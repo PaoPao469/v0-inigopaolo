@@ -23,19 +23,19 @@ export default function Header() {
           href="#"
           className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
         >
-          Features
+          Architecture
         </a>
         <a
           href="#"
           className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
         >
-          Pricing
+          Photography
         </a>
         <a
           href="#"
           className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
         >
-          Docs
+          Clothing
         </a>
       </nav>
 
