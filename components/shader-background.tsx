@@ -85,40 +85,67 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         />
       </div>
 
-      {/* Primary film grain layer — dense, high-frequency noise */}
+      {/* Primary film grain layer — fine, high-frequency noise for flow areas */}
       <div
         aria-hidden="true"
         className="grain-overlay absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
-          opacity: 0.28,
-          mixBlendMode: "overlay",
-        }}
-      />
-
-      {/* Secondary grain layer — coarser, for depth */}
-      <div
-        aria-hidden="true"
-        className="grain-overlay-secondary absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "150px 150px",
-          opacity: 0.18,
+          backgroundSize: "256px 256px",
+          opacity: 0.42,
           mixBlendMode: "soft-light",
         }}
       />
 
-      {/* Animated scanline shimmer for vintage feel */}
+      {/* Secondary grain layer — luminance-sensitive, emphasizes light flowing areas */}
       <div
         aria-hidden="true"
-        className="scanlines absolute inset-0 w-full h-full pointer-events-none"
+        className="grain-overlay-secondary absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.03) 1px, rgba(255,255,255,0.03) 2px)",
-          opacity: 0.8,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "200px 200px",
+          opacity: 0.35,
+          mixBlendMode: "overlay",
+        }}
+      />
+
+      {/* Diagonal crosshatch texture for dark areas — as seen in reference */}
+      <div
+        aria-hidden="true"
+        className="crosshatch absolute inset-0 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(
+              -45deg,
+              transparent,
+              transparent 2px,
+              rgba(255,255,255,0.012) 2px,
+              rgba(255,255,255,0.012) 3px
+            ),
+            repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 2px,
+              rgba(255,255,255,0.012) 2px,
+              rgba(255,255,255,0.012) 3px
+            )
+          `,
+          opacity: 1,
+        }}
+      />
+
+      {/* Fine speckle grain — adds particle-like texture to flows */}
+      <div
+        aria-hidden="true"
+        className="grain-speckle absolute inset-0 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='ns'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='discrete' tableValues='0 1'/%3E%3CfeFuncG type='discrete' tableValues='0 1'/%3E%3CfeFuncB type='discrete' tableValues='0 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ns)' opacity='0.5'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
+          opacity: 0.12,
+          mixBlendMode: "color-dodge",
         }}
       />
 
