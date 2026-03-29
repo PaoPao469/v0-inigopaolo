@@ -1,51 +1,62 @@
 "use client"
 
+import Link from "next/link"
+
+const navLinkStyle = {
+  fontFamily: "var(--font-chillax), sans-serif",
+  fontWeight: 500,
+  letterSpacing: "0.12em",
+  fontSize: "11px",
+  color: "rgba(180, 175, 165, 0.82)",
+  textTransform: "uppercase" as const,
+}
+
 export default function Header() {
   return (
     <header className="relative z-20 flex items-center justify-between p-6">
-      {/* Logo */}
-      <div className="flex items-center">
+      {/* Logo - links to home */}
+      <Link href="/" className="flex items-center">
         <svg
           fill="currentColor"
           viewBox="0 0 147 70"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
-          className="size-10 translate-x-[-0.5px] text-white"
+          className="size-10 translate-x-[-0.5px] text-white hover:text-white/80 transition-colors"
         >
           <path d="M56 50.2031V14H70V60.1562C70 65.5928 65.5928 70 60.1562 70C57.5605 70 54.9982 68.9992 53.1562 67.1573L0 14H19.7969L56 50.2031Z"></path>
           <path d="M147 56H133V23.9531L100.953 56H133V70H96.6875C85.8144 70 77 61.1856 77 50.3125V14H91V46.1562L123.156 14H91V0H127.312C138.186 0 147 8.81439 147 19.6875V56Z"></path>
         </svg>
-      </div>
+      </Link>
 
       {/* Navigation */}
       <nav className="flex items-center gap-12">
-        <a
-          href="#"
+        <Link
+          href="/architecture"
           className="hover:text-white px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-          style={{ fontFamily: "var(--font-chillax), sans-serif", fontWeight: 500, letterSpacing: "0.12em", fontSize: "11px", color: "rgba(180, 175, 165, 0.82)", textTransform: "uppercase" }}
+          style={navLinkStyle}
         >
           ARCHITECTURE
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          href="/photography"
           className="hover:text-white px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-          style={{ fontFamily: "var(--font-chillax), sans-serif", fontWeight: 500, letterSpacing: "0.12em", fontSize: "11px", color: "rgba(180, 175, 165, 0.82)", textTransform: "uppercase" }}
+          style={navLinkStyle}
         >
           PHOTOGRAPHY
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          href="/clothing"
           className="hover:text-white px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-          style={{ fontFamily: "var(--font-chillax), sans-serif", fontWeight: 500, letterSpacing: "0.12em", fontSize: "11px", color: "rgba(180, 175, 165, 0.82)", textTransform: "uppercase" }}
+          style={navLinkStyle}
         >
           CLOTHING
-        </a>
+        </Link>
       </nav>
 
       {/* Login Button */}
       <button
         className="px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
-        style={{ fontFamily: "var(--font-chillax), sans-serif", fontWeight: 500, letterSpacing: "0.12em", fontSize: "11px", color: "rgba(180, 175, 165, 0.82)", textTransform: "uppercase" }}
+        style={navLinkStyle}
       >
         LOGIN
       </button>
