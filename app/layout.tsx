@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Figtree } from "next/font/google"
+import { Figtree, Barlow_Condensed } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Instrument_Serif } from "next/font/google"
 import "./globals.css"
@@ -17,6 +17,13 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+})
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  variable: "--font-barlow-condensed",
   display: "swap",
 })
 
@@ -40,10 +47,11 @@ html {
   --font-sans: ${figtree.variable};
   --font-mono: ${GeistMono.variable};
   --font-instrument-serif: ${instrumentSerif.variable};
+  --font-barlow-condensed: ${barlowCondensed.variable};
 }
         `}</style>
       </head>
-      <body className={`${figtree.variable} ${instrumentSerif.variable}`}>{children}</body>
+      <body className={`${figtree.variable} ${instrumentSerif.variable} ${barlowCondensed.variable}`}>{children}</body>
     </html>
   )
 }
