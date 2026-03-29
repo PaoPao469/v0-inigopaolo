@@ -41,6 +41,7 @@
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --font-chillax: "Chillax", sans-serif; /* Chillax font for headings and display text */
 }
 
 .dark {
@@ -80,6 +81,7 @@
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree font variable for dark mode consistency */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --font-chillax: "Chillax", sans-serif; /* Chillax font for headings and display text */
 }
 
 @theme inline {
@@ -123,6 +125,7 @@
   /* Added Figtree font to theme configuration */
   --font-sans: var(--font-figtree);
   --font-figtree: var(--font-figtree);
+  --font-chillax: var(--font-chillax);
 }
 
 @layer base {
@@ -138,6 +141,19 @@
 
 .instrument {
   font-family: var(--font-instrument-serif);
+}
+
+/* Apply Chillax font to all headings and display text */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-chillax);
+}
+
+.heading {
+  font-family: var(--font-chillax);
+}
+
+.display {
+  font-family: var(--font-chillax);
 }
 
 /* Primary grain animation — fast, jittery shifts */

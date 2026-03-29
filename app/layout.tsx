@@ -41,6 +41,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=chillax@500,600&display=swap" />
         <style>{`
 html {
   font-family: ${figtree.style.fontFamily};
@@ -48,6 +50,7 @@ html {
   --font-mono: ${GeistMono.variable};
   --font-instrument-serif: ${instrumentSerif.variable};
   --font-barlow-condensed: ${barlowCondensed.variable};
+  --font-chillax: 'Chillax', sans-serif;
 }
         `}</style>
       </head>
