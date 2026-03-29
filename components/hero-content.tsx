@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react"
 
 const FONT_SIZE = "clamp(3rem, 9vw, 8rem)"
-const FONT_FAMILY = "var(--font-barlow-condensed), sans-serif"
-const FONT_WEIGHT = 700
+const FONT_FAMILY = "var(--font-chillax), sans-serif"
+const FONT_WEIGHT = 600
 const LETTER_SPACING = "0.12em"
 const TEXT = "INIGO PAOLO"
 
