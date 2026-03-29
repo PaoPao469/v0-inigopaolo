@@ -8,18 +8,22 @@ export default function SlimeCursor() {
   const positionRef = useRef({ x: 0, y: 0 })
   const targetRef = useRef({ x: 0, y: 0 })
   const velocityRef = useRef({ x: 0, y: 0 })
+  const scaleRef = useRef({ x: 1, y: 1 })
   const rafRef = useRef<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     // Spring physics constants for smooth slime-like motion
-    const SPRING = 0.08
-    const DAMPING = 0.75
-    const TRAIL_SPRING = 0.045
-    const TRAIL_DAMPING = 0.7
+    const SPRING = 0.12
+    const DAMPING = 0.72
+    const TRAIL_SPRING = 0.06
+    const TRAIL_DAMPING = 0.68
+    const SQUISH_FACTOR = 0.012
+    const SQUISH_RECOVERY = 0.15
 
     const trailPosition = { x: 0, y: 0 }
     const trailVelocity = { x: 0, y: 0 }
+    const trailScale = { x: 1, y: 1 }
 
     const handleMouseMove = (e: MouseEvent) => {
       targetRef.current.x = e.clientX
@@ -39,8 +43,9 @@ export default function SlimeCursor() {
       const pos = positionRef.current
       const target = targetRef.current
       const vel = velocityRef.current
+      const scale = scaleRef.current
 
-      // Spring physics for main cursor
+      // Spring physics for main cursor position
       const dx = target.x - pos.x
       const dy = target.y - pos.y
       vel.x += dx * SPRING
@@ -49,6 +54,23 @@ export default function SlimeCursor() {
       vel.y *= DAMPING
       pos.x += vel.x
       pos.y += vel.y
+
+      // Squishy deformation based on velocity (no rotation)
+      // Horizontal velocity stretches X, compresses Y
+      // Vertical velocity stretches Y, compresses X
+      const absVelX = Math.abs(vel.x)
+      const absVelY = Math.abs(vel.y)
+      
+      const targetScaleX = 1 + absVelX * SQUISH_FACTOR - absVelY * SQUISH_FACTOR * 0.5
+      const targetScaleY = 1 + absVelY * SQUISH_FACTOR - absVelX * SQUISH_FACTOR * 0.5
+      
+      // Clamp scales to reasonable bounds
+      const clampedTargetX = Math.max(0.7, Math.min(1.5, targetScaleX))
+      const clampedTargetY = Math.max(0.7, Math.min(1.5, targetScaleY))
+      
+      // Smooth recovery toward target scale
+      scale.x += (clampedTargetX - scale.x) * SQUISH_RECOVERY
+      scale.y += (clampedTargetY - scale.y) * SQUISH_RECOVERY
 
       // Spring physics for trail (follows main cursor with more lag)
       const tdx = pos.x - trailPosition.x
@@ -60,20 +82,20 @@ export default function SlimeCursor() {
       trailPosition.x += trailVelocity.x
       trailPosition.y += trailVelocity.y
 
-      // Calculate stretch based on velocity for slime effect
-      const speed = Math.sqrt(vel.x * vel.x + vel.y * vel.y)
-      const stretch = Math.min(1 + speed * 0.015, 1.6)
-      const angle = Math.atan2(vel.y, vel.x) * (180 / Math.PI)
+      // Trail squish
+      const trailAbsVelX = Math.abs(trailVelocity.x)
+      const trailAbsVelY = Math.abs(trailVelocity.y)
+      const trailTargetX = 1 + trailAbsVelX * SQUISH_FACTOR * 1.2 - trailAbsVelY * SQUISH_FACTOR * 0.6
+      const trailTargetY = 1 + trailAbsVelY * SQUISH_FACTOR * 1.2 - trailAbsVelX * SQUISH_FACTOR * 0.6
+      trailScale.x += (Math.max(0.6, Math.min(1.7, trailTargetX)) - trailScale.x) * SQUISH_RECOVERY * 0.8
+      trailScale.y += (Math.max(0.6, Math.min(1.7, trailTargetY)) - trailScale.y) * SQUISH_RECOVERY * 0.8
 
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) rotate(${angle}deg) scaleX(${stretch}) scaleY(${2 - stretch})`
+        cursorRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) scaleX(${scale.x}) scaleY(${scale.y})`
       }
 
       if (trailRef.current) {
-        const trailSpeed = Math.sqrt(trailVelocity.x * trailVelocity.x + trailVelocity.y * trailVelocity.y)
-        const trailStretch = Math.min(1 + trailSpeed * 0.02, 1.8)
-        const trailAngle = Math.atan2(trailVelocity.y, trailVelocity.x) * (180 / Math.PI)
-        trailRef.current.style.transform = `translate(${trailPosition.x}px, ${trailPosition.y}px) rotate(${trailAngle}deg) scaleX(${trailStretch}) scaleY(${2 - trailStretch})`
+        trailRef.current.style.transform = `translate(${trailPosition.x}px, ${trailPosition.y}px) scaleX(${trailScale.x}) scaleY(${trailScale.y})`
       }
 
       rafRef.current = requestAnimationFrame(animate)
