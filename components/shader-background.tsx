@@ -85,16 +85,29 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         />
       </div>
 
-      {/* Film grain + noise overlay */}
+      {/* Primary film grain layer — dense, high-frequency noise */}
       <div
         aria-hidden="true"
         className="grain-overlay absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "128px 128px",
-          opacity: 0.13,
+          backgroundSize: "200px 200px",
+          opacity: 0.28,
           mixBlendMode: "overlay",
+        }}
+      />
+
+      {/* Secondary grain layer — coarser, for depth */}
+      <div
+        aria-hidden="true"
+        className="grain-overlay-secondary absolute inset-0 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "150px 150px",
+          opacity: 0.18,
+          mixBlendMode: "soft-light",
         }}
       />
 
@@ -104,8 +117,8 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         className="scanlines absolute inset-0 w-full h-full pointer-events-none"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px)",
-          opacity: 0.6,
+            "repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.03) 1px, rgba(255,255,255,0.03) 2px)",
+          opacity: 0.8,
         }}
       />
 
