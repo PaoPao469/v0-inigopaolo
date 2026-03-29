@@ -2,39 +2,136 @@
 
 import type React from "react"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { MeshGradient } from "@paper-design/shaders-react"
 
 interface ShaderBackgroundProps {
   children: React.ReactNode
 }
 
+interface DistortionPoint {
+  x: number
+  y: number
+  targetX: number
+  targetY: number
+  velocityX: number
+  velocityY: number
+}
+
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const gradientContainerRef = useRef<HTMLDivElement>(null)
   const [isActive, setIsActive] = useState(false)
+  const mouseRef = useRef({ x: 0, y: 0, active: false })
+  const distortionRef = useRef<DistortionPoint>({
+    x: 0, y: 0, targetX: 0, targetY: 0, velocityX: 0, velocityY: 0
+  })
+  const animationRef = useRef<number | null>(null)
+
+  // Spring physics constants
+  const SPRING_STIFFNESS = 0.03
+  const DAMPING = 0.85
+  const PUSH_RADIUS = 250
+  const PUSH_STRENGTH = 40
+
+  const animate = useCallback(() => {
+    const distortion = distortionRef.current
+    const mouse = mouseRef.current
+    const container = gradientContainerRef.current
+
+    if (container) {
+      // Calculate push force based on mouse proximity
+      if (mouse.active) {
+        const rect = container.getBoundingClientRect()
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
+        
+        // Distance from mouse to center
+        const dx = mouse.x - centerX
+        const dy = mouse.y - centerY
+        const distance = Math.sqrt(dx * dx + dy * dy)
+        
+        if (distance < PUSH_RADIUS && distance > 0) {
+          // Push away from cursor - inverse direction
+          const force = (1 - distance / PUSH_RADIUS) * PUSH_STRENGTH
+          const angle = Math.atan2(dy, dx)
+          distortion.targetX = -Math.cos(angle) * force
+          distortion.targetY = -Math.sin(angle) * force
+        } else {
+          // Gradually return to center
+          distortion.targetX = 0
+          distortion.targetY = 0
+        }
+      } else {
+        distortion.targetX = 0
+        distortion.targetY = 0
+      }
+
+      // Spring physics - smooth motion toward target
+      const forceX = (distortion.targetX - distortion.x) * SPRING_STIFFNESS
+      const forceY = (distortion.targetY - distortion.y) * SPRING_STIFFNESS
+      
+      distortion.velocityX = (distortion.velocityX + forceX) * DAMPING
+      distortion.velocityY = (distortion.velocityY + forceY) * DAMPING
+      
+      distortion.x += distortion.velocityX
+      distortion.y += distortion.velocityY
+
+      // Apply transform to gradient container
+      container.style.transform = `translate(${distortion.x}px, ${distortion.y}px) scale(${1 + Math.abs(distortion.x + distortion.y) * 0.001})`
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+  }, [])
 
   useEffect(() => {
-    const handleMouseEnter = () => setIsActive(true)
-    const handleMouseLeave = () => setIsActive(false)
+    const handleMouseEnter = () => {
+      setIsActive(true)
+      mouseRef.current.active = true
+    }
+    const handleMouseLeave = () => {
+      setIsActive(false)
+      mouseRef.current.active = false
+    }
+    const handleMouseMove = (e: MouseEvent) => {
+      const container = containerRef.current
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        mouseRef.current.x = e.clientX - rect.left
+        mouseRef.current.y = e.clientY - rect.top
+      }
+    }
 
     const container = containerRef.current
     if (container) {
       container.addEventListener("mouseenter", handleMouseEnter)
       container.addEventListener("mouseleave", handleMouseLeave)
+      container.addEventListener("mousemove", handleMouseMove)
     }
+
+    // Start animation loop
+    animationRef.current = requestAnimationFrame(animate)
 
     return () => {
       if (container) {
         container.removeEventListener("mouseenter", handleMouseEnter)
         container.removeEventListener("mouseleave", handleMouseLeave)
+        container.removeEventListener("mousemove", handleMouseMove)
+      }
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [])
+  }, [animate])
 
   return (
     <div ref={containerRef} className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#000000" }}>
       {/* High-contrast draped fabric gradient mesh — stark white ribbons against true black */}
-      <div className="absolute inset-0 w-full h-full" style={{ filter: "contrast(1.4) brightness(1.05)" }}>
+      <div 
+        ref={gradientContainerRef}
+        className="absolute inset-0 w-full h-full will-change-transform" 
+        style={{ filter: "contrast(1.4) brightness(1.05)", transform: "translate(0px, 0px)" }}
+      >
         {/* Primary silk ribbon layer — stark white highlights against deep black */}
         <MeshGradient
           className="absolute inset-0 w-full h-full"
