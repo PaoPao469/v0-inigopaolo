@@ -32,119 +32,67 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   }, [])
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
-      {/* SVG Filters */}
-      <svg className="absolute inset-0 w-0 h-0" aria-hidden="true">
-        <defs>
-          {/* Desaturate everything to pure grayscale */}
-          <filter id="desaturate">
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          {/* Film grain overlay filter */}
-          <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="sRGB">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.72"
-              numOctaves="4"
-              stitchTiles="stitch"
-              result="noise"
-            />
-            <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise" />
-            <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay" result="blended" />
-            <feComponentTransfer in="blended">
-              <feFuncA type="linear" slope="1" />
-            </feComponentTransfer>
-          </filter>
-          <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-              result="gooey"
-            />
-            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
-
-      {/* Background Shaders — all purple replaced with grayscale tones */}
-      <div style={{ filter: "url(#desaturate)" }} className="absolute inset-0 w-full h-full">
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#0a0e12" }}>
+      {/* Draped fabric gradient mesh — elongated diagonal light ribbons */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* Primary silk ribbon layer — warm off-white highlights against blue-gray dark */}
         <MeshGradient
           className="absolute inset-0 w-full h-full"
-          colors={["#000000", "#888888", "#ffffff", "#1a1a1a", "#555555"]}
-          speed={0.3}
-          backgroundColor="#000000"
+          colors={["#0a0e12", "#E8E5DC", "#0a0e12", "#1a1e24", "#E8E5DC"]}
+          speed={0.15}
+          backgroundColor="#0a0e12"
         />
+        {/* Secondary diagonal flow layer — creates elongated bent light beams */}
         <MeshGradient
-          className="absolute inset-0 w-full h-full opacity-60"
-          colors={["#000000", "#ffffff", "#aaaaaa", "#000000"]}
-          speed={0.2}
-          wireframe="true"
+          className="absolute inset-0 w-full h-full opacity-70"
+          colors={["#0a0e12", "#D8D5CC", "#0a0e12", "#E8E5DC", "#0a0e12"]}
+          speed={0.1}
+          backgroundColor="transparent"
+        />
+        {/* Tertiary layer — adds depth and angular sweeps */}
+        <MeshGradient
+          className="absolute inset-0 w-full h-full opacity-40"
+          colors={["#0a0e12", "#F0EDE4", "#0a0e12", "#0a0e12", "#C8C5BC"]}
+          speed={0.08}
           backgroundColor="transparent"
         />
       </div>
 
-      {/* Primary film grain layer — fine, high-frequency noise for flow areas */}
+      {/* Heavy fractal noise grain — high opacity for vintage texture */}
       <div
         aria-hidden="true"
         className="grain-overlay absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "256px 256px",
-          opacity: 0.42,
-          mixBlendMode: "soft-light",
-        }}
-      />
-
-      {/* Secondary grain layer — luminance-sensitive, emphasizes light flowing areas */}
-      <div
-        aria-hidden="true"
-        className="grain-overlay-secondary absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
-          opacity: 0.35,
+          backgroundSize: "512px 512px",
+          opacity: 0.65,
           mixBlendMode: "overlay",
         }}
       />
 
-      {/* Diagonal crosshatch texture for dark areas — as seen in reference */}
+      {/* Secondary grain layer — finer texture for flow areas */}
       <div
         aria-hidden="true"
-        className="crosshatch absolute inset-0 w-full h-full pointer-events-none"
+        className="grain-overlay-secondary absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              -45deg,
-              transparent,
-              transparent 2px,
-              rgba(255,255,255,0.012) 2px,
-              rgba(255,255,255,0.012) 3px
-            ),
-            repeating-linear-gradient(
-              45deg,
-              transparent,
-              transparent 2px,
-              rgba(255,255,255,0.012) 2px,
-              rgba(255,255,255,0.012) 3px
-            )
-          `,
-          opacity: 1,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "256px 256px",
+          opacity: 0.45,
+          mixBlendMode: "soft-light",
         }}
       />
 
-      {/* Fine speckle grain — adds particle-like texture to flows */}
+      {/* Speckle grain — particle texture emphasizing light ribbons */}
       <div
         aria-hidden="true"
         className="grain-speckle absolute inset-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='ns'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='discrete' tableValues='0 1'/%3E%3CfeFuncG type='discrete' tableValues='0 1'/%3E%3CfeFuncB type='discrete' tableValues='0 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ns)' opacity='0.5'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='ns'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.0' numOctaves='4' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='discrete' tableValues='0 1'/%3E%3CfeFuncG type='discrete' tableValues='0 1'/%3E%3CfeFuncB type='discrete' tableValues='0 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ns)' opacity='0.6'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "128px 128px",
-          opacity: 0.12,
+          backgroundSize: "200px 200px",
+          opacity: 0.18,
           mixBlendMode: "color-dodge",
         }}
       />
