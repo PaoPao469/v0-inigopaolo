@@ -40,11 +40,11 @@ export default function HeroContent() {
       <svg className="absolute w-0 h-0 overflow-hidden" aria-hidden="true">
         <defs>
           {/*
-            Vertical streak filter — mimics the ink-bleed / motion-blur
-            streaking upward and downward from each letterform.
-            stdDeviation="0 40" blurs only on the Y axis.
+            Top-only streak filter — ink bleeds upward only.
+            A linear gradient mask clips the blur so nothing
+            extends below the baseline, removing the 3D depth illusion.
           */}
-          <filter id="streak" x="-10%" y="-120%" width="120%" height="340%" colorInterpolationFilters="sRGB">
+          <filter id="streak" x="-10%" y="-130%" width="120%" height="240%" colorInterpolationFilters="sRGB">
             <feTurbulence
               ref={turbulenceStreakRef}
               type="fractalNoise"
@@ -53,22 +53,29 @@ export default function HeroContent() {
               seed="5"
               result="noise"
             />
-            {/* Displace slightly on X to roughen the streak edges */}
+            {/* Slight X displacement to roughen streak edges */}
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="10"
+              scale="8"
               xChannelSelector="R"
               yChannelSelector="G"
               result="displaced"
             />
-            {/* Heavy Y-axis blur creates the vertical streak column */}
-            <feGaussianBlur in="displaced" stdDeviation="0 48" result="streaked" />
-            {/* Attenuate so streaks don't overpower the solid letter */}
+            {/* Y-axis blur — upward only (large negative Y region) */}
+            <feGaussianBlur in="displaced" stdDeviation="0 36" result="streaked" />
+            {/* Fade the streak so it doesn't create 3D volume */}
             <feComponentTransfer in="streaked" result="fadedStreak">
-              <feFuncA type="linear" slope="0.55" />
+              <feFuncA type="linear" slope="0.35" />
             </feComponentTransfer>
-            {/* Merge streak behind sharp letter */}
+            {/*
+              Clip bottom half: flood a rectangle covering the lower 50%
+              of the filter region with black alpha, composite it "out"
+              of the streak to erase downward bleed.
+            */}
+            <feFlood floodColor="black" floodOpacity="1" result="blackFill" />
+            <feComposite in="fadedStreak" in2="blackFill" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" result="clippedStreak" />
+            {/* Merge upward streak behind the sharp letterform */}
             <feMerge>
               <feMergeNode in="fadedStreak" />
               <feMergeNode in="SourceGraphic" />
@@ -94,16 +101,16 @@ export default function HeroContent() {
             />
           </filter>
 
-          {/* Glow halo — diffuse outer glow around letters */}
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blurred" />
+          {/* Glow halo — top-biased soft diffusion, no downward bloom */}
+          <filter id="glow" x="-20%" y="-60%" width="140%" height="120%" colorInterpolationFilters="sRGB">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10 18" result="blurred" />
             <feColorMatrix
               in="blurred"
               type="matrix"
-              values="1 0 0 0 0.93
-                      1 0 0 0 0.93
-                      1 0 0 0 0.9
-                      0 0 0 0.28 0"
+              values="1 0 0 0 0.82
+                      1 0 0 0 0.82
+                      1 0 0 0 0.79
+                      0 0 0 0.18 0"
               result="tinted"
             />
             <feMerge>
@@ -134,18 +141,18 @@ export default function HeroContent() {
         <div
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center"
-          style={{ filter: "url(#glow)", opacity: 0.38 }}
+          style={{ filter: "url(#glow)", opacity: 0.22 }}
         >
           <span style={{ fontSize: FONT_SIZE, fontFamily: FONT_FAMILY, fontWeight: FONT_WEIGHT, letterSpacing: LETTER_SPACING, color: "#fff", lineHeight: 1 }}>
             {TEXT}
           </span>
         </div>
 
-        {/* Layer 2 — vertical streak columns with organic warp */}
+        {/* Layer 2 — top-only streak columns with organic warp */}
         <div
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center"
-          style={{ filter: "url(#streak)", opacity: 0.65 }}
+          style={{ filter: "url(#streak)", opacity: 0.42 }}
         >
           <span style={{ fontSize: FONT_SIZE, fontFamily: FONT_FAMILY, fontWeight: FONT_WEIGHT, letterSpacing: LETTER_SPACING, color: "#fff", lineHeight: 1 }}>
             {TEXT}
@@ -160,8 +167,8 @@ export default function HeroContent() {
             fontFamily: FONT_FAMILY,
             fontWeight: FONT_WEIGHT,
             letterSpacing: LETTER_SPACING,
-            color: "#E8E5DC",
-            opacity: 0.72,
+            color: "#C8C5BB",
+            opacity: 0.58,
             lineHeight: 1,
             filter: "url(#warp)",
             margin: 0,
