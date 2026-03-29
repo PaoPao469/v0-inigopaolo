@@ -1,3 +1,9 @@
+export interface PageInfo {
+  pageNumber: number
+  description?: string
+  caption?: string
+}
+
 export interface Project {
   slug: string
   title: string
@@ -6,6 +12,9 @@ export interface Project {
   description: string
   pageCount: number
   section: "architecture" | "photography" | "clothing"
+  pages?: PageInfo[]  // Optional per-page descriptions extracted from PDF
+  tags?: string[]     // Project tags for filtering
+  featured?: boolean  // Highlight on main page
 }
 
 // Architecture projects - update this array with your actual projects
@@ -81,5 +90,32 @@ export function getAdjacentProjects(section: Project["section"], currentSlug: st
   return {
     prev: currentIndex > 0 ? projects[currentIndex - 1] : null,
     next: currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null,
+  }
+}
+
+export function getPageDescription(project: Project, pageNumber: number): string | undefined {
+  return project.pages?.find(p => p.pageNumber === pageNumber)?.description
+}
+
+export function getPageCaption(project: Project, pageNumber: number): string | undefined {
+  return project.pages?.find(p => p.pageNumber === pageNumber)?.caption
+}
+
+// Load extracted project data from JSON (for dynamic imports)
+export async function loadProjectMetadata(section: string, slug: string): Promise<{
+  pages: Array<{
+    pageNumber: number
+    imagePath: string
+    textContent: string
+    width: number
+    height: number
+  }>
+} | null> {
+  try {
+    const response = await fetch(`/images/${section}/${slug}/project.json`)
+    if (!response.ok) return null
+    return response.json()
+  } catch {
+    return null
   }
 }
