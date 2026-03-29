@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react"
 
 const FONT_SIZE = "clamp(3rem, 9vw, 8rem)"
 const FONT_FAMILY = "var(--font-barlow-condensed), sans-serif"
-const FONT_WEIGHT = 900
-const LETTER_SPACING = "0.05em"
+const FONT_WEIGHT = 700
+const LETTER_SPACING = "0.12em"
 const TEXT = "INIGO PAOLO"
 
 export default function HeroContent() {
@@ -134,7 +134,7 @@ export default function HeroContent() {
         <div
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center"
-          style={{ filter: "url(#glow)", opacity: 0.6 }}
+          style={{ filter: "url(#glow)", opacity: 0.38 }}
         >
           <span style={{ fontSize: FONT_SIZE, fontFamily: FONT_FAMILY, fontWeight: FONT_WEIGHT, letterSpacing: LETTER_SPACING, color: "#fff", lineHeight: 1 }}>
             {TEXT}
@@ -145,7 +145,7 @@ export default function HeroContent() {
         <div
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center"
-          style={{ filter: "url(#streak)", opacity: 1 }}
+          style={{ filter: "url(#streak)", opacity: 0.65 }}
         >
           <span style={{ fontSize: FONT_SIZE, fontFamily: FONT_FAMILY, fontWeight: FONT_WEIGHT, letterSpacing: LETTER_SPACING, color: "#fff", lineHeight: 1 }}>
             {TEXT}
@@ -161,6 +161,7 @@ export default function HeroContent() {
             fontWeight: FONT_WEIGHT,
             letterSpacing: LETTER_SPACING,
             color: "#E8E5DC",
+            opacity: 0.72,
             lineHeight: 1,
             filter: "url(#warp)",
             margin: 0,
@@ -173,7 +174,7 @@ export default function HeroContent() {
         <div
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center"
-          style={{ filter: "url(#text-grain)", mixBlendMode: "overlay", opacity: 0.55 }}
+          style={{ filter: "url(#text-grain)", mixBlendMode: "overlay", opacity: 0.38 }}
         >
           <span style={{ fontSize: FONT_SIZE, fontFamily: FONT_FAMILY, fontWeight: FONT_WEIGHT, letterSpacing: LETTER_SPACING, color: "#fff", lineHeight: 1 }}>
             {TEXT}
