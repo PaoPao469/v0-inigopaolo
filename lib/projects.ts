@@ -17,40 +17,71 @@ export interface Project {
   featured?: boolean  // Highlight on main page
 }
 
-// Architecture projects - update this array with your actual projects
+// Architecture projects - Year 1 and Year 2 work
 export const architectureProjects: Project[] = [
   {
     slug: "project-1",
-    title: "Project Title 1",
-    year: "2024",
-    location: "City, Country",
-    description: "Brief description of your first architecture project. Explain the concept, challenges, and your design approach.",
-    pageCount: 4,
+    title: "Project 1",
+    year: "Year 1",
+    description: "First year architecture project showcasing foundational design skills and spatial understanding.",
+    pageCount: 1, // Update after PDF processing
     section: "architecture",
+    tags: ["year-1"],
   },
   {
     slug: "project-2",
-    title: "Project Title 2",
-    year: "2024",
-    location: "City, Country",
-    description: "Brief description of your second architecture project.",
-    pageCount: 3,
+    title: "Project 2",
+    year: "Year 2",
+    description: "Second year architecture project demonstrating advanced design thinking and conceptual development.",
+    pageCount: 1, // Update after PDF processing
     section: "architecture",
+    tags: ["year-2"],
   },
   {
-    slug: "project-3",
-    title: "Project Title 3",
-    year: "2023",
-    location: "City, Country",
-    description: "Brief description of your third architecture project.",
-    pageCount: 5,
+    slug: "rhino-project",
+    title: "Rhino Project",
+    year: "Year 2",
+    description: "Digital modeling project created using Rhino 3D, exploring parametric design and computational techniques.",
+    pageCount: 1, // Update after PDF processing
     section: "architecture",
+    tags: ["year-2", "rhino", "3d-modeling"],
   },
 ]
 
-export const photographyProjects: Project[] = []
+// Photography projects - Car and Model photography
+export const photographyProjects: Project[] = [
+  {
+    slug: "car-photography",
+    title: "Car Photography",
+    year: "2024",
+    description: "Automotive photography series capturing the beauty and design of vehicles through creative composition and lighting.",
+    pageCount: 1, // Update after PDF processing
+    section: "photography",
+    tags: ["automotive", "cars"],
+  },
+  {
+    slug: "model-photography",
+    title: "Model Photography",
+    year: "2024",
+    description: "Portrait and fashion photography showcasing creative direction, lighting techniques, and collaborative work with models.",
+    pageCount: 1, // Update after PDF processing
+    section: "photography",
+    tags: ["portrait", "fashion", "model"],
+  },
+]
 
-export const clothingProjects: Project[] = []
+// Clothing projects
+export const clothingProjects: Project[] = [
+  {
+    slug: "clothing-brand",
+    title: "Clothing Brand",
+    year: "2024",
+    description: "Original clothing brand concept featuring unique designs, branding materials, and fashion pieces.",
+    pageCount: 1, // Update after PDF processing
+    section: "clothing",
+    tags: ["fashion", "branding", "design"],
+  },
+]
 
 // Helper functions
 export function getProjectsBySection(section: Project["section"]): Project[] {
