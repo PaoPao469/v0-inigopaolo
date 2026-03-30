@@ -107,6 +107,23 @@ export function getProjectImages(project: Project): string[] {
   )
 }
 
+// Fetch project images from Blob storage
+export async function getBlobProjectImages(section: string, slug: string): Promise<string[]> {
+  try {
+    const response = await fetch('/api/blob-images', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section, slug }),
+    })
+    if (!response.ok) return []
+    const data = await response.json()
+    return data.images || []
+  } catch (error) {
+    console.error('Error fetching blob images:', error)
+    return []
+  }
+}
+
 export function getProjectThumbnail(project: Project): string {
   return `/images/${project.section}/${project.slug}/page-1.jpg`
 }
