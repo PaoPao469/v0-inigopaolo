@@ -16,13 +16,24 @@ export default function ProjectImageGallery({ project }: ProjectImageGalleryProp
     return (
       <div className="w-full bg-neutral-900/50 rounded-lg p-8 text-center border border-white/5">
         <p style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(180, 175, 165, 0.5)", fontSize: "13px" }}>
-          No images available for this project yet.
+          Gallery loading...
         </p>
       </div>
     )
   }
 
   const currentImage = images[selectedIndex]
+  
+  // Don't render if current image has no URL
+  if (!currentImage || !currentImage.url) {
+    return (
+      <div className="w-full bg-neutral-900/50 rounded-lg p-8 text-center border border-white/5">
+        <p style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(180, 175, 165, 0.5)", fontSize: "13px" }}>
+          Image unavailable
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-8">

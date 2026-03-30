@@ -10,6 +10,11 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const thumbnail = getProjectThumbnail(project)
+  
+  // Don't render if no valid thumbnail
+  if (!thumbnail) {
+    return null
+  }
 
   return (
     <Link
