@@ -105,9 +105,14 @@ export function getProjectBySlug(section: Project["section"], slug: string): Pro
 }
 
 export function getProjectImages(project: Project): string[] {
-  return Array.from({ length: project.pageCount }, (_, i) => 
-    `/images/${project.section}/${project.slug}/page-${i + 1}.jpg`
-  )
+  const prefix = projectBlobPrefixes[project.slug]
+  if (prefix && project.pageCount > 0) {
+    return Array.from({ length: project.pageCount }, (_, i) => {
+      const pageNum = String(i + 1).padStart(2, '0')
+      return `${BLOB_BASE_URL}/${prefix}-${pageNum}.png`
+    })
+  }
+  return []
 }
 
 // Fetch project images from Blob storage
@@ -127,8 +132,25 @@ export async function getBlobProjectImages(section: string, slug: string): Promi
   }
 }
 
+// Blob storage base URL for portfolio images
+const BLOB_BASE_URL = "https://qh5hx3paeqwuc7ch.public.blob.vercel-storage.com"
+
+// Map project slugs to their blob folder/file prefixes
+const projectBlobPrefixes: Record<string, string> = {
+  "project-1": "project%201/project%201",
+  "project-2": "project%202/project%202",
+  "rhino-project": "rhino%20project/rhino%20project",
+  "car-photography": "car%20photography/car%20photography",
+  "model-photography": "Model%20Photography/Model%20Photography",
+  "clothing-brand": "Clothing%20Brand/Clothing%20Brand",
+}
+
 export function getProjectThumbnail(project: Project): string {
-  return `/images/${project.section}/${project.slug}/page-1.jpg`
+  const prefix = projectBlobPrefixes[project.slug]
+  if (prefix) {
+    return `${BLOB_BASE_URL}/${prefix}-01.png`
+  }
+  return `/images/${project.section}/${project.slug}/page-1.png`
 }
 
 export function getAdjacentProjects(section: Project["section"], currentSlug: string): {

@@ -1,51 +1,16 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import { Project } from "@/lib/projects"
+import { Project, getProjectImages } from "@/lib/projects"
 
 interface ProjectImageGalleryProps {
   project: Project
 }
 
 export default function ProjectImageGallery({ project }: ProjectImageGalleryProps) {
-  const [images, setImages] = useState<string[]>([])
+  const images = getProjectImages(project)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function fetchImages() {
-      try {
-        const response = await fetch('/api/blob-images', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            section: project.section,
-            slug: project.slug,
-          }),
-        })
-        
-        if (response.ok) {
-          const data = await response.json()
-          setImages(data.images || [])
-        }
-      } catch (error) {
-        console.error('[v0] Error fetching images:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchImages()
-  }, [project.section, project.slug])
-
-  if (loading) {
-    return (
-      <div className="w-full aspect-video bg-background/50 rounded-lg flex items-center justify-center">
-        <p className="text-foreground/60">Loading images...</p>
-      </div>
-    )
-  }
 
   if (!images || images.length === 0) {
     return (
