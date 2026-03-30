@@ -105,12 +105,11 @@ export function getProjectBySlug(section: Project["section"], slug: string): Pro
 }
 
 export function getProjectImages(project: Project): string[] {
-  const prefix = projectBlobPrefixes[project.slug]
-  if (prefix && project.pageCount > 0) {
-    return Array.from({ length: project.pageCount }, (_, i) => {
-      const pageNum = String(i + 1).padStart(2, '0')
-      return `${BLOB_BASE_URL}/${prefix}-${pageNum}.png`
-    })
+  // For now, return just the thumbnail as the first image
+  // Full gallery images will be added once blob storage structure is set up
+  const thumbnail = projectThumbnails[project.slug]
+  if (thumbnail) {
+    return [thumbnail]
   }
   return []
 }
@@ -132,25 +131,18 @@ export async function getBlobProjectImages(section: string, slug: string): Promi
   }
 }
 
-// Blob storage base URL for portfolio images
-const BLOB_BASE_URL = "https://qh5hx3paeqwuc7ch.public.blob.vercel-storage.com"
-
-// Map project slugs to their blob folder/file prefixes
-const projectBlobPrefixes: Record<string, string> = {
-  "project-1": "project%201/project%201",
-  "project-2": "project%202/project%202",
-  "rhino-project": "rhino%20project/rhino%20project",
-  "car-photography": "car%20photography/car%20photography",
-  "model-photography": "Model%20Photography/Model%20Photography",
-  "clothing-brand": "Clothing%20Brand/Clothing%20Brand",
+// Direct URLs for project cover images (from user's blob storage)
+const projectThumbnails: Record<string, string> = {
+  "project-1": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
+  "project-2": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
+  "rhino-project": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+  "car-photography": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/car%20photography.png-PuNEl58kO63IX181I5gXtr3ILKvF1p.jpeg",
+  "model-photography": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Model%20Photography.png-y2MtLFA3iLB3iyfdXPkng2jraLP1FR.jpeg",
+  "clothing-brand": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Clothing%20Brand.png-iT8yWNVcnho25dTpmjejj0L25DpEXU.jpeg",
 }
 
 export function getProjectThumbnail(project: Project): string {
-  const prefix = projectBlobPrefixes[project.slug]
-  if (prefix) {
-    return `${BLOB_BASE_URL}/${prefix}-01.png`
-  }
-  return `/images/${project.section}/${project.slug}/page-1.png`
+  return projectThumbnails[project.slug] || `/images/${project.section}/${project.slug}/page-1.png`
 }
 
 export function getAdjacentProjects(section: Project["section"], currentSlug: string): {
