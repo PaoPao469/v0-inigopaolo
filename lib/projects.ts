@@ -24,16 +24,17 @@ export const architectureProjects: Project[] = [
     title: "Project 1",
     year: "Year 1",
     description: "First year architecture project showcasing foundational design skills and spatial understanding.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 35,
     section: "architecture",
     tags: ["year-1"],
+    featured: true,
   },
   {
     slug: "project-2",
     title: "Project 2",
     year: "Year 2",
     description: "Second year architecture project demonstrating advanced design thinking and conceptual development.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 12,
     section: "architecture",
     tags: ["year-2"],
   },
@@ -42,7 +43,7 @@ export const architectureProjects: Project[] = [
     title: "Rhino Project",
     year: "Year 2",
     description: "Digital modeling project created using Rhino 3D, exploring parametric design and computational techniques.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 6,
     section: "architecture",
     tags: ["year-2", "rhino", "3d-modeling"],
   },
@@ -55,7 +56,7 @@ export const photographyProjects: Project[] = [
     title: "Car Photography",
     year: "2024",
     description: "Automotive photography series capturing the beauty and design of vehicles through creative composition and lighting.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 0, // File link unavailable - to be uploaded
     section: "photography",
     tags: ["automotive", "cars"],
   },
@@ -64,9 +65,10 @@ export const photographyProjects: Project[] = [
     title: "Model Photography",
     year: "2024",
     description: "Portrait and fashion photography showcasing creative direction, lighting techniques, and collaborative work with models.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 17,
     section: "photography",
     tags: ["portrait", "fashion", "model"],
+    featured: true,
   },
 ]
 
@@ -77,9 +79,10 @@ export const clothingProjects: Project[] = [
     title: "Clothing Brand",
     year: "2024",
     description: "Original clothing brand concept featuring unique designs, branding materials, and fashion pieces.",
-    pageCount: 1, // Update after PDF processing
+    pageCount: 19,
     section: "clothing",
     tags: ["fashion", "branding", "design"],
+    featured: true,
   },
 ]
 
