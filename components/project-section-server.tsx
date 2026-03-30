@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Project } from "@/lib/projects"
+import { Project, getProjectThumbnail } from "@/lib/projects"
 import { getProjectImagesFromBlob, BlobImage } from "@/lib/blob-images"
 
 interface ProjectSectionServerProps {
@@ -10,40 +10,20 @@ interface ProjectSectionServerProps {
 }
 
 export default async function ProjectSectionServer({ project, index, categoryLabel }: ProjectSectionServerProps) {
-  // Fetch images from Blob storage
-  const images = await getProjectImagesFromBlob(project.slug)
+  // Try to fetch images from Blob storage
+  const blobImages = await getProjectImagesFromBlob(project.slug)
   
-  // Use the first image as thumbnail, or fallback
-  const thumbnail = images.length > 0 ? images[0].url : null
+  // Use Blob images if available, otherwise fall back to project thumbnail
+  const thumbnail = blobImages.length > 0 ? blobImages[0].url : getProjectThumbnail(project)
   
+  // If still no thumbnail, don't render
   if (!thumbnail) {
-    return (
-      <section className="py-16 border-b border-white/5 last:border-b-0">
-        <div className="flex items-center gap-4 mb-6">
-          <span
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              fontSize: "11px",
-              color: "rgba(180, 175, 165, 0.35)",
-            }}
-          >
-            0{index + 1}
-          </span>
-          <div className="h-px flex-1 bg-white/5" />
-        </div>
-        <div className="p-8 bg-neutral-900/50 rounded border border-white/5 text-center">
-          <p style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(180, 175, 165, 0.5)", fontSize: "13px" }}>
-            {project.title} - Images loading from Blob storage...
-          </p>
-        </div>
-      </section>
-    )
+    return null
   }
 
   const isEven = index % 2 === 0
   const label = categoryLabel || project.section.charAt(0).toUpperCase() + project.section.slice(1)
+  const slideCount = blobImages.length > 0 ? blobImages.length : project.pageCount
 
   return (
     <section className="py-16 border-b border-white/5 last:border-b-0">
@@ -108,8 +88,8 @@ export default async function ProjectSectionServer({ project, index, categoryLab
             </div>
           </div>
 
-          {/* Slide count from Blob */}
-          {images.length > 0 && (
+          {/* Slide count from Blob or project data */}
+          {slideCount > 0 && (
             <div 
               className="absolute bottom-4 right-4 px-3 py-1.5 rounded bg-black/50 backdrop-blur-sm"
               style={{
@@ -119,7 +99,7 @@ export default async function ProjectSectionServer({ project, index, categoryLab
                 color: "rgba(255, 255, 255, 0.7)",
               }}
             >
-              {images.length} slides
+              {slideCount} slides
             </div>
           )}
 
