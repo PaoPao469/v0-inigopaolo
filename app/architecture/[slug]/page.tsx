@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import SectionLayout from "@/components/section-layout"
 import BackButton from "@/components/back-button"
-import ProjectGalleryServer from "@/components/project-gallery-server"
+import ProjectImageGallery from "@/components/project-image-gallery"
 import { architectureProjects, getProjectBySlug, getAdjacentProjects } from "@/lib/projects"
 
 interface ProjectPageProps {
