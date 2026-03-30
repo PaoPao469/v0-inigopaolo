@@ -106,8 +106,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </p>
       </div>
 
-      {/* Project images from Blob storage */}
-      <ProjectGalleryServer project={project} />
+      {/* Project images */}
+      <ProjectImageGallery project={project} />
 
       {/* Previous/Next navigation */}
       <div className="flex justify-between items-center mt-16 pt-8 border-t border-white/10">

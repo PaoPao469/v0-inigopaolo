@@ -1,5 +1,5 @@
 import SectionLayout from "@/components/section-layout"
-import ProjectSection from "@/components/project-section"
+import ProjectGallery from "@/components/project-gallery"
 import { architectureProjects } from "@/lib/projects"
 
 export const metadata = {
@@ -11,61 +11,36 @@ export default function ArchitecturePage() {
   return (
     <SectionLayout>
       {/* Section header */}
-      <div className="mb-8 pb-8 border-b border-white/5">
-        <div className="flex items-end justify-between">
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-chillax), sans-serif",
-                fontWeight: 500,
-                letterSpacing: "0.15em",
-                fontSize: "10px",
-                color: "rgba(180, 175, 165, 0.4)",
-                textTransform: "uppercase",
-                marginBottom: "12px",
-              }}
-            >
-              Portfolio
-            </p>
-            <h1
-              style={{
-                fontFamily: "var(--font-chillax), sans-serif",
-                fontWeight: 400,
-                letterSpacing: "0.02em",
-                fontSize: "42px",
-                color: "rgba(180, 175, 165, 0.9)",
-              }}
-            >
-              Architecture
-            </h1>
-          </div>
-          <p
-            className="max-w-sm text-right hidden md:block"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              fontSize: "12px",
-              color: "rgba(180, 175, 165, 0.45)",
-              lineHeight: 1.7,
-            }}
-          >
-            A collection of architectural projects exploring form, space, and materiality through academic work.
-          </p>
-        </div>
+      <div className="mb-12">
+        <h1
+          style={{
+            fontFamily: "var(--font-chillax), sans-serif",
+            fontWeight: 500,
+            letterSpacing: "0.28em",
+            fontSize: "34px",
+            color: "rgba(180, 175, 165, 0.82)",
+            textTransform: "uppercase",
+          }}
+        >
+          ARCHITECTURE
+        </h1>
+        <p
+          className="mt-4 max-w-2xl"
+          style={{
+            fontFamily: "var(--font-chillax), sans-serif",
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            fontSize: "13px",
+            color: "rgba(180, 175, 165, 0.55)",
+            lineHeight: 1.7,
+          }}
+        >
+          A collection of architectural projects exploring form, space, and materiality.
+        </p>
       </div>
 
-      {/* Project sections */}
-      <div>
-        {architectureProjects.map((project, index) => (
-          <ProjectSection 
-            key={project.slug} 
-            project={project} 
-            index={index}
-            categoryLabel="Architecture"
-          />
-        ))}
-      </div>
+      {/* Project grid */}
+      <ProjectGallery projects={architectureProjects} />
     </SectionLayout>
   )
 }

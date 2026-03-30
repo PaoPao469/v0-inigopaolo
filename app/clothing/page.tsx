@@ -1,6 +1,8 @@
 import { clothingProjects } from "@/lib/projects"
 import SectionLayout from "@/components/section-layout"
-import ProjectSection from "@/components/project-section"
+import ProjectGallery from "@/components/project-gallery"
+import BackButton from "@/components/back-button"
+import SlimeCursor from "@/components/slime-cursor"
 
 export const metadata = {
   title: "Clothing | Inigo Paolo",
@@ -9,63 +11,43 @@ export const metadata = {
 
 export default function ClothingPage() {
   return (
-    <SectionLayout>
-      {/* Section header */}
-      <div className="mb-8 pb-8 border-b border-white/5">
-        <div className="flex items-end justify-between">
-          <div>
-            <p
+    <>
+      <SlimeCursor />
+      <SectionLayout>
+        <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24">
+          <BackButton href="/" label="Home" />
+          
+          <header className="mb-16">
+            <h1
+              className="mb-4"
               style={{
                 fontFamily: "var(--font-chillax), sans-serif",
                 fontWeight: 500,
-                letterSpacing: "0.15em",
-                fontSize: "10px",
-                color: "rgba(180, 175, 165, 0.4)",
+                fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                letterSpacing: "0.12em",
+                color: "rgba(180, 175, 165, 0.82)",
                 textTransform: "uppercase",
-                marginBottom: "12px",
-              }}
-            >
-              Portfolio
-            </p>
-            <h1
-              style={{
-                fontFamily: "var(--font-chillax), sans-serif",
-                fontWeight: 400,
-                letterSpacing: "0.02em",
-                fontSize: "42px",
-                color: "rgba(180, 175, 165, 0.9)",
               }}
             >
               Clothing
             </h1>
-          </div>
-          <p
-            className="max-w-sm text-right hidden md:block"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              fontSize: "12px",
-              color: "rgba(180, 175, 165, 0.45)",
-              lineHeight: 1.7,
-            }}
-          >
-            Original clothing brand concepts featuring unique designs, branding, and fashion pieces.
-          </p>
-        </div>
-      </div>
+            <p
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                fontWeight: 400,
+                fontSize: "14px",
+                color: "rgba(180, 175, 165, 0.6)",
+                maxWidth: "600px",
+                lineHeight: 1.6,
+              }}
+            >
+              Original clothing brand concepts featuring unique designs, branding, and fashion pieces.
+            </p>
+          </header>
 
-      {/* Project sections */}
-      <div>
-        {clothingProjects.map((project, index) => (
-          <ProjectSection 
-            key={project.slug} 
-            project={project} 
-            index={index}
-            categoryLabel="Fashion"
-          />
-        ))}
-      </div>
-    </SectionLayout>
+          <ProjectGallery projects={clothingProjects} section="clothing" />
+        </div>
+      </SectionLayout>
+    </>
   )
 }
