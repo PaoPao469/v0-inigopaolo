@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import SectionLayout from "@/components/section-layout"
 import BackButton from "@/components/back-button"
-import ProjectImageGallery from "@/components/project-image-gallery"
+import ProjectGalleryServer from "@/components/project-gallery-server"
 import { architectureProjects, getProjectBySlug, getAdjacentProjects } from "@/lib/projects"
 
 interface ProjectPageProps {
@@ -106,8 +106,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </p>
       </div>
 
-      {/* Project images */}
-      <ProjectImageGallery project={project} />
+      {/* Project images from Blob storage */}
+      <ProjectGalleryServer project={project} />
 
       {/* Previous/Next navigation */}
       <div className="flex justify-between items-center mt-16 pt-8 border-t border-white/10">

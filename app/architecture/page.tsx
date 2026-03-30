@@ -1,5 +1,5 @@
 import SectionLayout from "@/components/section-layout"
-import ProjectSection from "@/components/project-section"
+import ProjectSectionServer from "@/components/project-section-server"
 import { architectureProjects } from "@/lib/projects"
 
 export const metadata = {
@@ -58,7 +58,7 @@ export default function ArchitecturePage() {
       {/* Project sections */}
       <div>
         {architectureProjects.map((project, index) => (
-          <ProjectSection 
+          <ProjectSectionServer 
             key={project.slug} 
             project={project} 
             index={index}
