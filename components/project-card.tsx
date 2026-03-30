@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="group block relative overflow-hidden"
     >
       {/* Image container */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
+      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 rounded border border-white/5">
         <Image
           src={thumbnail}
           alt={project.title}
@@ -25,8 +25,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+        {/* Hover overlay with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Page count badge */}
+        {project.pageCount > 0 && (
+          <div 
+            className="absolute bottom-3 right-3 px-2 py-1 rounded bg-black/60 backdrop-blur-sm"
+            style={{
+              fontFamily: "var(--font-chillax), sans-serif",
+              fontSize: "10px",
+              letterSpacing: "0.08em",
+              color: "rgba(255, 255, 255, 0.7)",
+            }}
+          >
+            {project.pageCount} slides
+          </div>
+        )}
       </div>
 
       {/* Project info */}
@@ -53,8 +68,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             marginTop: "4px",
           }}
         >
-          {project.year}{project.location ? ` — ${project.location}` : ""}
+          {project.year}
         </p>
+        {/* Tags */}
+        {project.tags && project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-2">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded bg-white/5 border border-white/10"
+                style={{
+                  fontFamily: "var(--font-chillax), sans-serif",
+                  fontSize: "9px",
+                  letterSpacing: "0.06em",
+                  color: "rgba(180, 175, 165, 0.5)",
+                  textTransform: "uppercase",
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </Link>
   )
