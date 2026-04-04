@@ -125,7 +125,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   }, [animate])
 
   return (
-    <div ref={containerRef} className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#000000" }}>
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#000000", isolation: "isolate" }}>
       {/* High-contrast draped fabric gradient mesh — stark white ribbons against true black */}
       <div 
         ref={gradientContainerRef}

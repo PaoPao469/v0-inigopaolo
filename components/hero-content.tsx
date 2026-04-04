@@ -10,11 +10,11 @@ const FONT_STYLE = {
 
 export default function HeroContent() {
   return (
-    <main className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-      <div 
-        className="relative flex items-center justify-center select-none"
-        style={{ mixBlendMode: "difference" }}
-      >
+    <main 
+      className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
+      style={{ mixBlendMode: "difference" }}
+    >
+      <div className="relative flex items-center justify-center select-none">
         <h1
           className="relative"
           style={{
