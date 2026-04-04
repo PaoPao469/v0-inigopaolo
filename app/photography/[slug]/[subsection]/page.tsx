@@ -3,6 +3,7 @@ import SectionLayout from "@/components/section-layout"
 import SlimeCursor from "@/components/slime-cursor"
 import SubsectionGallery from "@/components/subsection-gallery"
 import FerrariShowcase from "@/components/ferrari-showcase"
+import ShelbyShowcase from "@/components/shelby-showcase"
 import ToyotaShowcase from "@/components/toyota-showcase"
 import { getAllPhotographySlugs, getPhotographyCategory, getSubsection, hasSubsections } from "@/lib/photography-data"
 
@@ -47,8 +48,9 @@ export default async function SubsectionPage({ params }: { params: Promise<{ slu
     notFound()
   }
 
-  // Use dedicated showcase components for Ferrari and Toyota
+  // Use dedicated showcase components for Ferrari, Shelby, and Toyota
   const isFerrari = subsectionId === "ferrari"
+  const isShelby = subsectionId === "shelby"
   const isToyota = subsectionId === "toyota"
 
   return (
@@ -57,6 +59,12 @@ export default async function SubsectionPage({ params }: { params: Promise<{ slu
       <SectionLayout>
         {isFerrari ? (
           <FerrariShowcase
+            categoryLabel={category.label}
+            categorySlug={slug}
+            images={subsection.images}
+          />
+        ) : isShelby ? (
+          <ShelbyShowcase
             categoryLabel={category.label}
             categorySlug={slug}
             images={subsection.images}

@@ -24,9 +24,14 @@ export const photographyData = {
         id: "shelby",
         title: "SHELBY",
         images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/car%20photography.png-PuNEl58kO63IX181I5gXtr3ILKvF1p.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-EY8xW6mdMS0XiRb9lJAr8fcAr9BDoh.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-jyckKLlNOgbeXp9Du4rPUI0q38p90g.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-Ihzc6Qa3jRN4PRkMIUeuT5pHQXPRSf.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-wIMNYeOaMV2rv0uQc7yfL4dHYk2a9Q.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-TDEW8NOOqFWbRChvuSc0E10xsVxuF8.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-y1ocaURexPHE2QuWVZjKId1QI1qJ5i.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-4d5eNe8Kk60o792gIeXAURmYhFD11O.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-fKpl9EXCchgnJoGOa0eUK60857nJxa.jpg",
         ],
       },
       {
