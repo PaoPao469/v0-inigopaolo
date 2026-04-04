@@ -10,6 +10,7 @@ export const photographyData = {
         id: "ferrari",
         title: "FERRARI",
         images: [
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MG_8283-2-g9u4VFequmijTKYG5BayDAVkmQLz9A.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_3942-2gZxuflBrsQ9xubXksxh9W00bFvrfN.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4012-3-JsFZnSAHUVsQj7hhjT6V5Ak9qzsNUc.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_3959-5-ykAb7m0aY8Ow6CjX9e71dJ8xN1TJNp.jpg",
@@ -18,7 +19,6 @@ export const photographyData = {
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4066-VSbv50gJnwSUXFUO4V4fZ6hLlxeGgG.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4071-jntAwXPBcGbILCkYgGLrrZehsP0GGE.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4062-3-iPF7N641r4tPEBgXGqRusQ9Qj3hpSg.jpg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MG_8283-2-LMazoL2PTtS02DyU0XIjvcB4aVG7Vx.jpg",
         ],
       },
       {
