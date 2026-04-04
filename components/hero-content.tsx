@@ -11,12 +11,15 @@ const FONT_STYLE = {
 export default function HeroContent() {
   return (
     <main className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-      <div className="relative flex items-center justify-center select-none">
+      <div 
+        className="relative flex items-center justify-center select-none"
+        style={{ mixBlendMode: "difference" }}
+      >
         <h1
           className="relative"
           style={{
             ...FONT_STYLE,
-            color: "rgba(180, 175, 165, 0.82)",
+            color: "#FFFFFF",
           }}
         >
           {TEXT}
