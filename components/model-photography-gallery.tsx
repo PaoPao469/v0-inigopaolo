@@ -50,29 +50,23 @@ export default function ModelPhotographyGallery({ category }: ModelPhotographyGa
         </p>
       </header>
 
-      {/* Masonry-style Gallery Grid */}
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+      {/* Large Image Gallery Grid */}
+      <div className="columns-1 lg:columns-2 gap-6">
         {category.images.map((image, index) => {
-          // Create varying aspect ratios for masonry effect
-          const aspectClass = index % 3 === 0 
-            ? "aspect-[3/4]" 
-            : index % 3 === 1 
-              ? "aspect-[4/3]" 
-              : "aspect-square"
-          
           return (
             <div
               key={index}
-              className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
+              className="relative w-full overflow-hidden mb-6 break-inside-avoid group"
             >
               <Image
                 src={image}
                 alt={`${category.label} - Image ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                width={1200}
+                height={1600}
+                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300 pointer-events-none" />
             </div>
           )
         })}
