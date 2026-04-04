@@ -3,17 +3,21 @@ export const photographyData = {
   "car-photography": {
     label: "CAR PHOTOGRAPHY",
     slug: "car-photography",
-    thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/car%20photography.png-PuNEl58kO63IX181I5gXtr3ILKvF1p.jpeg",
+    thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_3942-2gZxuflBrsQ9xubXksxh9W00bFvrfN.jpg",
     description: "Automotive photography capturing the beauty and design of iconic vehicles.",
     subsections: [
       {
         id: "ferrari",
         title: "FERRARI",
         images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/car%20photography.png-PuNEl58kO63IX181I5gXtr3ILKvF1p.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_3942-2gZxuflBrsQ9xubXksxh9W00bFvrfN.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4012-3-JsFZnSAHUVsQj7hhjT6V5Ak9qzsNUc.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_3959-5-ykAb7m0aY8Ow6CjX9e71dJ8xN1TJNp.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4100-TddR4TB0wSkkoI3P05kcYrOLFMb5fI.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4007-5-4-MqI4u7XHm38aEN51IrNmlzDTkvrvvL.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4066-VSbv50gJnwSUXFUO4V4fZ6hLlxeGgG.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4071-jntAwXPBcGbILCkYgGLrrZehsP0GGE.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4062-3-iPF7N641r4tPEBgXGqRusQ9Qj3hpSg.jpg",
         ],
       },
       {
