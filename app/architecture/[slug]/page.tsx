@@ -8,17 +8,16 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// Generate static params for both year slugs and project IDs
 export async function generateStaticParams() {
   const yearSlugs = getAllYearSlugs().map((slug) => ({ slug }))
   const projectIds = getAllProjects().map((project) => ({ slug: project.id }))
+  
   return [...yearSlugs, ...projectIds]
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
   
-  // Check if it's a year page
   const yearData = getYearBySlug(slug)
   if (yearData) {
     return {
@@ -27,7 +26,6 @@ export async function generateMetadata({ params }: PageProps) {
     }
   }
   
-  // Check if it's a project page
   const project = getProjectById(slug)
   if (project) {
     return {
@@ -36,12 +34,14 @@ export async function generateMetadata({ params }: PageProps) {
     }
   }
 
-  return { title: "Not Found" }
+  return {
+    title: "Not Found | Inigo Paolo",
+  }
 }
 
-export default async function ArchitectureDetailPage({ params }: PageProps) {
+export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params
-
+  
   // Check if it's a year collection page
   const yearData = getYearBySlug(slug)
   if (yearData) {
@@ -51,7 +51,7 @@ export default async function ArchitectureDetailPage({ params }: PageProps) {
       </SectionLayout>
     )
   }
-
+  
   // Check if it's a project detail page
   const project = getProjectById(slug)
   if (project) {
@@ -62,6 +62,5 @@ export default async function ArchitectureDetailPage({ params }: PageProps) {
     )
   }
 
-  // Not found
   notFound()
 }
