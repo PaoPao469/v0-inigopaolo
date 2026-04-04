@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import BackButton from "@/components/back-button"
 
 interface ModelPhotographyCategory {
@@ -21,7 +22,7 @@ export default function ModelPhotographyGallery({ category }: ModelPhotographyGa
       <BackButton href="/photography" label="Photography" />
 
       {/* Page Header */}
-      <header className="mb-16">
+      <header className="mb-12">
         <h1
           className="mb-4"
           style={{
@@ -49,28 +50,49 @@ export default function ModelPhotographyGallery({ category }: ModelPhotographyGa
         </p>
       </header>
 
-      {/* Scrollable Gallery Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-        {category.images.map((image, index) => (
-          <div
-            key={index}
-            className="relative aspect-[4/5] overflow-hidden rounded-lg group"
-          >
-            <Image
-              src={image}
-              alt={`${category.label} - Image ${index + 1}`}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-          </div>
-        ))}
+      {/* Masonry-style Gallery Grid */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+        {category.images.map((image, index) => {
+          // Create varying aspect ratios for masonry effect
+          const aspectClass = index % 3 === 0 
+            ? "aspect-[3/4]" 
+            : index % 3 === 1 
+              ? "aspect-[4/3]" 
+              : "aspect-square"
+          
+          return (
+            <div
+              key={index}
+              className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
+            >
+              <Image
+                src={image}
+                alt={`${category.label} - Image ${index + 1}`}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
+            </div>
+          )
+        })}
       </div>
 
       {/* Bottom Navigation */}
       <div className="mt-16 pt-8 border-t border-white/10">
-        <BackButton href="/photography" label="Back to Photography" />
+        <Link
+          href="/photography"
+          className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
+          style={{
+            fontFamily: "var(--font-chillax), sans-serif",
+            color: "rgba(180, 160, 120, 0.8)",
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          BACK TO PHOTOGRAPHY
+        </Link>
       </div>
     </div>
   )

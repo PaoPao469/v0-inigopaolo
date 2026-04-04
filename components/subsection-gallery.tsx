@@ -22,7 +22,7 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
       <BackButton href={`/photography/${categorySlug}`} label={categoryLabel} />
 
       {/* Page Header */}
-      <header className="mb-16">
+      <header className="mb-12">
         <p
           className="mb-2"
           style={{
@@ -50,23 +50,33 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
         </h1>
       </header>
 
-      {/* Full Gallery */}
-      <div className="space-y-6">
-        {subsection.images.map((image, index) => (
-          <div
-            key={index}
-            className="relative w-full aspect-[16/10] overflow-hidden rounded-lg"
-          >
-            <Image
-              src={image}
-              alt={`${subsection.title} - Image ${index + 1}`}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority={index === 0}
-            />
-          </div>
-        ))}
+      {/* Masonry-style Gallery Grid */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+        {subsection.images.map((image, index) => {
+          // Create varying aspect ratios for masonry effect
+          const aspectClass = index % 3 === 0 
+            ? "aspect-[3/4]" 
+            : index % 3 === 1 
+              ? "aspect-[4/3]" 
+              : "aspect-square"
+          
+          return (
+            <div
+              key={index}
+              className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
+            >
+              <Image
+                src={image}
+                alt={`${subsection.title} - Image ${index + 1}`}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                priority={index === 0}
+              />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
+            </div>
+          )
+        })}
       </div>
 
       {/* Bottom Navigation */}

@@ -56,70 +56,54 @@ export default function CarPhotographySection({ category }: CarPhotographySectio
         </p>
       </header>
 
-      {/* Subsections */}
-      <div className="space-y-24">
+      {/* Clickable Thumbnails Grid - 3 columns on desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         {category.subsections.map((subsection) => (
-          <section key={subsection.id} id={subsection.id}>
-            {/* Subsection Title */}
-            <Link
-              href={`/photography/${category.slug}/${subsection.id}`}
-              className="inline-block mb-8 group"
-            >
-              <h2
-                className="flex items-center gap-3 transition-colors duration-200 group-hover:text-white"
-                style={{
-                  fontFamily: "var(--font-chillax), sans-serif",
-                  fontWeight: 500,
-                  fontSize: "24px",
-                  letterSpacing: "0.15em",
-                  color: "rgba(180, 160, 120, 0.85)",
-                }}
-              >
-                {subsection.title}
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </h2>
-            </Link>
-
-            {/* Horizontal Scrollable Gallery */}
-            <div className="relative -mx-6 md:-mx-12 lg:-mx-24">
-              <div
-                className="flex gap-4 overflow-x-auto px-6 md:px-12 lg:px-24 pb-4 scrollbar-hide"
-                style={{
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                }}
-              >
-                {subsection.images.map((image, index) => (
-                  <Link
-                    key={index}
-                    href={`/photography/${category.slug}/${subsection.id}`}
-                    className="flex-shrink-0 group"
-                  >
-                    <div className="relative w-72 md:w-80 lg:w-96 aspect-[4/3] overflow-hidden rounded-lg">
-                      <Image
-                        src={image}
-                        alt={`${subsection.title} - Image ${index + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
+          <Link
+            key={subsection.id}
+            href={`/photography/${category.slug}/${subsection.id}`}
+            className="group block"
+          >
+            {/* Thumbnail Container */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg mb-4">
+              <Image
+                src={subsection.images[0]}
+                alt={subsection.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-colors duration-300" />
             </div>
-          </section>
+
+            {/* Subsection Label */}
+            <h2
+              className="transition-colors duration-200 group-hover:text-white"
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                fontWeight: 500,
+                fontSize: "16px",
+                letterSpacing: "0.15em",
+                color: "rgba(180, 175, 165, 0.85)",
+              }}
+            >
+              {subsection.title}
+            </h2>
+
+            {/* Image count */}
+            <p
+              className="mt-1"
+              style={{
+                fontFamily: "var(--font-figtree), sans-serif",
+                fontWeight: 400,
+                fontSize: "12px",
+                color: "rgba(180, 175, 165, 0.5)",
+              }}
+            >
+              {subsection.images.length} images
+            </p>
+          </Link>
         ))}
       </div>
     </div>
