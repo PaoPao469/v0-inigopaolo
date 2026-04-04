@@ -43,54 +43,59 @@ export default function ClothingBrandDetail({ brand }: ClothingBrandDetailProps)
         </p>
       </header>
 
-      {/* Sections */}
-      <div className="space-y-24">
+      {/* Section Thumbnails Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
         {brand.sections.map((section) => (
-          <section key={section.id}>
-            {/* Section Header */}
-            <div className="mb-8 pb-4 border-b border-white/10">
-              <h2
-                style={{
-                  fontFamily: "var(--font-chillax), sans-serif",
-                  fontWeight: 500,
-                  fontSize: "clamp(1.2rem, 3vw, 1.5rem)",
-                  letterSpacing: "0.15em",
-                  color: "rgba(180, 160, 120, 0.85)",
-                  textTransform: "uppercase",
-                }}
-              >
-                {section.label}
-              </h2>
+          <Link
+            key={section.id}
+            href={`/clothing/${brand.slug}/${section.id}`}
+            className="group block"
+          >
+            {/* Thumbnail Container */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg mb-4">
+              <Image
+                src={section.thumbnail}
+                alt={section.label}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+              
+              {/* Label Overlay */}
+              <div className="absolute inset-0 flex items-end p-6">
+                <h2
+                  className="transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-chillax), sans-serif",
+                    fontWeight: 500,
+                    fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
+                    letterSpacing: "0.15em",
+                    color: "rgba(255, 255, 255, 0.95)",
+                    textTransform: "uppercase",
+                    textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                  }}
+                >
+                  {section.label}
+                </h2>
+              </div>
             </div>
 
-            {/* Masonry-style Gallery Grid */}
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
-              {section.images.map((image, index) => {
-                // Create varying aspect ratios for masonry effect
-                const aspectClass = index % 3 === 0 
-                  ? "aspect-[3/4]" 
-                  : index % 3 === 1 
-                    ? "aspect-[4/3]" 
-                    : "aspect-square"
-                
-                return (
-                  <div
-                    key={index}
-                    className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${brand.label} - ${section.label} - Image ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
-                  </div>
-                )
-              })}
-            </div>
-          </section>
+            {/* Image Count */}
+            <p
+              className="text-center"
+              style={{
+                fontFamily: "var(--font-figtree), sans-serif",
+                fontWeight: 400,
+                fontSize: "12px",
+                color: "rgba(180, 175, 165, 0.5)",
+                letterSpacing: "0.08em",
+              }}
+            >
+              {section.images.length} IMAGES
+            </p>
+          </Link>
         ))}
       </div>
 
