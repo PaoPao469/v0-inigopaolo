@@ -30,237 +30,177 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const backHref = yearInfo ? `/architecture/${yearInfo.slug}` : "/architecture"
   const backLabel = yearInfo ? `BACK TO ${yearInfo.label}` : "BACK TO COLLECTIONS"
 
+  // Parse description into sections
+  const descriptionSections = project.description.split('\n\n').reduce((acc: { title: string | null; content: string }[], part) => {
+    const trimmed = part.trim()
+    if (trimmed === 'Project Description' || trimmed === 'Thought Process') {
+      acc.push({ title: trimmed, content: '' })
+    } else if (acc.length > 0 && acc[acc.length - 1].content === '') {
+      acc[acc.length - 1].content = trimmed
+    } else {
+      acc.push({ title: null, content: trimmed })
+    }
+    return acc
+  }, [])
+
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* Back Navigation */}
-      <div className="mb-12 pt-4">
-        <Link
-          href={backHref}
-          className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
-          style={{
-            fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.8)",
-          }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-          {backLabel}
-        </Link>
-      </div>
-
-      {/* Main Content - Side by Side Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-        {/* Left Side - Project Info (Sticky on Desktop) */}
-        <div className="lg:sticky lg:top-32">
-          <span
-            className="text-[10px] tracking-[0.25em] block mb-3"
+    <div className="max-w-[1600px] mx-auto">
+      {/* Compact Header with Back Nav and Title */}
+      <div className="mb-8 pt-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <Link
+            href={backHref}
+            className="inline-flex items-center gap-2 text-[10px] tracking-[0.15em] transition-opacity hover:opacity-70 w-fit"
             style={{
               fontFamily: "var(--font-chillax), sans-serif",
-              color: "rgba(180, 160, 120, 0.9)",
+              color: "rgba(180, 160, 120, 0.8)",
             }}
           >
-            {project.category}
-          </span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            {backLabel}
+          </Link>
           
-          <h1
-            className="text-3xl md:text-4xl lg:text-5xl mb-6"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 600,
-              color: "rgba(255, 255, 255, 0.95)",
-              letterSpacing: "0.02em",
-              lineHeight: 1.1,
-            }}
-          >
-            {project.title}
-            <br />
-            <span style={{ fontWeight: 400, opacity: 0.7 }}>{project.titleAccent}</span>
-          </h1>
-          
-          <div className="mb-8 max-w-lg space-y-6">
-            {project.description.split('\n\n').reduce((acc: { title: string | null; content: string }[], part, index, arr) => {
-              const trimmed = part.trim()
-              // Check if this part is a section title (Project Description or Thought Process)
-              if (trimmed === 'Project Description' || trimmed === 'Thought Process') {
-                acc.push({ title: trimmed, content: '' })
-              } else if (acc.length > 0 && acc[acc.length - 1].content === '') {
-                // This is the content for the previous title
-                acc[acc.length - 1].content = trimmed
-              } else {
-                // Regular paragraph without title
-                acc.push({ title: null, content: trimmed })
-              }
-              return acc
-            }, []).map((section, idx) => (
-              <div key={idx}>
-                {section.title && (
-                  <h3
-                    className="text-base md:text-lg mb-2"
-                    style={{
-                      fontFamily: "var(--font-chillax), sans-serif",
-                      fontWeight: 500,
-                      color: "rgba(255, 255, 255, 0.85)",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    {section.title}
-                  </h3>
-                )}
-                <p
-                  className="text-sm md:text-base leading-relaxed"
-                  style={{
-                    fontFamily: "var(--font-figtree), sans-serif",
-                    color: "rgba(180, 175, 165, 0.7)",
-                    lineHeight: 1.9,
-                  }}
-                >
-                  {section.content || section.title}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Project Details */}
-          <div className="space-y-4 border-t border-white/10 pt-8">
-            <div className="flex justify-between items-center">
-              <span
-                className="text-[10px] tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-chillax), sans-serif",
-                  color: "rgba(180, 175, 165, 0.4)",
-                }}
-              >
-                PROJECT TYPE
-              </span>
-              <span
-                className="text-xs"
-                style={{
-                  fontFamily: "var(--font-figtree), sans-serif",
-                  color: "rgba(180, 175, 165, 0.7)",
-                }}
-              >
-                {project.category}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span
-                className="text-[10px] tracking-[0.2em]"
-                style={{
-                  fontFamily: "var(--font-chillax), sans-serif",
-                  color: "rgba(180, 175, 165, 0.4)",
-                }}
-              >
-                IMAGES
-              </span>
-              <span
-                className="text-xs"
-                style={{
-                  fontFamily: "var(--font-figtree), sans-serif",
-                  color: "rgba(180, 175, 165, 0.7)",
-                }}
-              >
-                {project.imageSections 
-                  ? project.imageSections.reduce((total, section) => total + section.images.length, 0)
-                  : project.images.length} Photos
-              </span>
-            </div>
+          <div className="flex items-baseline gap-4">
+            <h1
+              className="text-2xl md:text-3xl lg:text-4xl"
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                fontWeight: 600,
+                color: "rgba(255, 255, 255, 0.95)",
+                letterSpacing: "0.02em",
+                lineHeight: 1.1,
+              }}
+            >
+              {project.title}{" "}
+              <span style={{ fontWeight: 400, opacity: 0.7 }}>{project.titleAccent}</span>
+            </h1>
+            <span
+              className="text-[9px] tracking-[0.2em] hidden md:inline"
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                color: "rgba(180, 160, 120, 0.7)",
+              }}
+            >
+              {project.category}
+            </span>
           </div>
         </div>
 
-        {/* Right Side - Scrollable Image Gallery */}
-        <div className="space-y-8">
-          {/* Render labeled image sections if available */}
-          {project.imageSections && project.imageSections.length > 0 ? (
-            project.imageSections.map((section, sectionIndex) => {
-              // Check if this section has a hero (large first image)
-              const hasHeroFirst = section.isHeroFirst === true
-              // Check if this is the "Minecraft Render" section for larger display
-              const isMinecraftRender = section.label.toLowerCase().includes('minecraft')
-              // Single image sections display full width
-              const isSingleImage = section.images.length === 1
-              
-              return (
-                <div key={sectionIndex} className="space-y-4">
-                  {/* Section Label */}
-                  <h3
-                    className="text-sm tracking-[0.15em] uppercase"
-                    style={{
-                      fontFamily: "var(--font-chillax), sans-serif",
-                      color: "rgba(180, 160, 120, 0.9)",
-                    }}
-                  >
-                    {section.label}
-                  </h3>
-                  {/* Section Images */}
-                  {hasHeroFirst ? (
-                    // Hero layout: first image large, rest in grid
-                    <div className="space-y-4">
-                      {/* Hero image - large and prominent */}
-                      <div className="relative overflow-hidden rounded-sm">
-                        <div className="relative aspect-[16/9]">
+        <span
+          className="text-[10px] tracking-[0.15em]"
+          style={{
+            fontFamily: "var(--font-figtree), sans-serif",
+            color: "rgba(180, 175, 165, 0.5)",
+          }}
+        >
+          {project.imageSections 
+            ? project.imageSections.reduce((total, section) => total + section.images.length, 0)
+            : project.images.length} IMAGES
+        </span>
+      </div>
+
+      {/* Full-Width Image Gallery - Primary Focus */}
+      <div className="space-y-12">
+        {project.imageSections && project.imageSections.length > 0 ? (
+          project.imageSections.map((section, sectionIndex) => {
+            const hasHeroFirst = section.isHeroFirst === true
+            const isMinecraftRender = section.label.toLowerCase().includes('minecraft')
+            const isSingleImage = section.images.length === 1
+            
+            return (
+              <div key={sectionIndex} className="space-y-4">
+                {/* Section Label - Subtle */}
+                <h3
+                  className="text-[10px] tracking-[0.2em] uppercase"
+                  style={{
+                    fontFamily: "var(--font-chillax), sans-serif",
+                    color: "rgba(180, 160, 120, 0.6)",
+                  }}
+                >
+                  {section.label}
+                </h3>
+                
+                {/* Section Images - Large and Prominent */}
+                {hasHeroFirst ? (
+                  <div className="space-y-4">
+                    {/* Hero image - Extra large */}
+                    <div className="relative overflow-hidden rounded-sm">
+                      <div className="relative aspect-[21/9] md:aspect-[2.5/1]">
+                        <Image
+                          src={section.images[0]}
+                          alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
+                          fill
+                          className="object-cover"
+                          priority={sectionIndex === 0}
+                        />
+                      </div>
+                    </div>
+                    {/* Remaining images in responsive grid */}
+                    {section.images.length > 1 && (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {section.images.slice(1).map((image, imageIndex) => (
+                          <div
+                            key={imageIndex}
+                            className="relative overflow-hidden rounded-sm"
+                          >
+                            <div className="relative aspect-[4/3]">
+                              <Image
+                                src={image}
+                                alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className={
+                    isMinecraftRender || isSingleImage 
+                      ? "space-y-4" 
+                      : section.images.length === 2 
+                        ? "grid grid-cols-1 md:grid-cols-2 gap-3"
+                        : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+                  }>
+                    {section.images.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="relative overflow-hidden rounded-sm"
+                      >
+                        <div className={`relative ${
+                          isMinecraftRender || isSingleImage 
+                            ? 'aspect-[21/9] md:aspect-[2.5/1]' 
+                            : section.images.length === 2
+                              ? 'aspect-[4/3] md:aspect-[3/2]'
+                              : 'aspect-[4/3]'
+                        }`}>
                           <Image
-                            src={section.images[0]}
-                            alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
+                            src={image}
+                            alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
                             className="object-cover"
-                            priority={sectionIndex === 0}
+                            priority={sectionIndex === 0 && imageIndex === 0}
                           />
                         </div>
                       </div>
-                      {/* Remaining images in grid */}
-                      {section.images.length > 1 && (
-                        <div className="grid grid-cols-2 gap-4">
-                          {section.images.slice(1).map((image, imageIndex) => (
-                            <div
-                              key={imageIndex}
-                              className="relative overflow-hidden rounded-sm"
-                            >
-                              <div className="relative aspect-[4/3]">
-                                <Image
-                                  src={image}
-                                  alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    // Standard layout
-                    <div className={isMinecraftRender || isSingleImage ? "space-y-6" : "grid grid-cols-2 gap-4"}>
-                      {section.images.map((image, imageIndex) => (
-                        <div
-                          key={imageIndex}
-                          className="relative overflow-hidden rounded-sm"
-                        >
-                          <div className={`relative ${isMinecraftRender || isSingleImage ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
-                            <Image
-                              src={image}
-                              alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
-                              fill
-                              className="object-cover"
-                              priority={sectionIndex === 0 && imageIndex === 0}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )
-            })
-          ) : (
-            /* Fallback to regular images array */
-            project.images.map((image, index) => (
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {project.images.map((image, index) => (
               <div
                 key={index}
-                className="relative overflow-hidden rounded-sm"
+                className={`relative overflow-hidden rounded-sm ${index === 0 ? 'md:col-span-2' : ''}`}
               >
-                <div className="relative aspect-[4/3]">
+                <div className={`relative ${index === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
                   <Image
                     src={image}
                     alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
@@ -270,22 +210,55 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   />
                 </div>
               </div>
-            ))
-          )}
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Compact Description Section - Below Images */}
+      <div className="mt-16 pt-8 border-t border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {descriptionSections.map((section, idx) => (
+              <div key={idx} className="space-y-2">
+                {section.title && (
+                  <h3
+                    className="text-[10px] tracking-[0.2em] uppercase"
+                    style={{
+                      fontFamily: "var(--font-chillax), sans-serif",
+                      color: "rgba(180, 160, 120, 0.6)",
+                    }}
+                  >
+                    {section.title}
+                  </h3>
+                )}
+                <p
+                  className="text-xs leading-relaxed"
+                  style={{
+                    fontFamily: "var(--font-figtree), sans-serif",
+                    color: "rgba(180, 175, 165, 0.5)",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  {section.content || section.title}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="mt-20 mb-8 pt-8 border-t border-white/10">
+      {/* Minimal Bottom Navigation */}
+      <div className="mt-12 mb-8 pt-6 border-t border-white/5 flex justify-center">
         <Link
           href={backHref}
-          className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
+          className="inline-flex items-center gap-2 text-[10px] tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.8)",
+            color: "rgba(180, 160, 120, 0.5)",
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
           {backLabel}
