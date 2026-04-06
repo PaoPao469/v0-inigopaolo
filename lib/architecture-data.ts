@@ -77,13 +77,6 @@ export const portfolioData = {
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
         ],
       },
-    ],
-  },
-  "rhino-project": {
-    label: "RHINO PROJECT",
-    slug: "rhino-project",
-    thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-    projects: [
       {
         id: "parametric-forms",
         category: "DIGITAL",
@@ -106,7 +99,6 @@ export function getAllProjects() {
   return [
     ...portfolioData["year-1"].projects,
     ...portfolioData["year-2"].projects,
-    ...portfolioData["rhino-project"].projects,
   ]
 }
 
