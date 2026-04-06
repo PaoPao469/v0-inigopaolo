@@ -73,7 +73,7 @@ export default function ImageLightbox({
       <button
         onClick={onClose}
         className="absolute top-6 right-6 z-50 p-2 transition-opacity hover:opacity-70"
-        style={{ color: "rgba(180, 160, 120, 0.8)" }}
+        style={{ color: "rgba(200, 205, 215, 0.8)" }}
         aria-label="Close lightbox"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -89,7 +89,7 @@ export default function ImageLightbox({
             onPrevious()
           }}
           className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-3 transition-opacity hover:opacity-70"
-          style={{ color: "rgba(180, 160, 120, 0.8)" }}
+          style={{ color: "rgba(200, 205, 215, 0.8)" }}
           aria-label="Previous image"
         >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -106,7 +106,7 @@ export default function ImageLightbox({
             onNext()
           }}
           className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-3 transition-opacity hover:opacity-70"
-          style={{ color: "rgba(180, 160, 120, 0.8)" }}
+          style={{ color: "rgba(200, 205, 215, 0.8)" }}
           aria-label="Next image"
         >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -137,7 +137,7 @@ export default function ImageLightbox({
         className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center"
         style={{
           fontFamily: "var(--font-figtree), sans-serif",
-          color: "rgba(180, 175, 165, 0.5)",
+          color: "rgba(200, 205, 215, 0.5)",
           fontSize: "11px",
           letterSpacing: "0.1em",
         }}
@@ -150,7 +150,7 @@ export default function ImageLightbox({
         className="absolute bottom-6 right-6 hidden md:flex items-center gap-4"
         style={{
           fontFamily: "var(--font-figtree), sans-serif",
-          color: "rgba(180, 175, 165, 0.3)",
+          color: "rgba(200, 205, 215, 0.3)",
           fontSize: "10px",
           letterSpacing: "0.05em",
         }}
