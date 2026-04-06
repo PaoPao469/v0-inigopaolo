@@ -172,7 +172,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       </div>
 
       {/* Full-Width Image Gallery - Primary Visual Focus */}
-      <div className="space-y-16">
+      <div className="space-y-10">
         {project.imageSections && project.imageSections.length > 0 ? (
           project.imageSections.map((section, sectionIndex) => {
             const hasHeroFirst = section.isHeroFirst === true
@@ -181,7 +181,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             const isSingleImage = section.images.length === 1
             
             return (
-              <div key={sectionIndex} className="space-y-6">
+              <div key={sectionIndex} className="space-y-4">
                 {/* Section Label */}
                 <h3
                   className="text-xs tracking-[0.15em] uppercase"
@@ -195,7 +195,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 
                 {/* Hero 3x3 Grid Layout - First image large focal point, rest balanced */}
                 {hasHeroGrid ? (
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {/* Top row: Hero image (2 cols) + 1 image */}
                     <div className="grid grid-cols-3 gap-4">
                       {/* Hero image spanning 2 columns - larger focal point */}
@@ -274,7 +274,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     </div>
                   </div>
                 ) : hasHeroFirst ? (
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     {/* Hero image - Extra large, maintains aspect ratio */}
                     <button
                       onClick={() => openLightbox(section.images[0])}
@@ -319,29 +319,31 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     isSingleImage 
                       ? "w-full flex justify-center" 
                       : section.images.length === 2 
-                        ? "grid grid-cols-1 md:grid-cols-2 gap-4"
-                        : "grid grid-cols-1 md:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 md:grid-cols-2 gap-3"
+                        : section.images.length === 4
+                          ? "grid grid-cols-2 gap-3"
+                          : "grid grid-cols-2 md:grid-cols-3 gap-3"
                   }>
                     {section.images.map((image, imageIndex) => (
                       <button
                         key={imageIndex}
                         onClick={() => openLightbox(image)}
-                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10 ${
+                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${
                           isSingleImage ? 'w-full' : ''
                         }`}
                       >
                         <div className={`relative ${
                           isSingleImage
                             ? 'aspect-[16/9]' 
-                            : 'aspect-[3/4]'
+                            : 'aspect-[4/3]'
                         }`}>
                           <Image
                             src={image}
                             alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
-                            className="object-contain"
+                            className="object-cover"
                             priority={sectionIndex === 0 && imageIndex === 0}
-                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 100vw, 33vw"}
+                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 50vw, 33vw"}
                           />
                         </div>
                       </button>
