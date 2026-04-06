@@ -67,9 +67,7 @@ export const portfolioData = {
           },
           {
             label: "Model Photos",
-            gridLayout: "hero-3x3",
             images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-Q0dKkVufsh0wjSQWOFui0FCqWMOInz.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-LzElRHotngL5SnyDF62TUzxZBNZG9p.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-OnKwG81sVp7hbkFLzoVMJSfGDNFm5r.jpg",
@@ -77,6 +75,7 @@ export const portfolioData = {
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-GKU9VGFQ85nS9X9ZDmEZFPUC3OV34v.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-VjNiVy9cu8T2dv9C7e1agmXTVfAPI2.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-rqXRrLfwbQeWjnqHNYEGqpLy3OrAfI.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
             ],
           },
         ],
@@ -95,7 +94,6 @@ export const portfolioData = {
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
             ],
           },
           {
@@ -105,6 +103,7 @@ export const portfolioData = {
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-RvRKsEmFx6wDCTFQCyjEkh50RJ94xq.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
             ],
           },
           {
