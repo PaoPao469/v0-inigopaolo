@@ -197,15 +197,16 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {/* Hero image - Extra large, maintains aspect ratio */}
                     <button
                       onClick={() => openLightbox(section.images[0])}
-                      className="relative overflow-hidden rounded-sm w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                      className="relative overflow-hidden rounded-sm w-full cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                     >
                       <div className="relative aspect-[16/9]">
                         <Image
                           src={section.images[0]}
                           alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
                           fill
-                          className="object-contain bg-black/20"
+                          className="object-cover"
                           priority={sectionIndex === 0}
+                          sizes="(max-width: 1800px) 100vw, 1800px"
                         />
                       </div>
                     </button>
@@ -216,14 +217,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                           <button
                             key={imageIndex}
                             onClick={() => openLightbox(image)}
-                            className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                            className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                           >
                             <div className="relative aspect-[4/3]">
                               <Image
                                 src={image}
                                 alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
                                 fill
-                                className="object-contain bg-black/20"
+                                className="object-cover"
+                                sizes="(max-width: 768px) 50vw, 33vw"
                               />
                             </div>
                           </button>
@@ -233,8 +235,8 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </div>
                 ) : (
                   <div className={
-                    isMinecraftRender || isSingleImage 
-                      ? "space-y-6" 
+                    isSingleImage 
+                      ? "w-full flex justify-center" 
                       : section.images.length === 2 
                         ? "grid grid-cols-1 md:grid-cols-2 gap-4"
                         : "grid grid-cols-2 lg:grid-cols-3 gap-4"
@@ -243,21 +245,22 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                       <button
                         key={imageIndex}
                         onClick={() => openLightbox(image)}
-                        className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${
+                          isSingleImage ? 'w-full' : ''
+                        }`}
                       >
                         <div className={`relative ${
-                          isMinecraftRender || isSingleImage 
+                          isSingleImage
                             ? 'aspect-[16/9]' 
-                            : section.images.length === 2
-                              ? 'aspect-[4/3]'
-                              : 'aspect-[4/3]'
+                            : 'aspect-[4/3]'
                         }`}>
                           <Image
                             src={image}
                             alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
-                            className="object-contain bg-black/20"
+                            className="object-cover"
                             priority={sectionIndex === 0 && imageIndex === 0}
+                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 50vw, 33vw"}
                           />
                         </div>
                       </button>
@@ -273,15 +276,16 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <button
                 key={index}
                 onClick={() => openLightbox(image)}
-                className={`relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}
+                className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}
               >
                 <div className={`relative ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
                   <Image
                     src={image}
                     alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
                     fill
-                    className="object-contain bg-black/20"
+                    className="object-cover"
                     priority={index === 0}
+                    sizes={index === 0 ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 100vw, 50vw"}
                   />
                 </div>
               </button>
