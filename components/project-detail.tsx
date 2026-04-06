@@ -71,16 +71,48 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             <span style={{ fontWeight: 400, opacity: 0.7 }}>{project.titleAccent}</span>
           </h1>
           
-          <p
-            className="text-sm md:text-base leading-relaxed mb-8 max-w-lg"
-            style={{
-              fontFamily: "var(--font-figtree), sans-serif",
-              color: "rgba(180, 175, 165, 0.7)",
-              lineHeight: 1.9,
-            }}
-          >
-            {project.description}
-          </p>
+          <div className="mb-8 max-w-lg space-y-6">
+            {project.description.split('\n\n').reduce((acc: { title: string | null; content: string }[], part, index, arr) => {
+              const trimmed = part.trim()
+              // Check if this part is a section title (Project Description or Thought Process)
+              if (trimmed === 'Project Description' || trimmed === 'Thought Process') {
+                acc.push({ title: trimmed, content: '' })
+              } else if (acc.length > 0 && acc[acc.length - 1].content === '') {
+                // This is the content for the previous title
+                acc[acc.length - 1].content = trimmed
+              } else {
+                // Regular paragraph without title
+                acc.push({ title: null, content: trimmed })
+              }
+              return acc
+            }, []).map((section, idx) => (
+              <div key={idx}>
+                {section.title && (
+                  <h3
+                    className="text-base md:text-lg mb-2"
+                    style={{
+                      fontFamily: "var(--font-chillax), sans-serif",
+                      fontWeight: 500,
+                      color: "rgba(255, 255, 255, 0.85)",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {section.title}
+                  </h3>
+                )}
+                <p
+                  className="text-sm md:text-base leading-relaxed"
+                  style={{
+                    fontFamily: "var(--font-figtree), sans-serif",
+                    color: "rgba(180, 175, 165, 0.7)",
+                    lineHeight: 1.9,
+                  }}
+                >
+                  {section.content || section.title}
+                </p>
+              </div>
+            ))}
+          </div>
 
           {/* Project Details */}
           <div className="space-y-4 border-t border-white/10 pt-8">
