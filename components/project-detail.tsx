@@ -7,6 +7,7 @@ import { getYearForProject } from "@/lib/architecture-data"
 interface ImageSection {
   label: string
   images: string[]
+  isHeroFirst?: boolean
 }
 
 interface Project {
@@ -172,9 +173,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           {/* Render labeled image sections if available */}
           {project.imageSections && project.imageSections.length > 0 ? (
             project.imageSections.map((section, sectionIndex) => {
+              // Check if this section has a hero (large first image)
+              const hasHeroFirst = section.isHeroFirst === true
               // Check if this is the "Minecraft Render" section for larger display
-              const isMinecraftRender = section.label.toLowerCase().includes('minecraft') || 
-                                        section.label.toLowerCase().includes('render')
+              const isMinecraftRender = section.label.toLowerCase().includes('minecraft')
+              // Single image sections display full width
+              const isSingleImage = section.images.length === 1
               
               return (
                 <div key={sectionIndex} className="space-y-4">
@@ -189,24 +193,63 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {section.label}
                   </h3>
                   {/* Section Images */}
-                  <div className={isMinecraftRender ? "space-y-6" : "grid grid-cols-2 gap-4"}>
-                    {section.images.map((image, imageIndex) => (
-                      <div
-                        key={imageIndex}
-                        className="relative overflow-hidden rounded-sm"
-                      >
-                        <div className={`relative ${isMinecraftRender ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                  {hasHeroFirst ? (
+                    // Hero layout: first image large, rest in grid
+                    <div className="space-y-4">
+                      {/* Hero image - large and prominent */}
+                      <div className="relative overflow-hidden rounded-sm">
+                        <div className="relative aspect-[16/9]">
                           <Image
-                            src={image}
-                            alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
+                            src={section.images[0]}
+                            alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
                             fill
                             className="object-cover"
-                            priority={sectionIndex === 0 && imageIndex === 0}
+                            priority={sectionIndex === 0}
                           />
                         </div>
                       </div>
-                    ))}
-                  </div>
+                      {/* Remaining images in grid */}
+                      {section.images.length > 1 && (
+                        <div className="grid grid-cols-2 gap-4">
+                          {section.images.slice(1).map((image, imageIndex) => (
+                            <div
+                              key={imageIndex}
+                              className="relative overflow-hidden rounded-sm"
+                            >
+                              <div className="relative aspect-[4/3]">
+                                <Image
+                                  src={image}
+                                  alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    // Standard layout
+                    <div className={isMinecraftRender || isSingleImage ? "space-y-6" : "grid grid-cols-2 gap-4"}>
+                      {section.images.map((image, imageIndex) => (
+                        <div
+                          key={imageIndex}
+                          className="relative overflow-hidden rounded-sm"
+                        >
+                          <div className={`relative ${isMinecraftRender || isSingleImage ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                            <Image
+                              src={image}
+                              alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
+                              fill
+                              className="object-cover"
+                              priority={sectionIndex === 0 && imageIndex === 0}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )
             })

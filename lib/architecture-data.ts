@@ -45,11 +45,39 @@ export const portfolioData = {
         title: "THE",
         titleAccent: "EXHIBIT",
         description: "Project Description\n\nAn experimental spatial system based on cube grids, exploring repetition, circulation, and perception. The project creates a layered architectural environment that challenges orientation and encourages exploration.\n\nThought Process\n\nThe design is driven by a narrative of an exclusive and mysterious exhibition that reveals itself only once entered. The space is conceived as immersive and disorienting, where repeating rooms and continuous circulation create a sense of endlessness. Subtle variations within the grid distort perception, making it difficult to distinguish direction or progression. The architecture acts almost as a living system guiding, trapping, and reshaping the user's experience over time.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-NdiGixNSfVbgBI23WtoYCOUSFgOax6.jpg",
+        images: [],
+        imageSections: [
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-4S6XMQBDG5O3BXqHXWq11z2V9UQ2F4.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-H5bKdyATbyc9kX27kB9t6IchCI6Lme.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-FEwIiPRnFTnn2cDVdrYL4uZo7OTYo9.jpg",
+            ],
+          },
+          {
+            label: "Rhino Renders",
+            isHeroFirst: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-NdiGixNSfVbgBI23WtoYCOUSFgOax6.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%202-KvTPQqQ0XS3730frk1RBCik1gzimT6.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%203-n119k1Mf8MFsAgWheRYwvMBgOjPZby.jpg",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-Q0dKkVufsh0wjSQWOFui0FCqWMOInz.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-LzElRHotngL5SnyDF62TUzxZBNZG9p.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-OnKwG81sVp7hbkFLzoVMJSfGDNFm5r.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-z5jGySpBFdi977ZBvsG4zzugLADIqO.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-GKU9VGFQ85nS9X9ZDmEZFPUC3OV34v.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-VjNiVy9cu8T2dv9C7e1agmXTVfAPI2.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-rqXRrLfwbQeWjnqHNYEGqpLy3OrAfI.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
+            ],
+          },
         ],
       },
       {
