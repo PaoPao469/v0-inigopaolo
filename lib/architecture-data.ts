@@ -1,3 +1,55 @@
+// Project color themes derived from each project's photo palette
+export const projectColorThemes: Record<string, { primary: string; secondary: string; accent: string }> = {
+  // Seaside House - warm sandy beige tones from the coastal setting
+  'seaside-house': {
+    primary: 'rgba(210, 195, 170, 0.95)',    // warm sand
+    secondary: 'rgba(190, 175, 155, 0.8)',   // muted beige
+    accent: 'rgba(180, 165, 140, 0.7)',      // soft tan
+  },
+  // The Exhibit - cool gray tones from the minimalist cube renders
+  'the-exhibit': {
+    primary: 'rgba(180, 190, 200, 0.95)',    // cool steel gray
+    secondary: 'rgba(160, 170, 185, 0.8)',   // slate blue-gray
+    accent: 'rgba(145, 155, 170, 0.7)',      // muted blue
+  },
+  // Marina Vista Raceway - vibrant warm tones from the dancer image
+  'marina-vista-raceway': {
+    primary: 'rgba(220, 180, 160, 0.95)',    // warm coral
+    secondary: 'rgba(200, 165, 145, 0.8)',   // dusty rose
+    accent: 'rgba(185, 150, 130, 0.7)',      // terracotta
+  },
+  // Vertical Landscapes - organic green tones
+  'vertical-landscapes': {
+    primary: 'rgba(170, 195, 175, 0.95)',    // sage green
+    secondary: 'rgba(155, 180, 160, 0.8)',   // muted olive
+    accent: 'rgba(140, 165, 145, 0.7)',      // moss
+  },
+  // Community Hub - warm welcoming amber
+  'community-hub': {
+    primary: 'rgba(215, 190, 155, 0.95)',    // warm amber
+    secondary: 'rgba(195, 175, 145, 0.8)',   // golden beige
+    accent: 'rgba(180, 160, 130, 0.7)',      // caramel
+  },
+  // Parametric Forms - futuristic purple-blue
+  'parametric-forms': {
+    primary: 'rgba(190, 180, 210, 0.95)',    // soft lavender
+    secondary: 'rgba(170, 165, 195, 0.8)',   // muted violet
+    accent: 'rgba(155, 150, 180, 0.7)',      // dusty purple
+  },
+}
+
+// Default color theme for projects without a specific theme
+export const defaultColorTheme = {
+  primary: 'rgba(200, 205, 215, 0.95)',
+  secondary: 'rgba(200, 205, 215, 0.8)',
+  accent: 'rgba(200, 205, 215, 0.7)',
+}
+
+// Helper to get color theme for a project
+export function getProjectColorTheme(projectId: string) {
+  return projectColorThemes[projectId] || defaultColorTheme
+}
+
 // Project data organized by year - shared between server and client
 export const portfolioData = {
   "year-1": {

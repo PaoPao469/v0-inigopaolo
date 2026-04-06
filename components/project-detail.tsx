@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { getYearForProject } from "@/lib/architecture-data"
+import { getYearForProject, getProjectColorTheme } from "@/lib/architecture-data"
 import ImageLightbox from "./image-lightbox"
 
 interface ImageSection {
@@ -32,6 +32,9 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const yearInfo = getYearForProject(project.id)
   const backHref = yearInfo ? `/architecture/${yearInfo.slug}` : "/architecture"
   const backLabel = yearInfo ? `BACK TO ${yearInfo.label}` : "BACK TO COLLECTIONS"
+
+  // Get project-specific color theme
+  const colorTheme = getProjectColorTheme(project.id)
 
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -108,7 +111,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     
     return (
       <div key={`${section.label}-${sectionIndex}`} className="space-y-6">
-        <h3 className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(200, 205, 215, 0.7)" }}>
+        <h3 className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.accent }}>
           {section.label}
         </h3>
         
@@ -184,7 +187,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   return (
     <div className="max-w-[1800px] mx-auto">
       <div className="mb-6 pt-4">
-        <Link href={backHref} className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] transition-opacity hover:opacity-70 w-fit" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(200, 205, 215, 0.8)" }}>
+        <Link href={backHref} className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] transition-opacity hover:opacity-70 w-fit" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.secondary }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
           {backLabel}
         </Link>
@@ -197,13 +200,13 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               {project.title} <span style={{ fontWeight: 400, opacity: 0.7 }}>{project.titleAccent}</span>
             </h1>
           </div>
-          <span className="text-[10px] tracking-[0.2em]" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(200, 205, 215, 0.7)" }}>{project.category}</span>
+          <span className="text-[10px] tracking-[0.2em]" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.accent }}>{project.category}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
           {descriptionSections.map((section, idx) => (
             <div key={idx} className="space-y-3">
-              {section.title && <h3 className="text-sm tracking-[0.12em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(200, 205, 215, 0.9)", fontWeight: 500 }}>{section.title}</h3>}
+              {section.title && <h3 className="text-sm tracking-[0.12em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.primary, fontWeight: 500 }}>{section.title}</h3>}
               <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: "var(--font-figtree), sans-serif", color: "rgba(255, 255, 255, 0.75)", lineHeight: 1.9 }}>{section.content || section.title}</p>
             </div>
           ))}
@@ -234,7 +237,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       </div>
 
       <div className="mt-20 mb-12 pt-8 border-t border-white/5 flex justify-center">
-        <Link href={backHref} className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(200, 205, 215, 0.6)" }}>
+        <Link href={backHref} className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.accent }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
           {backLabel}
         </Link>
