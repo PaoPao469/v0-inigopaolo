@@ -11,6 +11,7 @@ interface ImageSection {
   images: string[]
   isHeroFirst?: boolean
   gridLayout?: "hero-3x3"
+  preserveHeroAspect?: boolean
 }
 
 interface Project {
@@ -109,6 +110,11 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     const hasHeroGrid = section.gridLayout === "hero-3x3"
     const isSingleImage = section.images.length === 1
     const isFirstSection = sectionIndex === 0
+    const preserveAspect = section.preserveHeroAspect === true
+    
+    // Determine hero aspect ratio and object fit based on preserveHeroAspect flag
+    const heroAspectClass = preserveAspect ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[21/9] lg:aspect-[2.5/1]"
+    const heroObjectFit = preserveAspect ? "object-contain" : "object-cover"
     
     return (
       <div key={`${section.label}-${sectionIndex}`} className="space-y-8">
@@ -127,12 +133,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               onClick={() => openLightbox(section.images[0])} 
               className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
             >
-              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+              <div className={`relative ${heroAspectClass}`}>
                 <Image 
                   src={section.images[0]} 
                   alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
                   fill 
-                  className="object-contain transition-all duration-700 group-hover:scale-[1.02]" 
+                  className={`${heroObjectFit} transition-all duration-700 group-hover:scale-[1.02]`} 
                   priority={isFirstSection} 
                   sizes="(max-width: 768px) 100vw, 1600px" 
                 />
@@ -167,17 +173,17 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
         ) : hasHeroFirst ? (
           <div className="space-y-3">
-            {/* Hero highlight - cinematic wide format */}
+            {/* Hero highlight - cinematic wide format or preserved aspect */}
             <button 
               onClick={() => openLightbox(section.images[0])} 
               className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
             >
-              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+              <div className={`relative ${heroAspectClass}`}>
                 <Image 
                   src={section.images[0]} 
                   alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
                   fill 
-                  className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                  className={`${heroObjectFit} transition-all duration-700 group-hover:scale-[1.02]`} 
                   priority={isFirstSection} 
                   sizes="(max-width: 1800px) 100vw, 1800px" 
                 />
@@ -240,12 +246,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               onClick={() => openLightbox(section.images[0])} 
               className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
             >
-              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+              <div className={`relative ${heroAspectClass}`}>
                 <Image 
                   src={section.images[0]} 
                   alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
                   fill 
-                  className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                  className={`${heroObjectFit} transition-all duration-700 group-hover:scale-[1.02]`} 
                   priority={isFirstSection} 
                   sizes="(max-width: 1800px) 100vw, 1800px" 
                 />

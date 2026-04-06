@@ -111,6 +111,7 @@ export const portfolioData = {
           {
             label: "Rhino Renders",
             isHeroFirst: true,
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-NdiGixNSfVbgBI23WtoYCOUSFgOax6.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%202-KvTPQqQ0XS3730frk1RBCik1gzimT6.jpg",
@@ -143,6 +144,7 @@ export const portfolioData = {
         imageSections: [
           {
             label: "Chosen Image",
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
@@ -151,6 +153,7 @@ export const portfolioData = {
           {
             label: "Drawings",
             isHeroFirst: true,
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
