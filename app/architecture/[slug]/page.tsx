@@ -56,7 +56,7 @@ export default async function DynamicPage({ params }: PageProps) {
   const project = getProjectById(slug)
   if (project) {
     return (
-      <SectionLayout>
+      <SectionLayout plainBackground>
         <ProjectDetail project={project} />
       </SectionLayout>
     )
