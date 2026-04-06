@@ -19,11 +19,11 @@ export const portfolioData = {
         ],
       },
       {
-        id: "form-studies",
-        category: "CONCEPTUAL",
-        title: "FORM",
-        titleAccent: "STUDIES",
-        description: "Project Description\n\nA series of explorations into geometric forms and their spatial implications. These studies examine how basic shapes can be manipulated to create dynamic architectural spaces that respond to light and movement.\n\nThought Process\n\nPushing the boundaries of conventional design through experimentation with form and space.",
+        id: "the-exhibit",
+        category: "NARRATIVE GRID SYSTEMS",
+        title: "THE",
+        titleAccent: "EXHIBIT",
+        description: "Project Description\n\nAn experimental spatial system based on cube grids, exploring repetition, circulation, and perception. The project creates a layered architectural environment that challenges orientation and encourages exploration.\n\nThought Process\n\nThe design is driven by a narrative of an exclusive and mysterious exhibition that reveals itself only once entered. The space is conceived as immersive and disorienting, where repeating rooms and continuous circulation create a sense of endlessness. Subtle variations within the grid distort perception, making it difficult to distinguish direction or progression. The architecture acts almost as a living system guiding, trapping, and reshaping the user's experience over time.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
