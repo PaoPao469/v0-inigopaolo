@@ -174,7 +174,35 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Full-Width Image Gallery - Primary Visual Focus */}
       <div className="space-y-16 lg:max-w-[85%] lg:mx-auto xl:max-w-[80%]">
         {project.imageSections && project.imageSections.length > 0 ? (
-          project.imageSections.map((section, sectionIndex) => {
+          (() => {
+            // Define desktop-first sections for specific projects
+            const desktopFirstSectionMap: Record<string, string> = {
+              'seaside-house': 'Minecraft Render',
+              'the-exhibit': 'Rhino Renders',
+              'marina-vista-raceway': 'Drawings',
+            }
+            
+            const desktopFirstSection = desktopFirstSectionMap[project.id]
+            
+            // Create reordered sections for desktop view
+            const getDesktopSections = () => {
+              if (!desktopFirstSection) return project.imageSections!
+              
+              const priorityIndex = project.imageSections!.findIndex(
+                s => s.label === desktopFirstSection
+              )
+              if (priorityIndex === -1) return project.imageSections!
+              
+              const reordered = [...project.imageSections!]
+              const [prioritySection] = reordered.splice(priorityIndex, 1)
+              return [prioritySection, ...reordered]
+            }
+            
+            const mobileSections = project.imageSections!
+            const desktopSections = getDesktopSections()
+            
+            // Render function for a section
+            const renderSection = (section: ImageSection, sectionIndex: number, isPriority: boolean = false) => {
             const hasHeroFirst = section.isHeroFirst === true
             const hasHeroGrid = section.gridLayout === "hero-3x3"
             const isMinecraftRender = section.label.toLowerCase().includes('minecraft')
