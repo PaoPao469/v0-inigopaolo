@@ -320,28 +320,28 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                       ? "w-full flex justify-center" 
                       : section.images.length === 2 
                         ? "grid grid-cols-1 md:grid-cols-2 gap-4"
-                        : "grid grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "grid grid-cols-1 md:grid-cols-3 gap-4"
                   }>
                     {section.images.map((image, imageIndex) => (
                       <button
                         key={imageIndex}
                         onClick={() => openLightbox(image)}
-                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${
+                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10 ${
                           isSingleImage ? 'w-full' : ''
                         }`}
                       >
                         <div className={`relative ${
                           isSingleImage
                             ? 'aspect-[16/9]' 
-                            : 'aspect-[4/3]'
+                            : 'aspect-[3/4]'
                         }`}>
                           <Image
                             src={image}
                             alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
-                            className="object-cover"
+                            className="object-contain"
                             priority={sectionIndex === 0 && imageIndex === 0}
-                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 50vw, 33vw"}
+                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 100vw, 33vw"}
                           />
                         </div>
                       </button>
