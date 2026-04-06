@@ -6,11 +6,11 @@ export const portfolioData = {
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
     projects: [
       {
-        id: "urban-dwelling",
-        category: "RESIDENTIAL",
-        title: "URBAN",
-        titleAccent: "DWELLING",
-        description: "An exploration of compact urban living spaces that maximize functionality while maintaining aesthetic harmony. This project investigates the relationship between private and communal areas within a constrained urban footprint, emphasizing natural light penetration and spatial fluidity.",
+        id: "seaside-house",
+        category: "RECTILINEAR FORM STUDY",
+        title: "SEASIDE",
+        titleAccent: "HOUSE",
+        description: "Project Description: A study in rectilinear composition exploring how simple geometric volumes can be manipulated to create dynamic architectural form. The project investigates spatial relationships through the combination of three primary volumes. | Thought Process: The design developed through experimenting with operations such as stacking, shifting, and cantilevering. The goal was to create a balanced composition that feels both structured and open, resulting in a modern waterfront dwelling with clear form and strong spatial hierarchy.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
