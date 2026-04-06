@@ -168,10 +168,40 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           ))}
         </div>
+
+        {/* Main Hero Image - Primary Visual Focus After Description */}
+        {allImages.length > 0 && (
+          <div className="mt-10 lg:max-w-[85%] lg:mx-auto xl:max-w-[80%]">
+            <button
+              onClick={() => openLightbox(allImages[0].url)}
+              className="relative overflow-hidden rounded-sm w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30 group"
+            >
+              <div className="relative aspect-[16/9] lg:aspect-[16/9]">
+                <Image
+                  src={allImages[0].url}
+                  alt={allImages[0].alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </button>
+            <p
+              className="mt-3 text-[10px] tracking-[0.15em] uppercase text-center"
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                color: "rgba(180, 160, 120, 0.5)",
+              }}
+            >
+              Primary Visual
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Full-Width Image Gallery - Primary Visual Focus */}
-      <div className="space-y-16">
+      <div className="space-y-16 lg:max-w-[85%] lg:mx-auto xl:max-w-[80%]">
         {project.imageSections && project.imageSections.length > 0 ? (
           project.imageSections.map((section, sectionIndex) => {
             const hasHeroFirst = section.isHeroFirst === true
@@ -234,7 +264,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : (
                   <div className={
                     isMinecraftRender || isSingleImage 
-                      ? "space-y-6" 
+                      ? "space-y-6 lg:max-w-[90%] lg:mx-auto" 
                       : section.images.length === 2 
                         ? "grid grid-cols-1 md:grid-cols-2 gap-4"
                         : "grid grid-cols-2 lg:grid-cols-3 gap-4"
