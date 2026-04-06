@@ -172,7 +172,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       </div>
 
       {/* Full-Width Image Gallery - Primary Visual Focus */}
-      <div className="space-y-16">
+      <div className="space-y-16 lg:max-w-[85%] lg:mx-auto xl:max-w-[80%]">
         {project.imageSections && project.imageSections.length > 0 ? (
           project.imageSections.map((section, sectionIndex) => {
             const hasHeroFirst = section.isHeroFirst === true
@@ -317,7 +317,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : (
                   <div className={
                     isSingleImage 
-                      ? "w-full flex justify-center" 
+                      ? "w-full flex justify-center lg:max-w-[90%] lg:mx-auto" 
                       : section.images.length === 2 
                         ? "grid grid-cols-1 md:grid-cols-2 gap-4"
                         : "grid grid-cols-2 lg:grid-cols-3 gap-4"
