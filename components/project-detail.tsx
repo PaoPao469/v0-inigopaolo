@@ -1,8 +1,10 @@
 "use client"
 
+import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { getYearForProject } from "@/lib/architecture-data"
+import ImageLightbox from "./image-lightbox"
 
 interface ImageSection {
   label: string
@@ -29,6 +31,51 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const yearInfo = getYearForProject(project.id)
   const backHref = yearInfo ? `/architecture/${yearInfo.slug}` : "/architecture"
   const backLabel = yearInfo ? `BACK TO ${yearInfo.label}` : "BACK TO COLLECTIONS"
+
+  // Lightbox state
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Collect all images into a flat array for lightbox navigation
+  const allImages = useMemo(() => {
+    const images: { url: string; alt: string }[] = []
+    
+    if (project.imageSections && project.imageSections.length > 0) {
+      project.imageSections.forEach((section) => {
+        section.images.forEach((img, idx) => {
+          images.push({
+            url: img,
+            alt: `${project.title} ${project.titleAccent} - ${section.label} ${idx + 1}`,
+          })
+        })
+      })
+    } else {
+      project.images.forEach((img, idx) => {
+        images.push({
+          url: img,
+          alt: `${project.title} ${project.titleAccent} - Image ${idx + 1}`,
+        })
+      })
+    }
+    
+    return images
+  }, [project])
+
+  const openLightbox = (imageUrl: string) => {
+    const index = allImages.findIndex((img) => img.url === imageUrl)
+    setCurrentImageIndex(index >= 0 ? index : 0)
+    setLightboxOpen(true)
+  }
+
+  const closeLightbox = () => setLightboxOpen(false)
+  
+  const goToPrevious = () => {
+    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : prev))
+  }
+  
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev < allImages.length - 1 ? prev + 1 : prev))
+  }
 
   // Parse description into sections
   const descriptionSections = project.description.split('\n\n').reduce((acc: { title: string | null; content: string }[], part) => {
@@ -148,7 +195,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 {hasHeroFirst ? (
                   <div className="space-y-6">
                     {/* Hero image - Extra large, maintains aspect ratio */}
-                    <div className="relative overflow-hidden rounded-sm">
+                    <button
+                      onClick={() => openLightbox(section.images[0])}
+                      className="relative overflow-hidden rounded-sm w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                    >
                       <div className="relative aspect-[16/9]">
                         <Image
                           src={section.images[0]}
@@ -158,14 +208,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                           priority={sectionIndex === 0}
                         />
                       </div>
-                    </div>
+                    </button>
                     {/* Remaining images in responsive grid */}
                     {section.images.length > 1 && (
                       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                         {section.images.slice(1).map((image, imageIndex) => (
-                          <div
+                          <button
                             key={imageIndex}
-                            className="relative overflow-hidden rounded-sm"
+                            onClick={() => openLightbox(image)}
+                            className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                           >
                             <div className="relative aspect-[4/3]">
                               <Image
@@ -175,7 +226,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                                 className="object-contain bg-black/20"
                               />
                             </div>
-                          </div>
+                          </button>
                         ))}
                       </div>
                     )}
@@ -189,9 +240,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                         : "grid grid-cols-2 lg:grid-cols-3 gap-4"
                   }>
                     {section.images.map((image, imageIndex) => (
-                      <div
+                      <button
                         key={imageIndex}
-                        className="relative overflow-hidden rounded-sm"
+                        onClick={() => openLightbox(image)}
+                        className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                       >
                         <div className={`relative ${
                           isMinecraftRender || isSingleImage 
@@ -208,7 +260,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                             priority={sectionIndex === 0 && imageIndex === 0}
                           />
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -218,9 +270,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.images.map((image, index) => (
-              <div
+              <button
                 key={index}
-                className={`relative overflow-hidden rounded-sm ${index === 0 ? 'md:col-span-2' : ''}`}
+                onClick={() => openLightbox(image)}
+                className={`relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}
               >
                 <div className={`relative ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
                   <Image
@@ -231,7 +284,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     priority={index === 0}
                   />
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
@@ -253,6 +306,20 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           {backLabel}
         </Link>
       </div>
+
+      {/* Image Lightbox */}
+      {allImages.length > 0 && (
+        <ImageLightbox
+          isOpen={lightboxOpen}
+          imageUrl={allImages[currentImageIndex]?.url || ""}
+          alt={allImages[currentImageIndex]?.alt || ""}
+          onClose={closeLightbox}
+          onPrevious={goToPrevious}
+          onNext={goToNext}
+          hasPrevious={currentImageIndex > 0}
+          hasNext={currentImageIndex < allImages.length - 1}
+        />
+      )}
     </div>
   )
 }
