@@ -23,7 +23,7 @@ export const portfolioData = {
         category: "CONCEPTUAL",
         title: "FORM",
         titleAccent: "STUDIES",
-        description: "A series of explorations into geometric forms and their spatial implications. These studies examine how basic shapes can be manipulated to create dynamic architectural spaces that respond to light and movement, pushing the boundaries of conventional design.",
+        description: "Project Description\n\nA series of explorations into geometric forms and their spatial implications. These studies examine how basic shapes can be manipulated to create dynamic architectural spaces that respond to light and movement.\n\nThought Process\n\nPushing the boundaries of conventional design through experimentation with form and space.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
@@ -36,7 +36,7 @@ export const portfolioData = {
         category: "MATERIAL",
         title: "TEXTURE",
         titleAccent: "DIALOGUE",
-        description: "An investigation into the tactile qualities of architectural surfaces. This project explores how different materials interact with each other and with their environment to create rich sensory experiences that engage inhabitants on multiple levels.",
+        description: "Project Description\n\nAn investigation into the tactile qualities of architectural surfaces. This project explores how different materials interact with each other and with their environment to create rich sensory experiences.\n\nThought Process\n\nEngaging inhabitants on multiple levels through material interaction and environmental response.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
@@ -56,7 +56,7 @@ export const portfolioData = {
         category: "COMMERCIAL",
         title: "VERTICAL",
         titleAccent: "LANDSCAPES",
-        description: "A multi-story commercial development that reimagines the traditional office building. The design incorporates green spaces at multiple levels, creating a vertical ecosystem that promotes well-being and sustainability while redefining workplace environments.",
+        description: "Project Description\n\nA multi-story commercial development that reimagines the traditional office building. The design incorporates green spaces at multiple levels, creating a vertical ecosystem that promotes well-being and sustainability.\n\nThought Process\n\nRedefining workplace environments through the integration of nature and architecture.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
@@ -69,7 +69,7 @@ export const portfolioData = {
         category: "PUBLIC",
         title: "COMMUNITY",
         titleAccent: "HUB",
-        description: "A civic building designed to serve as a gathering point for the local community. The architecture emphasizes transparency, accessibility, and flexibility to accommodate diverse activities and events, fostering social connections and community engagement.",
+        description: "Project Description\n\nA civic building designed to serve as a gathering point for the local community. The architecture emphasizes transparency, accessibility, and flexibility to accommodate diverse activities and events.\n\nThought Process\n\nFostering social connections and community engagement through open, adaptable spaces.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
@@ -82,7 +82,7 @@ export const portfolioData = {
         category: "DIGITAL",
         title: "PARAMETRIC",
         titleAccent: "FORMS",
-        description: "Digital modeling explorations using Rhino 3D and Grasshopper. These experiments investigate parametric design principles, creating complex geometries that respond to various environmental and programmatic inputs, blending computational precision with artistic expression.",
+        description: "Project Description\n\nDigital modeling explorations using Rhino 3D and Grasshopper. These experiments investigate parametric design principles, creating complex geometries that respond to various environmental and programmatic inputs.\n\nThought Process\n\nBlending computational precision with artistic expression to push the boundaries of digital architecture.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
