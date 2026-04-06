@@ -11,11 +11,32 @@ export const portfolioData = {
         title: "SEASIDE",
         titleAccent: "HOUSE",
         description: "Project Description\n\nA study in rectilinear composition exploring how simple geometric volumes can be manipulated to create dynamic architectural form. The project investigates spatial relationships through the combination of three primary volumes.\n\nThought Process\n\nThe design developed through experimenting with operations such as stacking, shifting, and cantilevering. The goal was to create a balanced composition that feels both structured and open, resulting in a modern waterfront dwelling with clear form and strong spatial hierarchy.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/house-RDLsUrBoz9hYmlANOYqgFsdNYDLyV4.png",
+        images: [],
+        imageSections: [
+          {
+            label: "Clay Model",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/clay%20model-ACVwfGgoKX9EJcp9Wp2lfHVI85Qi64.jpg",
+            ],
+          },
+          {
+            label: "Chosen Form Bristol Model",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-5DXtDPF75ORYKM5eBM5EPyND4UIKGr.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-YW6oZWFyeZY12Pw7C7NEPNohxrRUp1.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-MKqBV5grZPeF0OySpjPYwrFMmeh7h6.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-fagpK1Z5WaAaxj9iaVmOZneF6efgqG.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-xV54ehBhM3JPL1P8zAJBTPnvmJr5YR.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-By73bYoYT7tWESMs0r99swyd6BBL0m.jpg",
+            ],
+          },
+          {
+            label: "Minecraft Render",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/house-RDLsUrBoz9hYmlANOYqgFsdNYDLyV4.png",
+            ],
+          },
         ],
       },
       {

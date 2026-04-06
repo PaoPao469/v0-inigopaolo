@@ -4,6 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { getYearForProject } from "@/lib/architecture-data"
 
+interface ImageSection {
+  label: string
+  images: string[]
+}
+
 interface Project {
   id: string
   category: string
@@ -12,6 +17,7 @@ interface Project {
   description: string
   thumbnail: string
   images: string[]
+  imageSections?: ImageSection[]
 }
 
 interface ProjectDetailProps {
@@ -153,30 +159,70 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   color: "rgba(180, 175, 165, 0.7)",
                 }}
               >
-                {project.images.length} Photos
+                {project.imageSections 
+                  ? project.imageSections.reduce((total, section) => total + section.images.length, 0)
+                  : project.images.length} Photos
               </span>
             </div>
           </div>
         </div>
 
         {/* Right Side - Scrollable Image Gallery */}
-        <div className="space-y-6">
-          {project.images.map((image, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-sm"
-            >
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={image}
-                  alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
+        <div className="space-y-8">
+          {/* Render labeled image sections if available */}
+          {project.imageSections && project.imageSections.length > 0 ? (
+            project.imageSections.map((section, sectionIndex) => (
+              <div key={sectionIndex} className="space-y-4">
+                {/* Section Label */}
+                <h3
+                  className="text-sm tracking-[0.15em] uppercase"
+                  style={{
+                    fontFamily: "var(--font-chillax), sans-serif",
+                    color: "rgba(180, 160, 120, 0.9)",
+                  }}
+                >
+                  {section.label}
+                </h3>
+                {/* Section Images */}
+                <div className="space-y-6">
+                  {section.images.map((image, imageIndex) => (
+                    <div
+                      key={imageIndex}
+                      className="relative overflow-hidden rounded-sm"
+                    >
+                      <div className="relative aspect-[4/3]">
+                        <Image
+                          src={image}
+                          alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
+                          fill
+                          className="object-cover"
+                          priority={sectionIndex === 0 && imageIndex === 0}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            /* Fallback to regular images array */
+            project.images.map((image, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-sm"
+              >
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={image}
+                    alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
