@@ -171,39 +171,45 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <div className="space-y-8">
           {/* Render labeled image sections if available */}
           {project.imageSections && project.imageSections.length > 0 ? (
-            project.imageSections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="space-y-4">
-                {/* Section Label */}
-                <h3
-                  className="text-sm tracking-[0.15em] uppercase"
-                  style={{
-                    fontFamily: "var(--font-chillax), sans-serif",
-                    color: "rgba(180, 160, 120, 0.9)",
-                  }}
-                >
-                  {section.label}
-                </h3>
-                {/* Section Images */}
-                <div className="space-y-6">
-                  {section.images.map((image, imageIndex) => (
-                    <div
-                      key={imageIndex}
-                      className="relative overflow-hidden rounded-sm"
-                    >
-                      <div className="relative aspect-[4/3]">
-                        <Image
-                          src={image}
-                          alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
-                          fill
-                          className="object-cover"
-                          priority={sectionIndex === 0 && imageIndex === 0}
-                        />
+            project.imageSections.map((section, sectionIndex) => {
+              // Check if this is the "Minecraft Render" section for larger display
+              const isMinecraftRender = section.label.toLowerCase().includes('minecraft') || 
+                                        section.label.toLowerCase().includes('render')
+              
+              return (
+                <div key={sectionIndex} className="space-y-4">
+                  {/* Section Label */}
+                  <h3
+                    className="text-sm tracking-[0.15em] uppercase"
+                    style={{
+                      fontFamily: "var(--font-chillax), sans-serif",
+                      color: "rgba(180, 160, 120, 0.9)",
+                    }}
+                  >
+                    {section.label}
+                  </h3>
+                  {/* Section Images */}
+                  <div className={isMinecraftRender ? "space-y-6" : "grid grid-cols-2 gap-4"}>
+                    {section.images.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="relative overflow-hidden rounded-sm"
+                      >
+                        <div className={`relative ${isMinecraftRender ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                          <Image
+                            src={image}
+                            alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
+                            fill
+                            className="object-cover"
+                            priority={sectionIndex === 0 && imageIndex === 0}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))
+              )
+            })
           ) : (
             /* Fallback to regular images array */
             project.images.map((image, index) => (
