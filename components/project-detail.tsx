@@ -168,6 +168,36 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           ))}
         </div>
+
+        {/* Main Hero Image - Primary Visual Focus After Description */}
+        {allImages.length > 0 && (
+          <div className="mt-10">
+            <button
+              onClick={() => openLightbox(allImages[0].url)}
+              className="relative overflow-hidden rounded-sm w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30 group"
+            >
+              <div className="relative aspect-[16/9] md:aspect-[21/9]">
+                <Image
+                  src={allImages[0].url}
+                  alt={allImages[0].alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </button>
+            <p
+              className="mt-3 text-[10px] tracking-[0.15em] uppercase text-center"
+              style={{
+                fontFamily: "var(--font-chillax), sans-serif",
+                color: "rgba(180, 160, 120, 0.5)",
+              }}
+            >
+              Primary Visual
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Full-Width Image Gallery - Primary Visual Focus */}
@@ -197,16 +227,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {/* Hero image - Extra large, maintains aspect ratio */}
                     <button
                       onClick={() => openLightbox(section.images[0])}
-                      className="relative overflow-hidden rounded-sm w-full cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                      className="relative overflow-hidden rounded-sm w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                     >
                       <div className="relative aspect-[16/9]">
                         <Image
                           src={section.images[0]}
                           alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
                           fill
-                          className="object-cover"
+                          className="object-contain bg-black/20"
                           priority={sectionIndex === 0}
-                          sizes="(max-width: 1800px) 100vw, 1800px"
                         />
                       </div>
                     </button>
@@ -217,15 +246,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                           <button
                             key={imageIndex}
                             onClick={() => openLightbox(image)}
-                            className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                            className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                           >
                             <div className="relative aspect-[4/3]">
                               <Image
                                 src={image}
                                 alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
                                 fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 50vw, 33vw"
+                                className="object-contain bg-black/20"
                               />
                             </div>
                           </button>
@@ -235,8 +263,8 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </div>
                 ) : (
                   <div className={
-                    isSingleImage 
-                      ? "w-full flex justify-center" 
+                    isMinecraftRender || isSingleImage 
+                      ? "space-y-6" 
                       : section.images.length === 2 
                         ? "grid grid-cols-1 md:grid-cols-2 gap-4"
                         : "grid grid-cols-2 lg:grid-cols-3 gap-4"
@@ -245,22 +273,21 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                       <button
                         key={imageIndex}
                         onClick={() => openLightbox(image)}
-                        className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${
-                          isSingleImage ? 'w-full' : ''
-                        }`}
+                        className="relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30"
                       >
                         <div className={`relative ${
-                          isSingleImage
+                          isMinecraftRender || isSingleImage 
                             ? 'aspect-[16/9]' 
-                            : 'aspect-[4/3]'
+                            : section.images.length === 2
+                              ? 'aspect-[4/3]'
+                              : 'aspect-[4/3]'
                         }`}>
                           <Image
                             src={image}
                             alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
-                            className="object-cover"
+                            className="object-contain bg-black/20"
                             priority={sectionIndex === 0 && imageIndex === 0}
-                            sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 50vw, 33vw"}
                           />
                         </div>
                       </button>
@@ -276,16 +303,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <button
                 key={index}
                 onClick={() => openLightbox(image)}
-                className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}
+                className={`relative overflow-hidden rounded-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}
               >
                 <div className={`relative ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
                   <Image
                     src={image}
                     alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-contain bg-black/20"
                     priority={index === 0}
-                    sizes={index === 0 ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 100vw, 50vw"}
                   />
                 </div>
               </button>
