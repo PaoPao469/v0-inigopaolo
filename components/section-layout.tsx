@@ -106,10 +106,7 @@ export default function SectionLayout({ children }: SectionLayoutProps) {
 
         <Header />
         
-        <main 
-          className="relative z-10 pt-24 pb-16 px-6 md:px-12 lg:px-20"
-          style={{ mixBlendMode: "difference" }}
-        >
+        <main className="relative z-10 pt-24 pb-16 px-6 md:px-12 lg:px-20">
           {children}
         </main>
       </div>
