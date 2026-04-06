@@ -32,11 +32,11 @@ export const portfolioData = {
         ],
       },
       {
-        id: "texture-dialogue",
-        category: "MATERIAL",
-        title: "TEXTURE",
-        titleAccent: "DIALOGUE",
-        description: "Project Description\n\nAn investigation into the tactile qualities of architectural surfaces. This project explores how different materials interact with each other and with their environment to create rich sensory experiences.\n\nThought Process\n\nEngaging inhabitants on multiple levels through material interaction and environmental response.",
+        id: "marina-vista-raceway",
+        category: "IMPOSSIBLE LANDSCAPES STUDY",
+        title: "MARINA VISTA",
+        titleAccent: "RACEWAY",
+        description: "Project Description\n\nAn integrated landscape project that translates abstract visual inspiration into a cohesive spatial system. The design explores how movement, topography, and circulation can be unified to create a dynamic environment that engages both users and spectators.\n\nThought Process\n\nThe project began by translating the motion and flow of the reference image into a continuous landscape. The idea of a Formula 1 track was introduced as a way to express speed and direction through form. The design focuses on enhancing both the driver and spectator experience by incorporating multiple viewing points, layered circulation paths, and varied elevations, creating a more immersive and engaging environment.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
