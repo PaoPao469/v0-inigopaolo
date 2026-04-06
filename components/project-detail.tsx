@@ -111,6 +111,8 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     const isSingleImage = section.images.length === 1
     const isFirstSection = sectionIndex === 0
     const preserveAspect = section.preserveHeroAspect === true
+    const isTwoImages = section.images.length === 2
+    const isChosenImageSection = section.label.toLowerCase().includes('chosen')
     
     // Determine hero aspect ratio and object fit based on preserveHeroAspect flag
     const heroAspectClass = preserveAspect ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[21/9] lg:aspect-[2.5/1]"
@@ -150,26 +152,35 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
             </button>
             
-            {/* Thumbnail grid - smaller, clearly secondary */}
-            <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
-              {section.images.slice(1).map((image, imageIndex) => (
-                <button 
-                  key={imageIndex} 
-                  onClick={() => openLightbox(image)} 
-                  className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
-                >
-                  <div className="relative aspect-square">
-                    <Image 
-                      src={image} 
-                      alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
-                      fill 
-                      className="object-cover" 
-                      sizes="(max-width: 768px) 25vw, 16vw" 
-                    />
-                  </div>
-                </button>
-              ))}
-            </div>
+            {/* Thumbnail grid - clean organized layout */}
+            {section.images.length > 1 && (
+              <div className={`grid gap-3 ${
+                section.images.length - 1 <= 3 
+                  ? "grid-cols-3" 
+                  : section.images.length - 1 <= 4 
+                    ? "grid-cols-2 md:grid-cols-4" 
+                    : "grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+              }`}>
+                {section.images.slice(1).map((image, imageIndex) => (
+                  <button 
+                    key={imageIndex} 
+                    onClick={() => openLightbox(image)} 
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-80 hover:opacity-100 transition-all duration-300"
+                  >
+                    <div className="relative aspect-[4/3]">
+                      <Image 
+                        src={image} 
+                        alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
+                        fill 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                        sizes="(max-width: 768px) 33vw, 25vw" 
+                      />
+                    </div>
+                    <div className="absolute inset-0 border border-white/[0.02] pointer-events-none" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ) : hasHeroFirst ? (
           <div className="space-y-3">
@@ -194,24 +205,31 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
             </button>
             
-            {/* Thumbnail strip - horizontal scroll feel */}
+            {/* Thumbnail strip - clean organized grid */}
             {section.images.length > 1 && (
-              <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
+              <div className={`grid gap-3 ${
+                section.images.length - 1 <= 3 
+                  ? "grid-cols-3" 
+                  : section.images.length - 1 <= 4 
+                    ? "grid-cols-2 md:grid-cols-4" 
+                    : "grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+              }`}>
                 {section.images.slice(1).map((image, imageIndex) => (
                   <button 
                     key={imageIndex} 
                     onClick={() => openLightbox(image)} 
-                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-80 hover:opacity-100 transition-all duration-300"
                   >
-                    <div className="relative aspect-square">
+                    <div className="relative aspect-[4/3]">
                       <Image 
                         src={image} 
                         alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
                         fill 
-                        className="object-cover" 
-                        sizes="(max-width: 768px) 25vw, 16vw" 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                        sizes="(max-width: 768px) 33vw, 25vw" 
                       />
                     </div>
+                    <div className="absolute inset-0 border border-white/[0.02] pointer-events-none" />
                   </button>
                 ))}
               </div>
@@ -223,12 +241,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             onClick={() => openLightbox(section.images[0])} 
             className="group relative w-full max-w-4xl mx-auto overflow-hidden cursor-zoom-in focus:outline-none"
           >
-            <div className="relative aspect-[16/9]">
+            <div className={`relative ${preserveAspect ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[16/9]"}`}>
               <Image 
                 src={section.images[0]} 
                 alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
                 fill 
-                className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                className={`${preserveAspect ? "object-contain" : "object-cover"} transition-all duration-700 group-hover:scale-[1.02]`} 
                 priority={isFirstSection} 
                 sizes="(max-width: 1800px) 100vw, 1800px" 
               />
@@ -238,6 +256,72 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
             </div>
           </button>
+        ) : isTwoImages && isChosenImageSection ? (
+          /* Two images side by side - elegant paired layout for "Chosen Image" sections */
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Primary chosen image - larger, preserved aspect */}
+            <button 
+              onClick={() => openLightbox(section.images[0])} 
+              className="group relative flex-1 lg:flex-[2] overflow-hidden cursor-zoom-in focus:outline-none"
+            >
+              <div className="relative aspect-[4/3]">
+                <Image 
+                  src={section.images[0]} 
+                  alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
+                  fill 
+                  className="object-contain transition-all duration-700 group-hover:scale-[1.02]" 
+                  priority={isFirstSection} 
+                  sizes="(max-width: 768px) 100vw, 66vw" 
+                />
+              </div>
+              <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
+              </div>
+            </button>
+            {/* Secondary image - smaller, complementary */}
+            <button 
+              onClick={() => openLightbox(section.images[1])} 
+              className="group relative flex-1 overflow-hidden cursor-zoom-in focus:outline-none opacity-85 hover:opacity-100 transition-opacity duration-300"
+            >
+              <div className="relative aspect-[4/3]">
+                <Image 
+                  src={section.images[1]} 
+                  alt={`${project.title} ${project.titleAccent} - ${section.label} 2`} 
+                  fill 
+                  className="object-contain transition-all duration-700 group-hover:scale-[1.02]" 
+                  sizes="(max-width: 768px) 100vw, 33vw" 
+                />
+              </div>
+              <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+            </button>
+          </div>
+        ) : isTwoImages ? (
+          /* Two images - balanced side by side */
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {section.images.map((image, imageIndex) => (
+              <button 
+                key={imageIndex}
+                onClick={() => openLightbox(image)} 
+                className="group relative overflow-hidden cursor-zoom-in focus:outline-none"
+              >
+                <div className={`relative ${preserveAspect ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
+                  <Image 
+                    src={image} 
+                    alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`} 
+                    fill 
+                    className={`${preserveAspect ? "object-contain" : "object-cover"} transition-all duration-700 group-hover:scale-[1.02]`} 
+                    priority={isFirstSection && imageIndex === 0} 
+                    sizes="(max-width: 768px) 100vw, 50vw" 
+                  />
+                </div>
+                <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
+                </div>
+              </button>
+            ))}
+          </div>
         ) : (
           /* Multi-image grid with first image as hero */
           <div className="space-y-3">
@@ -262,24 +346,31 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
             </button>
             
-            {/* Remaining as thumbnails */}
+            {/* Remaining as thumbnails - clean grid layout */}
             {section.images.length > 1 && (
-              <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
+              <div className={`grid gap-3 ${
+                section.images.length - 1 <= 3 
+                  ? "grid-cols-3" 
+                  : section.images.length - 1 <= 4 
+                    ? "grid-cols-2 md:grid-cols-4" 
+                    : "grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+              }`}>
                 {section.images.slice(1).map((image, imageIndex) => (
                   <button 
                     key={imageIndex} 
                     onClick={() => openLightbox(image)} 
-                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-80 hover:opacity-100 transition-all duration-300"
                   >
-                    <div className="relative aspect-square">
+                    <div className="relative aspect-[4/3]">
                       <Image 
                         src={image} 
                         alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
                         fill 
-                        className="object-cover" 
-                        sizes="(max-width: 768px) 25vw, 16vw" 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                        sizes="(max-width: 768px) 33vw, 25vw" 
                       />
                     </div>
+                    <div className="absolute inset-0 border border-white/[0.02] pointer-events-none" />
                   </button>
                 ))}
               </div>
