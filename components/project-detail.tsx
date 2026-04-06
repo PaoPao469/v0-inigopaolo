@@ -193,61 +193,85 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   {section.label}
                 </h3>
                 
-                {/* Hero 3x3 Grid Layout - First image large, rest in balanced grid */}
+                {/* Hero 3x3 Grid Layout - First image large focal point, rest balanced */}
                 {hasHeroGrid ? (
-                  <div className="grid grid-cols-3 gap-4">
-                    {/* Hero image spanning 2x2 */}
-                    <button
-                      onClick={() => openLightbox(section.images[0])}
-                      className="col-span-2 row-span-2 relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
-                    >
-                      <div className="relative aspect-square">
-                        <Image
-                          src={section.images[0]}
-                          alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
-                          fill
-                          className="object-cover"
-                          priority={sectionIndex === 0}
-                          sizes="(max-width: 768px) 66vw, 1200px"
-                        />
-                      </div>
-                    </button>
-                    {/* Right column - 2 images stacked */}
-                    {section.images.slice(1, 3).map((image, imageIndex) => (
+                  <div className="space-y-4">
+                    {/* Top row: Hero image (2 cols) + 1 image */}
+                    <div className="grid grid-cols-3 gap-4">
+                      {/* Hero image spanning 2 columns - larger focal point */}
                       <button
-                        key={imageIndex}
-                        onClick={() => openLightbox(image)}
-                        className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                        onClick={() => openLightbox(section.images[0])}
+                        className="col-span-2 relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10"
                       >
-                        <div className="relative aspect-square">
+                        <div className="relative aspect-[4/3]">
                           <Image
-                            src={image}
-                            alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
+                            src={section.images[0]}
+                            alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
                             fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 33vw, 600px"
+                            className="object-contain"
+                            priority={sectionIndex === 0}
+                            sizes="(max-width: 768px) 66vw, 1200px"
                           />
                         </div>
                       </button>
-                    ))}
-                    {/* Bottom row - remaining images */}
-                    {section.images.slice(3, 8).map((image, imageIndex) => (
-                      <button
-                        key={imageIndex + 3}
-                        onClick={() => openLightbox(image)}
-                        className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30"
-                      >
-                        <div className="relative aspect-square">
-                          <Image
-                            src={image}
-                            alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 4}`}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 33vw, 600px"
-                          />
-                        </div>
-                      </button>
-                    ))}
+                      {/* First small image */}
+                      {section.images[1] && (
+                        <button
+                          onClick={() => openLightbox(section.images[1])}
+                          className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10"
+                        >
+                          <div className="relative aspect-[4/3]">
+                            <Image
+                              src={section.images[1]}
+                              alt={`${project.title} ${project.titleAccent} - ${section.label} 2`}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 33vw, 600px"
+                            />
+                          </div>
+                        </button>
+                      )}
+                    </div>
+                    {/* Middle row: 3 images */}
+                    <div className="grid grid-cols-3 gap-4">
+                      {section.images.slice(2, 5).map((image, imageIndex) => (
+                        <button
+                          key={imageIndex}
+                          onClick={() => openLightbox(image)}
+                          className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10"
+                        >
+                          <div className="relative aspect-[4/3]">
+                            <Image
+                              src={image}
+                              alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 3}`}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 33vw, 600px"
+                            />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    {/* Bottom row: remaining images */}
+                    <div className="grid grid-cols-3 gap-4">
+                      {section.images.slice(5, 8).map((image, imageIndex) => (
+                        <button
+                          key={imageIndex}
+                          onClick={() => openLightbox(image)}
+                          className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10"
+                        >
+                          <div className="relative aspect-[4/3]">
+                            <Image
+                              src={image}
+                              alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 6}`}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 33vw, 600px"
+                            />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ) : hasHeroFirst ? (
                   <div className="space-y-6">
