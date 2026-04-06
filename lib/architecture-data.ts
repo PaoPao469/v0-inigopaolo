@@ -67,7 +67,9 @@ export const portfolioData = {
           },
           {
             label: "Model Photos",
+            gridLayout: "hero-3x3",
             images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-Q0dKkVufsh0wjSQWOFui0FCqWMOInz.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-LzElRHotngL5SnyDF62TUzxZBNZG9p.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-OnKwG81sVp7hbkFLzoVMJSfGDNFm5r.jpg",
@@ -75,7 +77,6 @@ export const portfolioData = {
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-GKU9VGFQ85nS9X9ZDmEZFPUC3OV34v.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-VjNiVy9cu8T2dv9C7e1agmXTVfAPI2.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-rqXRrLfwbQeWjnqHNYEGqpLy3OrAfI.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
             ],
           },
         ],
