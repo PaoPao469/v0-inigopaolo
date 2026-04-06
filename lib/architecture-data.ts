@@ -86,11 +86,41 @@ export const portfolioData = {
         title: "MARINA VISTA",
         titleAccent: "RACEWAY",
         description: "Project Description\n\nAn integrated landscape project that translates abstract visual inspiration into a cohesive spatial system. The design explores how movement, topography, and circulation can be unified to create a dynamic environment that engages both users and spectators.\n\nThought Process\n\nThe project began by translating the motion and flow of the reference image into a continuous landscape. The idea of a Formula 1 track was introduced as a way to express speed and direction through form. The design focuses on enhancing both the driver and spectator experience by incorporating multiple viewing points, layered circulation paths, and varied elevations, creating a more immersive and engaging environment.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
+        images: [],
+        imageSections: [
+          {
+            label: "Chosen Image",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
+            ],
+          },
+          {
+            label: "Drawings",
+            isHeroFirst: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-RvRKsEmFx6wDCTFQCyjEkh50RJ94xq.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
+            ],
+          },
+          {
+            label: "Sections and Diagrams",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sections-L9j55XiID9qOUr2CeBKbV8brTZg23Q.jpg",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-sQjujWokboPzpRJ6MP6YG7lkOkzkUR.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-B3L5RVjxDvIvQM70hn6rm397NBP9NB.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-vdKWzsveVYaN7sr8tyQCFRQhrtCUEo.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-JO342LFkpL7dhNyzk6nUzJr7Diere5.jpg",
+            ],
+          },
         ],
       },
     ],
