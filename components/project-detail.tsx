@@ -108,76 +108,176 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     const hasHeroFirst = section.isHeroFirst === true
     const hasHeroGrid = section.gridLayout === "hero-3x3"
     const isSingleImage = section.images.length === 1
+    const isFirstSection = sectionIndex === 0
     
     return (
-      <div key={`${section.label}-${sectionIndex}`} className="space-y-6">
-        <h3 className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.accent }}>
-          {section.label}
-        </h3>
+      <div key={`${section.label}-${sectionIndex}`} className="space-y-8">
+        {/* Section Label - Minimal, elegant */}
+        <div className="flex items-center gap-4">
+          <div className="h-px flex-1 max-w-[40px]" style={{ backgroundColor: colorTheme.accent }} />
+          <h3 className="text-[10px] tracking-[0.25em] uppercase" style={{ fontFamily: "var(--font-chillax), sans-serif", color: colorTheme.accent, fontWeight: 500 }}>
+            {section.label}
+          </h3>
+        </div>
         
         {hasHeroGrid ? (
-          <div className="space-y-4">
-            <div className="grid grid-cols-3 gap-4">
-              <button onClick={() => openLightbox(section.images[0])} className="col-span-2 relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10">
-                <div className="relative aspect-[4/3]">
-                  <Image src={section.images[0]} alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} fill className="object-contain" priority={sectionIndex === 0} sizes="(max-width: 768px) 66vw, 1200px" />
-                </div>
-              </button>
-              {section.images[1] && (
-                <button onClick={() => openLightbox(section.images[1])} className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10">
-                  <div className="relative aspect-[4/3]">
-                    <Image src={section.images[1]} alt={`${project.title} ${project.titleAccent} - ${section.label} 2`} fill className="object-contain" sizes="(max-width: 768px) 33vw, 600px" />
-                  </div>
-                </button>
-              )}
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {section.images.slice(2, 5).map((image, imageIndex) => (
-                <button key={imageIndex} onClick={() => openLightbox(image)} className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10">
-                  <div className="relative aspect-[4/3]">
-                    <Image src={image} alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 3}`} fill className="object-contain" sizes="(max-width: 768px) 33vw, 600px" />
-                  </div>
-                </button>
-              ))}
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {section.images.slice(5, 8).map((image, imageIndex) => (
-                <button key={imageIndex} onClick={() => openLightbox(image)} className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 bg-black/10">
-                  <div className="relative aspect-[4/3]">
-                    <Image src={image} alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 6}`} fill className="object-contain" sizes="(max-width: 768px) 33vw, 600px" />
+          <div className="space-y-3">
+            {/* Hero highlight - prominent with visual distinction */}
+            <button 
+              onClick={() => openLightbox(section.images[0])} 
+              className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
+            >
+              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+                <Image 
+                  src={section.images[0]} 
+                  alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
+                  fill 
+                  className="object-contain transition-all duration-700 group-hover:scale-[1.02]" 
+                  priority={isFirstSection} 
+                  sizes="(max-width: 768px) 100vw, 1600px" 
+                />
+              </div>
+              {/* Subtle frame indicator for hero */}
+              <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
+              </div>
+            </button>
+            
+            {/* Thumbnail grid - smaller, clearly secondary */}
+            <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
+              {section.images.slice(1).map((image, imageIndex) => (
+                <button 
+                  key={imageIndex} 
+                  onClick={() => openLightbox(image)} 
+                  className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <div className="relative aspect-square">
+                    <Image 
+                      src={image} 
+                      alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
+                      fill 
+                      className="object-cover" 
+                      sizes="(max-width: 768px) 25vw, 16vw" 
+                    />
                   </div>
                 </button>
               ))}
             </div>
           </div>
         ) : hasHeroFirst ? (
-          <div className="space-y-6">
-            <button onClick={() => openLightbox(section.images[0])} className="relative overflow-hidden rounded-sm w-full cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30">
-              <div className="relative aspect-[16/9]">
-                <Image src={section.images[0]} alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} fill className="object-cover" priority={sectionIndex === 0} sizes="(max-width: 1800px) 100vw, 1800px" />
+          <div className="space-y-3">
+            {/* Hero highlight - cinematic wide format */}
+            <button 
+              onClick={() => openLightbox(section.images[0])} 
+              className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
+            >
+              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+                <Image 
+                  src={section.images[0]} 
+                  alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
+                  fill 
+                  className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                  priority={isFirstSection} 
+                  sizes="(max-width: 1800px) 100vw, 1800px" 
+                />
+              </div>
+              <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
               </div>
             </button>
+            
+            {/* Thumbnail strip - horizontal scroll feel */}
             {section.images.length > 1 && (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
                 {section.images.slice(1).map((image, imageIndex) => (
-                  <button key={imageIndex} onClick={() => openLightbox(image)} className="relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30">
-                    <div className="relative aspect-[4/3]">
-                      <Image src={image} alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+                  <button 
+                    key={imageIndex} 
+                    onClick={() => openLightbox(image)} 
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="relative aspect-square">
+                      <Image 
+                        src={image} 
+                        alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
+                        fill 
+                        className="object-cover" 
+                        sizes="(max-width: 768px) 25vw, 16vw" 
+                      />
                     </div>
                   </button>
                 ))}
               </div>
             )}
           </div>
+        ) : isSingleImage ? (
+          /* Single image - full prominence */
+          <button 
+            onClick={() => openLightbox(section.images[0])} 
+            className="group relative w-full max-w-4xl mx-auto overflow-hidden cursor-zoom-in focus:outline-none"
+          >
+            <div className="relative aspect-[16/9]">
+              <Image 
+                src={section.images[0]} 
+                alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
+                fill 
+                className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                priority={isFirstSection} 
+                sizes="(max-width: 1800px) 100vw, 1800px" 
+              />
+            </div>
+            <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+            <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
+            </div>
+          </button>
         ) : (
-          <div className={isSingleImage ? "w-full flex justify-center lg:max-w-[90%] lg:mx-auto" : section.images.length === 2 ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "grid grid-cols-2 lg:grid-cols-3 gap-4"}>
-            {section.images.map((image, imageIndex) => (
-              <button key={imageIndex} onClick={() => openLightbox(image)} className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.005] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${isSingleImage ? 'w-full' : ''}`}>
-                <div className={`relative ${isSingleImage ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
-                  <Image src={image} alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`} fill className="object-cover" priority={sectionIndex === 0 && imageIndex === 0} sizes={isSingleImage ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 50vw, 33vw"} />
-                </div>
-              </button>
-            ))}
+          /* Multi-image grid with first image as hero */
+          <div className="space-y-3">
+            {/* First image as hero */}
+            <button 
+              onClick={() => openLightbox(section.images[0])} 
+              className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
+            >
+              <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+                <Image 
+                  src={section.images[0]} 
+                  alt={`${project.title} ${project.titleAccent} - ${section.label} 1`} 
+                  fill 
+                  className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                  priority={isFirstSection} 
+                  sizes="(max-width: 1800px) 100vw, 1800px" 
+                />
+              </div>
+              <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
+              </div>
+            </button>
+            
+            {/* Remaining as thumbnails */}
+            {section.images.length > 1 && (
+              <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
+                {section.images.slice(1).map((image, imageIndex) => (
+                  <button 
+                    key={imageIndex} 
+                    onClick={() => openLightbox(image)} 
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="relative aspect-square">
+                      <Image 
+                        src={image} 
+                        alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`} 
+                        fill 
+                        className="object-cover" 
+                        sizes="(max-width: 768px) 25vw, 16vw" 
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -224,14 +324,52 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {project.images.map((image, index) => (
-              <button key={index} onClick={() => openLightbox(image)} className={`relative overflow-hidden rounded-sm cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-600/30 ${index === 0 ? 'md:col-span-2' : ''}`}>
-                <div className={`relative ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
-                  <Image src={image} alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`} fill className="object-cover" priority={index === 0} sizes={index === 0 ? "(max-width: 1800px) 100vw, 1800px" : "(max-width: 768px) 100vw, 50vw"} />
+          <div className="space-y-3">
+            {/* Hero image - first image prominently displayed */}
+            {project.images[0] && (
+              <button 
+                onClick={() => openLightbox(project.images[0])} 
+                className="group relative w-full overflow-hidden cursor-zoom-in focus:outline-none"
+              >
+                <div className="relative aspect-[21/9] lg:aspect-[2.5/1]">
+                  <Image 
+                    src={project.images[0]} 
+                    alt={`${project.title} ${project.titleAccent} - Image 1`} 
+                    fill 
+                    className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                    priority 
+                    sizes="(max-width: 1800px) 100vw, 1800px" 
+                  />
+                </div>
+                <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View Full</span>
                 </div>
               </button>
-            ))}
+            )}
+            
+            {/* Thumbnails - smaller, clearly secondary */}
+            {project.images.length > 1 && (
+              <div className="grid grid-cols-4 lg:grid-cols-6 gap-2">
+                {project.images.slice(1).map((image, index) => (
+                  <button 
+                    key={index} 
+                    onClick={() => openLightbox(image)} 
+                    className="group relative overflow-hidden cursor-zoom-in focus:outline-none opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="relative aspect-square">
+                      <Image 
+                        src={image} 
+                        alt={`${project.title} ${project.titleAccent} - Image ${index + 2}`} 
+                        fill 
+                        className="object-cover" 
+                        sizes="(max-width: 768px) 25vw, 16vw" 
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
