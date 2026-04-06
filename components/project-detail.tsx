@@ -44,27 +44,31 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   }, [])
 
   return (
-    <div className="max-w-[1600px] mx-auto">
-      {/* Compact Header with Back Nav and Title */}
-      <div className="mb-8 pt-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div className="flex flex-col gap-2">
-          <Link
-            href={backHref}
-            className="inline-flex items-center gap-2 text-[10px] tracking-[0.15em] transition-opacity hover:opacity-70 w-fit"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              color: "rgba(180, 160, 120, 0.8)",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            {backLabel}
-          </Link>
-          
+    <div className="max-w-[1800px] mx-auto">
+      {/* Header with Back Navigation */}
+      <div className="mb-6 pt-4">
+        <Link
+          href={backHref}
+          className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] transition-opacity hover:opacity-70 w-fit"
+          style={{
+            fontFamily: "var(--font-chillax), sans-serif",
+            color: "rgba(180, 160, 120, 0.8)",
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          {backLabel}
+        </Link>
+      </div>
+
+      {/* Project Title and Description Section - At Beginning, Prominent */}
+      <div className="mb-12">
+        {/* Title Row */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
           <div className="flex items-baseline gap-4">
             <h1
-              className="text-2xl md:text-3xl lg:text-4xl"
+              className="text-3xl md:text-4xl lg:text-5xl"
               style={{
                 fontFamily: "var(--font-chillax), sans-serif",
                 fontWeight: 600,
@@ -76,33 +80,51 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               {project.title}{" "}
               <span style={{ fontWeight: 400, opacity: 0.7 }}>{project.titleAccent}</span>
             </h1>
-            <span
-              className="text-[9px] tracking-[0.2em] hidden md:inline"
-              style={{
-                fontFamily: "var(--font-chillax), sans-serif",
-                color: "rgba(180, 160, 120, 0.7)",
-              }}
-            >
-              {project.category}
-            </span>
           </div>
+          <span
+            className="text-[10px] tracking-[0.2em]"
+            style={{
+              fontFamily: "var(--font-chillax), sans-serif",
+              color: "rgba(180, 160, 120, 0.7)",
+            }}
+          >
+            {project.category}
+          </span>
         </div>
 
-        <span
-          className="text-[10px] tracking-[0.15em]"
-          style={{
-            fontFamily: "var(--font-figtree), sans-serif",
-            color: "rgba(180, 175, 165, 0.5)",
-          }}
-        >
-          {project.imageSections 
-            ? project.imageSections.reduce((total, section) => total + section.images.length, 0)
-            : project.images.length} IMAGES
-        </span>
+        {/* Description Section - Larger and More Prominent */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
+          {descriptionSections.map((section, idx) => (
+            <div key={idx} className="space-y-3">
+              {section.title && (
+                <h3
+                  className="text-sm tracking-[0.12em] uppercase"
+                  style={{
+                    fontFamily: "var(--font-chillax), sans-serif",
+                    color: "rgba(180, 160, 120, 0.9)",
+                    fontWeight: 500,
+                  }}
+                >
+                  {section.title}
+                </h3>
+              )}
+              <p
+                className="text-sm md:text-base leading-relaxed"
+                style={{
+                  fontFamily: "var(--font-figtree), sans-serif",
+                  color: "rgba(200, 195, 185, 0.75)",
+                  lineHeight: 1.9,
+                }}
+              >
+                {section.content || section.title}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Full-Width Image Gallery - Primary Focus */}
-      <div className="space-y-12">
+      {/* Full-Width Image Gallery - Primary Visual Focus */}
+      <div className="space-y-16">
         {project.imageSections && project.imageSections.length > 0 ? (
           project.imageSections.map((section, sectionIndex) => {
             const hasHeroFirst = section.isHeroFirst === true
@@ -110,36 +132,36 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             const isSingleImage = section.images.length === 1
             
             return (
-              <div key={sectionIndex} className="space-y-4">
-                {/* Section Label - Subtle */}
+              <div key={sectionIndex} className="space-y-6">
+                {/* Section Label */}
                 <h3
-                  className="text-[10px] tracking-[0.2em] uppercase"
+                  className="text-xs tracking-[0.15em] uppercase"
                   style={{
                     fontFamily: "var(--font-chillax), sans-serif",
-                    color: "rgba(180, 160, 120, 0.6)",
+                    color: "rgba(180, 160, 120, 0.7)",
                   }}
                 >
                   {section.label}
                 </h3>
                 
-                {/* Section Images - Large and Prominent */}
+                {/* Section Images - Large and Primary Focus */}
                 {hasHeroFirst ? (
-                  <div className="space-y-4">
-                    {/* Hero image - Extra large */}
+                  <div className="space-y-6">
+                    {/* Hero image - Extra large, maintains aspect ratio */}
                     <div className="relative overflow-hidden rounded-sm">
-                      <div className="relative aspect-[21/9] md:aspect-[2.5/1]">
+                      <div className="relative aspect-[16/9]">
                         <Image
                           src={section.images[0]}
                           alt={`${project.title} ${project.titleAccent} - ${section.label} 1`}
                           fill
-                          className="object-cover"
+                          className="object-contain bg-black/20"
                           priority={sectionIndex === 0}
                         />
                       </div>
                     </div>
                     {/* Remaining images in responsive grid */}
                     {section.images.length > 1 && (
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                         {section.images.slice(1).map((image, imageIndex) => (
                           <div
                             key={imageIndex}
@@ -150,7 +172,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                                 src={image}
                                 alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 2}`}
                                 fill
-                                className="object-cover"
+                                className="object-contain bg-black/20"
                               />
                             </div>
                           </div>
@@ -161,10 +183,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : (
                   <div className={
                     isMinecraftRender || isSingleImage 
-                      ? "space-y-4" 
+                      ? "space-y-6" 
                       : section.images.length === 2 
-                        ? "grid grid-cols-1 md:grid-cols-2 gap-3"
-                        : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+                        ? "grid grid-cols-1 md:grid-cols-2 gap-4"
+                        : "grid grid-cols-2 lg:grid-cols-3 gap-4"
                   }>
                     {section.images.map((image, imageIndex) => (
                       <div
@@ -173,16 +195,16 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                       >
                         <div className={`relative ${
                           isMinecraftRender || isSingleImage 
-                            ? 'aspect-[21/9] md:aspect-[2.5/1]' 
+                            ? 'aspect-[16/9]' 
                             : section.images.length === 2
-                              ? 'aspect-[4/3] md:aspect-[3/2]'
+                              ? 'aspect-[4/3]'
                               : 'aspect-[4/3]'
                         }`}>
                           <Image
                             src={image}
                             alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`}
                             fill
-                            className="object-cover"
+                            className="object-contain bg-black/20"
                             priority={sectionIndex === 0 && imageIndex === 0}
                           />
                         </div>
@@ -194,18 +216,18 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             )
           })
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.images.map((image, index) => (
               <div
                 key={index}
                 className={`relative overflow-hidden rounded-sm ${index === 0 ? 'md:col-span-2' : ''}`}
               >
-                <div className={`relative ${index === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
+                <div className={`relative ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
                   <Image
                     src={image}
                     alt={`${project.title} ${project.titleAccent} - Image ${index + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-contain bg-black/20"
                     priority={index === 0}
                   />
                 </div>
@@ -215,50 +237,17 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         )}
       </div>
 
-      {/* Compact Description Section - Below Images */}
-      <div className="mt-16 pt-8 border-t border-white/5">
-        <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {descriptionSections.map((section, idx) => (
-              <div key={idx} className="space-y-2">
-                {section.title && (
-                  <h3
-                    className="text-[10px] tracking-[0.2em] uppercase"
-                    style={{
-                      fontFamily: "var(--font-chillax), sans-serif",
-                      color: "rgba(180, 160, 120, 0.6)",
-                    }}
-                  >
-                    {section.title}
-                  </h3>
-                )}
-                <p
-                  className="text-xs leading-relaxed"
-                  style={{
-                    fontFamily: "var(--font-figtree), sans-serif",
-                    color: "rgba(180, 175, 165, 0.5)",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {section.content || section.title}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Minimal Bottom Navigation */}
-      <div className="mt-12 mb-8 pt-6 border-t border-white/5 flex justify-center">
+      {/* Bottom Navigation */}
+      <div className="mt-20 mb-12 pt-8 border-t border-white/5 flex justify-center">
         <Link
           href={backHref}
-          className="inline-flex items-center gap-2 text-[10px] tracking-[0.15em] transition-opacity hover:opacity-70"
+          className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.5)",
+            color: "rgba(180, 160, 120, 0.6)",
           }}
         >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
           {backLabel}
