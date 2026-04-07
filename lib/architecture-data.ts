@@ -18,11 +18,11 @@ export const projectColorThemes: Record<string, { primary: string; secondary: st
     secondary: 'rgba(200, 165, 145, 0.8)',   // dusty rose
     accent: 'rgba(185, 150, 130, 0.7)',      // terracotta
   },
-  // Vertical Landscapes - organic green tones
-  'vertical-landscapes': {
-    primary: 'rgba(170, 195, 175, 0.95)',    // sage green
-    secondary: 'rgba(155, 180, 160, 0.8)',   // muted olive
-    accent: 'rgba(140, 165, 145, 0.7)',      // moss
+  // Living Pavilion Bathroom - marble and green tones
+  'living-pavilion-bathroom': {
+    primary: 'rgba(180, 190, 185, 0.95)',    // marble gray
+    secondary: 'rgba(165, 175, 170, 0.8)',   // soft stone
+    accent: 'rgba(140, 160, 150, 0.7)',      // teal green
   },
   // Sky Bridge - warm welcoming amber
   'sky-bridge': {
@@ -188,16 +188,30 @@ export const portfolioData = {
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
     projects: [
       {
-        id: "vertical-landscapes",
-        category: "COMMERCIAL",
-        title: "VERTICAL",
-        titleAccent: "LANDSCAPES",
-        description: "Project Description\n\nA multi-story commercial development that reimagines the traditional office building. The design incorporates green spaces at multiple levels, creating a vertical ecosystem that promotes well-being and sustainability.\n\nThought Process\n\nRedefining workplace environments through the integration of nature and architecture.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        id: "living-pavilion-bathroom",
+        category: "RHINO MODELING EXERCISE",
+        title: "LIVING PAVILION",
+        titleAccent: "– BATHROOM",
+        description: "Project Description\n\nA detailed 3D modeling exercise focused on accurately reconstructing a bathroom pavilion using Rhino. The project emphasizes precision in modeling, material application, and spatial representation through both interior and exterior views.\n\nThought Process\n\nThis project was primarily a technical exercise aimed at developing proficiency in Rhino. The focus was on accurately translating an existing design into a digital model while refining skills in geometry creation, detailing, and rendering.",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-x3zl3qxfsy01IgWxRM3nSAoB9zWbin.png",
+        images: [],
+        imageSections: [
+          {
+            label: "Rhino Model Views",
+            isMosaic: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-x3zl3qxfsy01IgWxRM3nSAoB9zWbin.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-uFtlONEaqUB6tD90HmIbWB2IUfDz3m.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-gEvn5oaMnEutHFydAXD5o2oK6GTfkS.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-wHYAM7HWO5QlDSzsw1lSa5UmqfCkHj.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-jaVshepvw8mrfk0Ubz8CKY3r8Y4byC.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.2-Tq9JsrSTgsi4XWlZJarkexyvIThLWd.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-Kcu9fBTQhIc5PPpkJ8QMZcp7tH5kiy.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-EJUDOGHNOUXm3yOCJa8PuKKmzVZDgR.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-pb0pkicmDN2JgSW9vCkI7lpfD3pipm.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9-GiMs9tZuAlGAX3gUN9bbL6nAveamBR.png",
+            ],
+          },
         ],
       },
       {
