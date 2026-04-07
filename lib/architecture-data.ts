@@ -18,20 +18,20 @@ export const projectColorThemes: Record<string, { primary: string; secondary: st
     secondary: 'rgba(200, 165, 145, 0.8)',   // dusty rose
     accent: 'rgba(185, 150, 130, 0.7)',      // terracotta
   },
-  // Vertical Landscapes - organic green tones
-  'vertical-landscapes': {
-    primary: 'rgba(170, 195, 175, 0.95)',    // sage green
-    secondary: 'rgba(155, 180, 160, 0.8)',   // muted olive
-    accent: 'rgba(140, 165, 145, 0.7)',      // moss
+  // Living Pavilion Bathroom - marble and green tones
+  'living-pavilion-bathroom': {
+    primary: 'rgba(180, 190, 185, 0.95)',    // marble gray
+    secondary: 'rgba(165, 175, 170, 0.8)',   // soft stone
+    accent: 'rgba(140, 160, 150, 0.7)',      // teal green
   },
-  // Community Hub - warm welcoming amber
-  'community-hub': {
+  // Sky Bridge - warm welcoming amber
+  'sky-bridge': {
     primary: 'rgba(215, 190, 155, 0.95)',    // warm amber
     secondary: 'rgba(195, 175, 145, 0.8)',   // golden beige
     accent: 'rgba(180, 160, 130, 0.7)',      // caramel
   },
-  // Parametric Forms - futuristic purple-blue
-  'parametric-forms': {
+  // Elemental Pavilions - futuristic purple-blue
+  'elemental-pavilions': {
     primary: 'rgba(190, 180, 210, 0.95)',    // soft lavender
     secondary: 'rgba(170, 165, 195, 0.8)',   // muted violet
     accent: 'rgba(155, 150, 180, 0.7)',      // dusty purple
@@ -188,42 +188,140 @@ export const portfolioData = {
     thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
     projects: [
       {
-        id: "vertical-landscapes",
-        category: "COMMERCIAL",
-        title: "VERTICAL",
-        titleAccent: "LANDSCAPES",
-        description: "Project Description\n\nA multi-story commercial development that reimagines the traditional office building. The design incorporates green spaces at multiple levels, creating a vertical ecosystem that promotes well-being and sustainability.\n\nThought Process\n\nRedefining workplace environments through the integration of nature and architecture.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        id: "living-pavilion-bathroom",
+        category: "RHINO MODELING EXERCISE",
+        title: "LIVING PAVILION",
+        titleAccent: "– BATHROOM",
+        description: "Project Description\n\nA detailed 3D modeling exercise focused on accurately reconstructing a bathroom pavilion using Rhino. The project emphasizes precision in modeling, material application, and spatial representation through both interior and exterior views.\n\nThought Process\n\nThis project was primarily a technical exercise aimed at developing proficiency in Rhino. The focus was on accurately translating an existing design into a digital model while refining skills in geometry creation, detailing, and rendering.",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-x3zl3qxfsy01IgWxRM3nSAoB9zWbin.png",
+        images: [],
+        imageSections: [
+          {
+            label: "Main View",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-x3zl3qxfsy01IgWxRM3nSAoB9zWbin.png",
+            ],
+          },
+          {
+            label: "Exterior Views",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-uFtlONEaqUB6tD90HmIbWB2IUfDz3m.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.2-Tq9JsrSTgsi4XWlZJarkexyvIThLWd.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-jaVshepvw8mrfk0Ubz8CKY3r8Y4byC.png",
+            ],
+          },
+          {
+            label: "Plan Views",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-gEvn5oaMnEutHFydAXD5o2oK6GTfkS.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-wHYAM7HWO5QlDSzsw1lSa5UmqfCkHj.png",
+            ],
+          },
+          {
+            label: "Interior Views",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-Kcu9fBTQhIc5PPpkJ8QMZcp7tH5kiy.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-EJUDOGHNOUXm3yOCJa8PuKKmzVZDgR.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-pb0pkicmDN2JgSW9vCkI7lpfD3pipm.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9-GiMs9tZuAlGAX3gUN9bbL6nAveamBR.png",
+            ],
+          },
         ],
       },
       {
-        id: "community-hub",
-        category: "PUBLIC",
-        title: "COMMUNITY",
-        titleAccent: "HUB",
-        description: "Project Description\n\nA civic building designed to serve as a gathering point for the local community. The architecture emphasizes transparency, accessibility, and flexibility to accommodate diverse activities and events.\n\nThought Process\n\nFostering social connections and community engagement through open, adaptable spaces.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        id: "sky-bridge",
+        category: "URBAN CONNECTOR STUDY",
+        title: "SKY",
+        titleAccent: "BRIDGE",
+        description: "Project Description\n\nAn architectural intervention designed to connect two buildings through an elevated bridge structure. The project explores how circulation, structure, and enclosure can be integrated to create a functional yet expressive space within a dense urban environment.\n\nThought Process\n\nThe design focused on transforming a simple bridge into an engaging spatial experience. By introducing layered surfaces and vertical elements, the structure enhances movement while creating moments of light, shadow, and visual connection. The goal was to balance functionality with atmosphere, turning circulation into an architectural feature rather than just a passage.",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-MjGYsivPTnBcPORzsKl6gkXDAjsP9g.jpg",
+        images: [],
+        imageSections: [
+          {
+            label: "Renders",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-MjGYsivPTnBcPORzsKl6gkXDAjsP9g.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%202-L4CQ2r35XJAHSpCblgAq48LFTaTnwv.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%203-r0meL7P671wPOOTgyOWAiP4Lys4OR9.png",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-qvo5ke0ysjXCYz7QmNO0bEAl0PPzFc.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-C5X5nuhl2u0bZfc8yLarKxQ2YLKar4.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-nhfzhPKS1Gs25yFeo1PjtLqj7NYRZX.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-mYGLngcJXUoD1tjPNCAFLDZ4KK6Cv3.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-z1JSqHHQ2Bc74iPsUdw4ABHHMQsgSX.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-GvkPdkEswy8XmH142RGD4RvZ0VGEuH.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-ilfxqDjum3ALePfRGG7Jyi81dD2rWM.jpg",
+            ],
+          },
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ZtrAIyYeAEOi6cGB2TJwqoJTbUiJ6r.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-N8dnfvZG4S3AfQkJoHnK5hKIqWE6kU.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-mx8dnRROlsFzbbH3xzh1IA92VrzoTf.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%204-8Tpy0QN9daA8nRWURjjFiKmEWN6uGe.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%205-cqLsNP83BiGzsxKqlnbDpK3xT9raSM.jpg",
+            ],
+          },
         ],
       },
       {
-        id: "parametric-forms",
-        category: "DIGITAL",
-        title: "PARAMETRIC",
-        titleAccent: "FORMS",
-        description: "Project Description\n\nDigital modeling explorations using Rhino 3D and Grasshopper. These experiments investigate parametric design principles, creating complex geometries that respond to various environmental and programmatic inputs.\n\nThought Process\n\nBlending computational precision with artistic expression to push the boundaries of digital architecture.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
+        id: "elemental-pavilions",
+        category: "SITE-RESPONSIVE PAVILION DESIGN",
+        title: "ELEMENTAL",
+        titleAccent: "PAVILIONS",
+        description: "Project Description\n\nA series of pavilions designed within a natural landscape, responding to site conditions, circulation patterns, and user interaction. The project integrates programmatic elements such as a ranger station and restroom facilities with spaces for observation and nature engagement.\n\nThought Process\n\nThe design was driven by the intention to blend architecture with the surrounding environment. Forms were developed to feel organic and continuous with the landscape, guiding movement while minimizing visual disruption. Program placement was informed by accessibility and privacy, creating a balance between public use and quiet interaction with nature.",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render.png-hHGSjQ6PYE6xFlpuPz9hqF8IG981sf.jpeg",
+        images: [],
+        imageSections: [
+          {
+            label: "Render",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render.png-hHGSjQ6PYE6xFlpuPz9hqF8IG981sf.jpeg",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-LiQ8kHnajB53bYhmaOhHhzEyajV4TF.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-WyqD6E8DOa7CUXOJe9vdQ8GSDn6qUi.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-PRAM9xD22oPtl1nyGG0VF3ZYzh8nSq.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-tpAEc5te1eZVLYEIAmH8JsqJ6UyGPk.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-qGh2JsidmGVknHoDIfziQUbeixcZrf.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-x3pmIElhydILIHdArlUqbG0z5NoKZS.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-IaBGPqAP4AKmg6ATAWOtLrJ6VDz2jj.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-gZKhHoF04TcUmDQNqlCKrMlpM66VrQ.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9-8LG6ivoxXgOPGsPFTJCbIa6uj8hE5z.jpg",
+            ],
+          },
+          {
+            label: "Rhino Model",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%201-eTdhedtQPzSA6ufc9zlHC25eMwR2kL.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%202-kHDeR6WAomNzdKWM7n0z1SArWxlgqM.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%203-hCLyWdVLdbIiHxvkRg6BKKu2UR8eJv.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%204-sK4OGGRjtT5zAAyUURFKyWWbwdzRAK.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%205-FvkD1uTFnOrPKqjbskyWkU2dsow6qk.png",
+            ],
+          },
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201.png-acWcs0rRz699lV8vkGtomiqMFEGMAU.jpeg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202.png-YeIYmc5LS0OcZfX6Mf39R1JA7D1EQY.jpeg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203.png-tMHjU0cBUB00ZdEgR2hxVygXpDifCj.jpeg",
+            ],
+          },
         ],
       },
     ],

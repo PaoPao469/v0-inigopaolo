@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { getYearForProject, getProjectColorTheme } from "@/lib/architecture-data"
+import { getProjectColorTheme } from "@/lib/architecture-data"
 import ImageLightbox from "./image-lightbox"
 
 interface ImageSection {
@@ -12,6 +12,7 @@ interface ImageSection {
   isHeroFirst?: boolean
   gridLayout?: "hero-3x3"
   preserveHeroAspect?: boolean
+  isMosaic?: boolean
 }
 
 interface Project {
@@ -30,9 +31,8 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
-  const yearInfo = getYearForProject(project.id)
-  const backHref = yearInfo ? `/architecture/${yearInfo.slug}` : "/architecture"
-  const backLabel = yearInfo ? `BACK TO ${yearInfo.label}` : "BACK TO COLLECTIONS"
+  const backHref = "/architecture"
+  const backLabel = "BACK TO PROJECTS"
 
   // Get project-specific color theme
   const colorTheme = getProjectColorTheme(project.id)
@@ -113,6 +113,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     const preserveAspect = section.preserveHeroAspect === true
     const isTwoImages = section.images.length === 2
     const isChosenImageSection = section.label.toLowerCase().includes('chosen')
+    const isMosaic = section.isMosaic === true
     
     // Determine hero aspect ratio and object fit based on preserveHeroAspect flag
     const heroAspectClass = preserveAspect ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[21/9] lg:aspect-[2.5/1]"
@@ -295,6 +296,49 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
               <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
             </button>
+          </div>
+        ) : isMosaic ? (
+          /* Mosaic grid layout with varied sizes */
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            {section.images.map((image, imageIndex) => {
+              // Create varied sizes for mosaic effect
+              const mosaicPatterns = [
+                "col-span-2 row-span-2", // large
+                "col-span-1 row-span-1", // small
+                "col-span-1 row-span-1", // small
+                "col-span-1 row-span-2", // tall
+                "col-span-2 row-span-1", // wide
+                "col-span-1 row-span-1", // small
+                "col-span-1 row-span-1", // small
+                "col-span-2 row-span-1", // wide
+                "col-span-1 row-span-2", // tall
+                "col-span-1 row-span-1", // small
+              ]
+              const pattern = mosaicPatterns[imageIndex % mosaicPatterns.length]
+              
+              return (
+                <button 
+                  key={imageIndex}
+                  onClick={() => openLightbox(image)} 
+                  className={`group relative overflow-hidden cursor-zoom-in focus:outline-none ${pattern}`}
+                >
+                  <div className="relative w-full h-full min-h-[180px] md:min-h-[220px]">
+                    <Image 
+                      src={image} 
+                      alt={`${project.title} ${project.titleAccent} - ${section.label} ${imageIndex + 1}`} 
+                      fill 
+                      className="object-cover transition-all duration-700 group-hover:scale-[1.02]" 
+                      priority={isFirstSection && imageIndex === 0} 
+                      sizes="(max-width: 768px) 50vw, 33vw" 
+                    />
+                  </div>
+                  <div className="absolute inset-0 border border-white/[0.03] pointer-events-none" />
+                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-[9px] tracking-[0.2em] uppercase px-2 py-1 bg-black/60 backdrop-blur-sm" style={{ color: colorTheme.primary, fontFamily: "var(--font-chillax), sans-serif" }}>View</span>
+                  </div>
+                </button>
+              )
+            })}
           </div>
         ) : isTwoImages ? (
           /* Two images - balanced side by side */
