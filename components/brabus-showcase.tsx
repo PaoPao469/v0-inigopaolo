@@ -83,6 +83,7 @@ export default function BrabusShowcase({ categoryLabel, categorySlug, images }: 
             sizes="(max-width: 768px) 100vw, 90vw"
             priority
           />
+
           {/* Image counter */}
           <div 
             className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"
@@ -111,25 +112,25 @@ export default function BrabusShowcase({ categoryLabel, categorySlug, images }: 
         hasNext={images.length > 1}
       />
 
-      {/* Horizontal Scrollable Thumbnail Gallery */}
-      <div className="mb-8 overflow-x-auto scrollbar-hide">
-        <div className="flex gap-3 pb-2" style={{ minWidth: "min-content" }}>
+      {/* Thumbnail Gallery */}
+      <div className="mb-16">
+        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
           {images.map((image, index) => (
             <button
               key={index}
               onClick={() => setSelectedIndex(index)}
-              className={`relative flex-shrink-0 w-24 h-16 md:w-32 md:h-20 rounded-lg overflow-hidden transition-all duration-300 ${
-                selectedIndex === index
-                  ? "ring-2 ring-[rgba(0,210,180,0.8)] ring-offset-2 ring-offset-black"
-                  : "opacity-60 hover:opacity-100"
+              className={`relative flex-shrink-0 w-24 h-16 md:w-32 md:h-20 lg:w-40 lg:h-24 overflow-hidden rounded-md transition-all duration-300 ${
+                selectedIndex === index 
+                  ? "ring-2 ring-[rgba(0,210,180,0.8)] ring-offset-2 ring-offset-black opacity-100" 
+                  : "opacity-50 hover:opacity-80"
               }`}
             >
               <Image
                 src={image}
-                alt={`Thumbnail ${index + 1}`}
+                alt={`Brabus thumbnail ${index + 1}`}
                 fill
                 className="object-cover"
-                sizes="128px"
+                sizes="160px"
               />
             </button>
           ))}
@@ -149,9 +150,12 @@ export default function BrabusShowcase({ categoryLabel, categorySlug, images }: 
             color: "rgba(180, 175, 165, 0.8)",
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
+          <span className="flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            PREV
+          </span>
         </button>
         <button
           onClick={handleNext}
@@ -164,9 +168,12 @@ export default function BrabusShowcase({ categoryLabel, categorySlug, images }: 
             color: "rgba(180, 175, 165, 0.8)",
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
+          <span className="flex items-center gap-2">
+            NEXT
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </span>
         </button>
       </div>
 
