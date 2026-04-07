@@ -83,12 +83,7 @@ export default function ShelbyShowcase({ categoryLabel, categorySlug, images }: 
             sizes="(max-width: 768px) 100vw, 90vw"
             priority
           />
-          {/* Click hint overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm text-xs tracking-wider" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(255,255,255,0.9)" }}>
-              Click to enlarge
-            </span>
-          </div>
+
           {/* Image counter */}
           <div 
             className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"

@@ -83,12 +83,7 @@ export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: 
             sizes="(max-width: 768px) 100vw, 90vw"
             priority
           />
-          {/* Click hint overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm text-xs tracking-wider" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(255,255,255,0.9)" }}>
-              Click to enlarge
-            </span>
-          </div>
+
           {/* Image counter */}
           <div 
             className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"
@@ -145,8 +140,8 @@ export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: 
       {/* Navigation Arrows for Main Image */}
       <div className="flex justify-center gap-4 mb-16">
         <button
-          onClick={() => setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+          onClick={handlePrevious}
+          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(120,140,160,0.5)] hover:bg-[rgba(120,140,160,0.05)] transition-all duration-300"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
             fontWeight: 400,
@@ -163,8 +158,8 @@ export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: 
           </span>
         </button>
         <button
-          onClick={() => setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+          onClick={handleNext}
+          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(120,140,160,0.5)] hover:bg-[rgba(120,140,160,0.05)] transition-all duration-300"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
             fontWeight: 400,
