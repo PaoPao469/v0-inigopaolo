@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
-import ImageLightbox from "@/components/image-lightbox"
 
 interface FerrariShowcaseProps {
   categoryLabel: string
@@ -14,15 +13,6 @@ interface FerrariShowcaseProps {
 
 export default function FerrariShowcase({ categoryLabel, categorySlug, images }: FerrariShowcaseProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-
-  const handlePrevious = () => {
-    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
-
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
 
   return (
     <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24">
@@ -71,19 +61,15 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
 
       {/* Main Display Area */}
       <div className="mb-6">
-        <button
-          onClick={() => setLightboxOpen(true)}
-          className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black/20 cursor-zoom-in group"
-        >
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black/20">
           <Image
             src={images[selectedIndex]}
             alt={`Ferrari - Image ${selectedIndex + 1}`}
             fill
-            className="object-cover transition-all duration-500 group-hover:scale-[1.02]"
+            className="object-cover transition-opacity duration-500"
             sizes="(max-width: 768px) 100vw, 90vw"
             priority
           />
-
           {/* Image counter */}
           <div 
             className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"
@@ -97,20 +83,8 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
           >
             {selectedIndex + 1} / {images.length}
           </div>
-        </button>
+        </div>
       </div>
-
-      {/* Lightbox */}
-      <ImageLightbox
-        isOpen={lightboxOpen}
-        imageUrl={images[selectedIndex]}
-        alt={`Ferrari - Image ${selectedIndex + 1}`}
-        onClose={() => setLightboxOpen(false)}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        hasPrevious={images.length > 1}
-        hasNext={images.length > 1}
-      />
 
       {/* Thumbnail Gallery */}
       <div className="mb-16">
@@ -140,8 +114,8 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
       {/* Navigation Arrows for Main Image */}
       <div className="flex justify-center gap-4 mb-16">
         <button
-          onClick={handlePrevious}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(180,160,120,0.5)] hover:bg-[rgba(180,160,120,0.05)] transition-all duration-300"
+          onClick={() => setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
+          className="px-6 py-3 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
             fontWeight: 400,
@@ -158,8 +132,8 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
           </span>
         </button>
         <button
-          onClick={handleNext}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(180,160,120,0.5)] hover:bg-[rgba(180,160,120,0.05)] transition-all duration-300"
+          onClick={() => setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
+          className="px-6 py-3 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
             fontWeight: 400,
