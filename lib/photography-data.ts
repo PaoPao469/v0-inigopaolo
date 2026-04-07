@@ -50,6 +50,18 @@ export const photographyData = {
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4235-4-Xbh5GcluMT05iFyxn61XOYXnyBOJ6Z.jpg",
         ],
       },
+      {
+        id: "brabus",
+        title: "BRABUS",
+        images: [
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-GqRFhGe6IggR8OuaI79oUQ7PTwrSbP.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-4ewAG9mNtHwn49WsVAyG06FwDY98wO.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-9x2OojJ958lzSzx6GiAUfsX9lWBUba.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-BuP6PXau7UHUWjCgDkG2NFKqjqFzqs.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-oWLw1sP9QxHbV2lrq5k44qqjb9CY6K.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-ZbsFhzI85S4aF1vjnNxkNKG1QaUBdJ.jpg",
+        ],
+      },
     ],
   },
   "model-photography": {
