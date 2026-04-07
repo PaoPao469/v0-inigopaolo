@@ -206,11 +206,41 @@ export const portfolioData = {
         title: "SKY",
         titleAccent: "BRIDGE",
         description: "Project Description\n\nAn architectural intervention designed to connect two buildings through an elevated bridge structure. The project explores how circulation, structure, and enclosure can be integrated to create a functional yet expressive space within a dense urban environment.\n\nThought Process\n\nThe design focused on transforming a simple bridge into an engaging spatial experience. By introducing layered surfaces and vertical elements, the structure enhances movement while creating moments of light, shadow, and visual connection. The goal was to balance functionality with atmosphere, turning circulation into an architectural feature rather than just a passage.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-MjGYsivPTnBcPORzsKl6gkXDAjsP9g.jpg",
+        images: [],
+        imageSections: [
+          {
+            label: "Renders",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-MjGYsivPTnBcPORzsKl6gkXDAjsP9g.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%202-L4CQ2r35XJAHSpCblgAq48LFTaTnwv.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%203-r0meL7P671wPOOTgyOWAiP4Lys4OR9.png",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-qvo5ke0ysjXCYz7QmNO0bEAl0PPzFc.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-C5X5nuhl2u0bZfc8yLarKxQ2YLKar4.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-nhfzhPKS1Gs25yFeo1PjtLqj7NYRZX.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-mYGLngcJXUoD1tjPNCAFLDZ4KK6Cv3.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-z1JSqHHQ2Bc74iPsUdw4ABHHMQsgSX.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-GvkPdkEswy8XmH142RGD4RvZ0VGEuH.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-ilfxqDjum3ALePfRGG7Jyi81dD2rWM.jpg",
+            ],
+          },
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ZtrAIyYeAEOi6cGB2TJwqoJTbUiJ6r.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-N8dnfvZG4S3AfQkJoHnK5hKIqWE6kU.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-mx8dnRROlsFzbbH3xzh1IA92VrzoTf.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%204-8Tpy0QN9daA8nRWURjjFiKmEWN6uGe.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%205-cqLsNP83BiGzsxKqlnbDpK3xT9raSM.jpg",
+            ],
+          },
         ],
       },
       {
