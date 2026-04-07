@@ -252,22 +252,6 @@ function CategoryCard({
           }}
         />
       </div>
-
-      {/* Description */}
-      <p
-        className="mt-2"
-        style={{
-          fontFamily: "var(--font-figtree), sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          color: isHovered ? "rgba(180, 175, 165, 0.7)" : "rgba(180, 175, 165, 0.5)",
-          lineHeight: 1.6,
-          transform: isHovered ? "translateX(4px)" : "translateX(0)",
-          transition: "color 0.3s ease-out, transform 0.3s ease-out",
-        }}
-      >
-        {category.description}
-      </p>
     </button>
   )
 }

@@ -340,7 +340,6 @@ export default function CarPhotographySection({ category }: CarPhotographySectio
           }}
         >
           <h1
-            className="mb-4"
             style={{
               fontFamily: "var(--font-chillax), sans-serif",
               fontWeight: 500,
@@ -352,20 +351,6 @@ export default function CarPhotographySection({ category }: CarPhotographySectio
           >
             {category.label}
           </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-figtree), sans-serif",
-              fontWeight: 400,
-              fontSize: "14px",
-              color: "rgba(180, 175, 165, 0.6)",
-              maxWidth: "500px",
-              lineHeight: 1.7,
-              opacity: headerVisible ? 1 : 0,
-              transition: "opacity 0.8s ease-out 0.3s",
-            }}
-          >
-            {category.description}
-          </p>
         </header>
 
         {/* Clickable Thumbnails Grid - 3 columns on desktop */}

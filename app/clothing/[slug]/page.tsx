@@ -33,7 +33,7 @@ export default async function ClothingBrandPage({ params }: { params: Promise<{ 
   return (
     <>
       <SlimeCursor />
-      <SectionLayout plainBackground>
+      <SectionLayout>
         <ClothingBrandDetail brand={brand} />
       </SectionLayout>
     </>
