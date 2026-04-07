@@ -151,8 +151,6 @@ export const portfolioData = {
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-RvRKsEmFx6wDCTFQCyjEkh50RJ94xq.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
             ],
           },
           {
@@ -169,13 +167,15 @@ export const portfolioData = {
             preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
             ],
           },
           {
             label: "Sections and Diagrams",
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sections-L9j55XiID9qOUr2CeBKbV8brTZg23Q.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-RvRKsEmFx6wDCTFQCyjEkh50RJ94xq.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
             ],
           },
         ],
