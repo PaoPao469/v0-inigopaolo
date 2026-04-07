@@ -30,8 +30,8 @@ export const projectColorThemes: Record<string, { primary: string; secondary: st
     secondary: 'rgba(195, 175, 145, 0.8)',   // golden beige
     accent: 'rgba(180, 160, 130, 0.7)',      // caramel
   },
-  // Parametric Forms - futuristic purple-blue
-  'parametric-forms': {
+  // Elemental Pavilions - futuristic purple-blue
+  'elemental-pavilions': {
     primary: 'rgba(190, 180, 210, 0.95)',    // soft lavender
     secondary: 'rgba(170, 165, 195, 0.8)',   // muted violet
     accent: 'rgba(155, 150, 180, 0.7)',      // dusty purple
@@ -214,11 +214,11 @@ export const portfolioData = {
         ],
       },
       {
-        id: "parametric-forms",
-        category: "DIGITAL",
-        title: "PARAMETRIC",
-        titleAccent: "FORMS",
-        description: "Project Description\n\nDigital modeling explorations using Rhino 3D and Grasshopper. These experiments investigate parametric design principles, creating complex geometries that respond to various environmental and programmatic inputs.\n\nThought Process\n\nBlending computational precision with artistic expression to push the boundaries of digital architecture.",
+        id: "elemental-pavilions",
+        category: "SITE-RESPONSIVE PAVILION DESIGN",
+        title: "ELEMENTAL",
+        titleAccent: "PAVILIONS",
+        description: "Project Description\n\nA series of pavilions designed within a natural landscape, responding to site conditions, circulation patterns, and user interaction. The project integrates programmatic elements such as a ranger station and restroom facilities with spaces for observation and nature engagement.\n\nThought Process\n\nThe design was driven by the intention to blend architecture with the surrounding environment. Forms were developed to feel organic and continuous with the landscape, guiding movement while minimizing visual disruption. Program placement was informed by accessibility and privacy, creating a balance between public use and quiet interaction with nature.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
