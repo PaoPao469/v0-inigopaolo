@@ -133,28 +133,6 @@ function CategoryCard({ category, index }: { category: Category; index: number }
           }}
         />
 
-        {/* View indicator that slides up on hover */}
-        <div
-          className="absolute bottom-0 left-0 right-0 flex items-center justify-center pb-4"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            transform: isHovered ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-          }}
-        >
-          <span
-            className="px-4 py-1.5 backdrop-blur-md rounded-full text-[10px] tracking-[0.15em]"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              color: "rgba(255, 255, 255, 0.9)",
-              background: "rgba(255, 255, 255, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-            }}
-          >
-            VIEW COLLECTION
-          </span>
-        </div>
-
         {/* Corner accent lines */}
         <div
           className="absolute top-0 left-0 pointer-events-none"

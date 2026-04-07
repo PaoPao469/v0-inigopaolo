@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
+import { useEffect, useRef, useState } from "react"
 
 interface Subsection {
   id: string
@@ -22,13 +23,268 @@ interface CarPhotographySectionProps {
   category: CarPhotographyCategory
 }
 
+function CarGalleryCard({ 
+  subsection, 
+  categorySlug, 
+  index 
+}: { 
+  subsection: Subsection
+  categorySlug: string
+  index: number 
+}) {
+  const cardRef = useRef<HTMLAnchorElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Staggered delay based on index for cascade effect
+          setTimeout(() => {
+            setIsVisible(true)
+          }, index * 120)
+        }
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    )
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [index])
+
+  // Parallax tilt effect on mouse move
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    setMousePosition({ x, y })
+  }
+
+  const handleMouseEnter = () => setIsHovered(true)
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setMousePosition({ x: 0, y: 0 })
+  }
+
+  // Calculate transform based on mouse position
+  const transform = isHovered
+    ? `perspective(1000px) rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg) scale(1.03)`
+    : "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)"
+
+  return (
+    <Link
+      ref={cardRef}
+      href={`/photography/${categorySlug}/${subsection.id}`}
+      className="group block"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? transform
+          : "translateY(80px) scale(0.92) rotateX(10deg)",
+        transition: isHovered
+          ? "transform 0.12s ease-out, opacity 0.6s ease-out"
+          : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out",
+        transformStyle: "preserve-3d",
+      }}
+    >
+      {/* Thumbnail Container */}
+      <div 
+        className="relative aspect-[4/5] overflow-hidden rounded-lg mb-4"
+        style={{
+          boxShadow: isHovered 
+            ? "0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(180, 175, 165, 0.1)"
+            : "0 15px 35px -10px rgba(0, 0, 0, 0.35)",
+          transition: "box-shadow 0.4s ease-out",
+        }}
+      >
+        {/* Main Image with parallax effect */}
+        <div
+          className="absolute inset-0"
+          style={{
+            transform: isHovered
+              ? `scale(1.15) translate(${-mousePosition.x * 12}px, ${-mousePosition.y * 12}px)`
+              : "scale(1) translate(0px, 0px)",
+            transition: isHovered
+              ? "transform 0.12s ease-out"
+              : "transform 0.5s ease-out",
+          }}
+        >
+          <Image
+            src={subsection.images[0]}
+            alt={subsection.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </div>
+
+        {/* Gradient overlay that intensifies on hover */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isHovered
+              ? "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 40%, rgba(0,0,0,0.05) 100%)"
+              : "linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 50%)",
+            transition: "background 0.4s ease-out",
+          }}
+        />
+
+        {/* Shine/spotlight effect following cursor */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isHovered
+              ? `radial-gradient(circle at ${(mousePosition.x + 0.5) * 100}% ${(mousePosition.y + 0.5) * 100}%, rgba(255,255,255,0.2) 0%, transparent 45%)`
+              : "none",
+            transition: "opacity 0.3s ease-out",
+          }}
+        />
+
+        {/* Corner accent lines that animate on hover */}
+        <div
+          className="absolute top-0 left-0 pointer-events-none"
+          style={{
+            width: isHovered ? "70px" : "0px",
+            height: "2px",
+            background: "linear-gradient(90deg, rgba(180, 175, 165, 0.8), transparent)",
+            transition: "width 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            transitionDelay: isHovered ? "0.1s" : "0s",
+          }}
+        />
+        <div
+          className="absolute top-0 left-0 pointer-events-none"
+          style={{
+            width: "2px",
+            height: isHovered ? "70px" : "0px",
+            background: "linear-gradient(180deg, rgba(180, 175, 165, 0.8), transparent)",
+            transition: "height 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            transitionDelay: isHovered ? "0.1s" : "0s",
+          }}
+        />
+
+        {/* Bottom right corner accent */}
+        <div
+          className="absolute bottom-0 right-0 pointer-events-none"
+          style={{
+            width: isHovered ? "70px" : "0px",
+            height: "2px",
+            background: "linear-gradient(270deg, rgba(180, 175, 165, 0.8), transparent)",
+            transition: "width 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            transitionDelay: isHovered ? "0.15s" : "0s",
+          }}
+        />
+        <div
+          className="absolute bottom-0 right-0 pointer-events-none"
+          style={{
+            width: "2px",
+            height: isHovered ? "70px" : "0px",
+            background: "linear-gradient(0deg, rgba(180, 175, 165, 0.8), transparent)",
+            transition: "height 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            transitionDelay: isHovered ? "0.15s" : "0s",
+          }}
+        />
+
+        {/* Image count badge */}
+        <div
+          className="absolute top-3 right-3"
+          style={{
+            opacity: isHovered ? 1 : 0.7,
+            transform: isHovered ? "scale(1.05)" : "scale(1)",
+            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+          }}
+        >
+          <span
+            className="px-2.5 py-1 backdrop-blur-md rounded-full text-[10px] tracking-[0.1em]"
+            style={{
+              fontFamily: "var(--font-chillax), sans-serif",
+              color: "rgba(255, 255, 255, 0.9)",
+              background: "rgba(0, 0, 0, 0.4)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+            }}
+          >
+            {subsection.images.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Subsection Label with animated underline */}
+      <div className="relative inline-block overflow-hidden">
+        <h2
+          className="transition-colors duration-200"
+          style={{
+            fontFamily: "var(--font-chillax), sans-serif",
+            fontWeight: 500,
+            fontSize: "16px",
+            letterSpacing: isHovered ? "0.2em" : "0.15em",
+            color: isHovered ? "rgba(255, 255, 255, 1)" : "rgba(180, 175, 165, 0.85)",
+            transform: isHovered ? "translateX(4px)" : "translateX(0)",
+            transition: "letter-spacing 0.4s ease-out, color 0.3s ease-out, transform 0.3s ease-out",
+          }}
+        >
+          {subsection.title}
+        </h2>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-2px",
+            left: 0,
+            width: isHovered ? "100%" : "0%",
+            height: "1px",
+            background: "rgba(180, 175, 165, 0.5)",
+            transition: "width 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        />
+      </div>
+
+      {/* Image count text */}
+      <p
+        className="mt-1"
+        style={{
+          fontFamily: "var(--font-figtree), sans-serif",
+          fontWeight: 400,
+          fontSize: "12px",
+          color: isHovered ? "rgba(180, 175, 165, 0.7)" : "rgba(180, 175, 165, 0.5)",
+          transform: isHovered ? "translateX(4px)" : "translateX(0)",
+          transition: "color 0.3s ease-out, transform 0.3s ease-out",
+        }}
+      >
+        {subsection.images.length} images
+      </p>
+    </Link>
+  )
+}
+
 export default function CarPhotographySection({ category }: CarPhotographySectionProps) {
+  const [headerVisible, setHeaderVisible] = useState(false)
+
+  useEffect(() => {
+    // Trigger header animation on mount
+    setTimeout(() => setHeaderVisible(true), 100)
+  }, [])
+
   return (
     <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24">
       <BackButton href="/photography" label="Photography" />
 
-      {/* Page Header */}
-      <header className="mb-16">
+      {/* Page Header with fade-in animation */}
+      <header 
+        className="mb-16"
+        style={{
+          opacity: headerVisible ? 1 : 0,
+          transform: headerVisible ? "translateY(0)" : "translateY(-30px)",
+          transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
+        }}
+      >
         <h1
           className="mb-4"
           style={{
@@ -50,6 +306,8 @@ export default function CarPhotographySection({ category }: CarPhotographySectio
             color: "rgba(180, 175, 165, 0.6)",
             maxWidth: "500px",
             lineHeight: 1.7,
+            opacity: headerVisible ? 1 : 0,
+            transition: "opacity 0.8s ease-out 0.3s",
           }}
         >
           {category.description}
@@ -58,52 +316,13 @@ export default function CarPhotographySection({ category }: CarPhotographySectio
 
       {/* Clickable Thumbnails Grid - 3 columns on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {category.subsections.map((subsection) => (
-          <Link
+        {category.subsections.map((subsection, index) => (
+          <CarGalleryCard
             key={subsection.id}
-            href={`/photography/${category.slug}/${subsection.id}`}
-            className="group block"
-          >
-            {/* Thumbnail Container */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg mb-4">
-              <Image
-                src={subsection.images[0]}
-                alt={subsection.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-colors duration-300" />
-            </div>
-
-            {/* Subsection Label */}
-            <h2
-              className="transition-colors duration-200 group-hover:text-white"
-              style={{
-                fontFamily: "var(--font-chillax), sans-serif",
-                fontWeight: 500,
-                fontSize: "16px",
-                letterSpacing: "0.15em",
-                color: "rgba(180, 175, 165, 0.85)",
-              }}
-            >
-              {subsection.title}
-            </h2>
-
-            {/* Image count */}
-            <p
-              className="mt-1"
-              style={{
-                fontFamily: "var(--font-figtree), sans-serif",
-                fontWeight: 400,
-                fontSize: "12px",
-                color: "rgba(180, 175, 165, 0.5)",
-              }}
-            >
-              {subsection.images.length} images
-            </p>
-          </Link>
+            subsection={subsection}
+            categorySlug={category.slug}
+            index={index}
+          />
         ))}
       </div>
     </div>
