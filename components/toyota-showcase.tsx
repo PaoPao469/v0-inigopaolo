@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
+import ImageLightbox from "@/components/image-lightbox"
 
 interface ToyotaShowcaseProps {
   categoryLabel: string
@@ -13,6 +14,15 @@ interface ToyotaShowcaseProps {
 
 export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: ToyotaShowcaseProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
+  const handlePrevious = () => {
+    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const handleNext = () => {
+    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
 
   return (
     <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24">
@@ -61,15 +71,24 @@ export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: 
 
       {/* Main Display Area */}
       <div className="mb-6">
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black/20">
+        <button
+          onClick={() => setLightboxOpen(true)}
+          className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black/20 cursor-zoom-in group"
+        >
           <Image
             src={images[selectedIndex]}
             alt={`Toyota Supra - Image ${selectedIndex + 1}`}
             fill
-            className="object-cover transition-opacity duration-500"
+            className="object-cover transition-all duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 90vw"
             priority
           />
+          {/* Click hint overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm text-xs tracking-wider" style={{ fontFamily: "var(--font-chillax), sans-serif", color: "rgba(255,255,255,0.9)" }}>
+              Click to enlarge
+            </span>
+          </div>
           {/* Image counter */}
           <div 
             className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"
@@ -83,8 +102,20 @@ export default function ToyotaShowcase({ categoryLabel, categorySlug, images }: 
           >
             {selectedIndex + 1} / {images.length}
           </div>
-        </div>
+        </button>
       </div>
+
+      {/* Lightbox */}
+      <ImageLightbox
+        isOpen={lightboxOpen}
+        imageUrl={images[selectedIndex]}
+        alt={`Toyota Supra - Image ${selectedIndex + 1}`}
+        onClose={() => setLightboxOpen(false)}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        hasPrevious={images.length > 1}
+        hasNext={images.length > 1}
+      />
 
       {/* Thumbnail Gallery */}
       <div className="mb-16">
