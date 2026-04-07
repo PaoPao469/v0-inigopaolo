@@ -13,15 +13,22 @@ interface FerrariShowcaseProps {
 }
 
 export default function FerrariShowcase({ categoryLabel, categorySlug, images }: FerrariShowcaseProps) {
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
 
+  const handleImageClick = (index: number) => {
+    setSelectedIndex(index)
+    setLightboxOpen(true)
+  }
+
   const handlePrevious = () => {
-    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+    if (selectedIndex === null) return
+    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : (prev ?? 0) - 1))
   }
 
   const handleNext = () => {
-    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+    if (selectedIndex === null) return
+    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : (prev ?? 0) + 1))
   }
 
   return (
@@ -29,7 +36,7 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
       <BackButton href={`/photography/${categorySlug}`} label={categoryLabel} />
 
       {/* Page Header */}
-      <header className="mb-8">
+      <header className="mb-12">
         <p
           className="mb-2"
           style={{
@@ -69,113 +76,42 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
         </p>
       </header>
 
-      {/* Main Display Area */}
-      <div className="mb-6">
-        <button
-          onClick={() => setLightboxOpen(true)}
-          className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black/20 cursor-zoom-in group"
-        >
-          <Image
-            src={images[selectedIndex]}
-            alt={`Ferrari - Image ${selectedIndex + 1}`}
-            fill
-            className="object-cover transition-all duration-500 group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 100vw, 90vw"
-            priority
-          />
-
-          {/* Image counter */}
-          <div 
-            className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 400,
-              fontSize: "12px",
-              letterSpacing: "0.1em",
-              color: "rgba(255, 255, 255, 0.8)",
-            }}
+      {/* Masonry Grid Gallery */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-4 mb-16">
+        {images.map((image, index) => (
+          <button
+            key={index}
+            onClick={() => handleImageClick(index)}
+            className="relative w-full mb-4 overflow-hidden rounded-lg cursor-zoom-in group block break-inside-avoid"
           >
-            {selectedIndex + 1} / {images.length}
-          </div>
-        </button>
+            <Image
+              src={image}
+              alt={`Ferrari 488 Pista - Image ${index + 1}`}
+              width={800}
+              height={600}
+              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          </button>
+        ))}
       </div>
 
       {/* Lightbox */}
-      <ImageLightbox
-        isOpen={lightboxOpen}
-        imageUrl={images[selectedIndex]}
-        alt={`Ferrari - Image ${selectedIndex + 1}`}
-        onClose={() => setLightboxOpen(false)}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        hasPrevious={images.length > 1}
-        hasNext={images.length > 1}
-      />
-
-      {/* Thumbnail Gallery */}
-      <div className="mb-16">
-        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => setSelectedIndex(index)}
-              className={`relative flex-shrink-0 w-24 h-16 md:w-32 md:h-20 lg:w-40 lg:h-24 overflow-hidden rounded-md transition-all duration-300 ${
-                selectedIndex === index 
-                  ? "ring-2 ring-[rgba(180,160,120,0.8)] ring-offset-2 ring-offset-black opacity-100" 
-                  : "opacity-50 hover:opacity-80"
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`Ferrari thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="160px"
-              />
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Navigation Arrows for Main Image */}
-      <div className="flex justify-center gap-4 mb-16">
-        <button
-          onClick={handlePrevious}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(180,160,120,0.5)] hover:bg-[rgba(180,160,120,0.05)] transition-all duration-300"
-          style={{
-            fontFamily: "var(--font-chillax), sans-serif",
-            fontWeight: 400,
-            fontSize: "12px",
-            letterSpacing: "0.15em",
-            color: "rgba(180, 175, 165, 0.8)",
+      {selectedIndex !== null && (
+        <ImageLightbox
+          isOpen={lightboxOpen}
+          imageUrl={images[selectedIndex]}
+          alt={`Ferrari 488 Pista - Image ${selectedIndex + 1}`}
+          onClose={() => {
+            setLightboxOpen(false)
+            setSelectedIndex(null)
           }}
-        >
-          <span className="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            PREV
-          </span>
-        </button>
-        <button
-          onClick={handleNext}
-          className="px-6 py-3 rounded-full border border-white/20 hover:border-[rgba(180,160,120,0.5)] hover:bg-[rgba(180,160,120,0.05)] transition-all duration-300"
-          style={{
-            fontFamily: "var(--font-chillax), sans-serif",
-            fontWeight: 400,
-            fontSize: "12px",
-            letterSpacing: "0.15em",
-            color: "rgba(180, 175, 165, 0.8)",
-          }}
-        >
-          <span className="flex items-center gap-2">
-            NEXT
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </span>
-        </button>
-      </div>
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          hasPrevious={images.length > 1}
+          hasNext={images.length > 1}
+        />
+      )}
 
       {/* Bottom Navigation */}
       <div className="pt-8 border-t border-white/10 flex justify-between items-center">
