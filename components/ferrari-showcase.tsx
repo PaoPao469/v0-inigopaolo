@@ -76,36 +76,24 @@ export default function FerrariShowcase({ categoryLabel, categorySlug, images }:
         </p>
       </header>
 
-      {/* Mosaic Grid Gallery */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 auto-rows-[200px] md:auto-rows-[180px]">
-        {images.map((image, index) => {
-          // Define varied spans for mosaic effect
-          const patterns = [
-            "md:col-span-1 md:row-span-2", // tall
-            "md:col-span-1 md:row-span-1", // small
-            "md:col-span-1 md:row-span-1", // small
-            "md:col-span-2 md:row-span-2", // large landscape
-            "md:col-span-1 md:row-span-2", // tall
-            "md:col-span-1 md:row-span-1", // small
-          ]
-          const pattern = patterns[index % patterns.length]
-          
-          return (
-            <button
-              key={index}
-              onClick={() => handleImageClick(index)}
-              className={`relative overflow-hidden rounded-lg cursor-zoom-in group ${pattern}`}
-            >
-              <Image
-                src={image}
-                alt={`Ferrari 488 Pista - Image ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-            </button>
-          )
-        })}
+      {/* Masonry Grid Gallery */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4 mb-16">
+        {images.map((image, index) => (
+          <button
+            key={index}
+            onClick={() => handleImageClick(index)}
+            className="relative w-full overflow-hidden rounded-lg cursor-zoom-in group block"
+          >
+            <Image
+              src={image}
+              alt={`Ferrari 488 Pista - Image ${index + 1}`}
+              width={800}
+              height={600}
+              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          </button>
+        ))}
       </div>
 
       {/* Lightbox */}
