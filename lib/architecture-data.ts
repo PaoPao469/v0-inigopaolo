@@ -68,6 +68,7 @@ export const portfolioData = {
         imageSections: [
           {
             label: "Clay Model",
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/clay%20model-ACVwfGgoKX9EJcp9Wp2lfHVI85Qi64.jpg",
             ],
@@ -85,6 +86,7 @@ export const portfolioData = {
           },
           {
             label: "Minecraft Render",
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/house-RDLsUrBoz9hYmlANOYqgFsdNYDLyV4.png",
             ],

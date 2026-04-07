@@ -236,10 +236,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             )}
           </div>
         ) : isSingleImage ? (
-          /* Single image - full prominence */
+          /* Single image - full prominence, full width when preserveAspect is true */
           <button 
             onClick={() => openLightbox(section.images[0])} 
-            className="group relative w-full max-w-4xl mx-auto overflow-hidden cursor-zoom-in focus:outline-none"
+            className={`group relative w-full overflow-hidden cursor-zoom-in focus:outline-none ${preserveAspect ? "" : "max-w-4xl mx-auto"}`}
           >
             <div className={`relative ${preserveAspect ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[16/9]"}`}>
               <Image 
