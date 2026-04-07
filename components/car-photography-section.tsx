@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import BackButton from "@/components/back-button"
 import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 
 interface Subsection {
   id: string
@@ -26,12 +26,19 @@ interface CarPhotographySectionProps {
 function CarGalleryCard({ 
   subsection, 
   categorySlug, 
-  index 
+  index,
+  onSelect,
+  isSelected,
+  isOtherSelected
 }: { 
   subsection: Subsection
   categorySlug: string
-  index: number 
+  index: number
+  onSelect: (id: string) => void
+  isSelected: boolean
+  isOtherSelected: boolean
 }) {
+  const router = useRouter()
   const cardRef = useRef<HTMLAnchorElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -73,28 +80,59 @@ function CarGalleryCard({
     setMousePosition({ x: 0, y: 0 })
   }
 
-  // Calculate transform based on mouse position
-  const transform = isHovered
-    ? `perspective(1000px) rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg) scale(1.03)`
-    : "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)"
+  // Handle card selection with animation before navigation
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    onSelect(subsection.id)
+    
+    // Navigate after animation completes
+    setTimeout(() => {
+      router.push(`/photography/${categorySlug}/${subsection.id}`)
+    }, 600)
+  }
+
+  // Calculate transform based on mouse position and selection state
+  const getTransform = () => {
+    if (isSelected) {
+      return "perspective(1000px) scale(1.08) translateY(-10px)"
+    }
+    if (isOtherSelected) {
+      return "perspective(1000px) scale(0.95) translateY(10px)"
+    }
+    if (isHovered) {
+      return `perspective(1000px) rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg) scale(1.03)`
+    }
+    return "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)"
+  }
+
+  // Calculate opacity based on selection state
+  const getOpacity = () => {
+    if (!isVisible) return 0
+    if (isSelected) return 1
+    if (isOtherSelected) return 0.3
+    return 1
+  }
 
   return (
-    <Link
-      ref={cardRef}
-      href={`/photography/${categorySlug}/${subsection.id}`}
-      className="group block"
-      onMouseMove={handleMouseMove}
+    <button
+      ref={cardRef as React.RefObject<HTMLButtonElement>}
+      onClick={handleClick}
+      className="group block text-left w-full"
+      onMouseMove={handleMouseMove as unknown as React.MouseEventHandler<HTMLButtonElement>}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        opacity: isVisible ? 1 : 0,
+        opacity: getOpacity(),
         transform: isVisible
-          ? transform
+          ? getTransform()
           : "translateY(80px) scale(0.92) rotateX(10deg)",
-        transition: isHovered
+        transition: isSelected || isOtherSelected
+          ? "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out"
+          : isHovered
           ? "transform 0.12s ease-out, opacity 0.6s ease-out"
           : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out",
         transformStyle: "preserve-3d",
+        filter: isOtherSelected ? "blur(2px)" : "none",
       }}
     >
       {/* Thumbnail Container */}
@@ -260,70 +298,90 @@ function CarGalleryCard({
       >
         {subsection.images.length} images
       </p>
-    </Link>
+    </button>
   )
 }
 
 export default function CarPhotographySection({ category }: CarPhotographySectionProps) {
   const [headerVisible, setHeaderVisible] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   useEffect(() => {
     // Trigger header animation on mount
     setTimeout(() => setHeaderVisible(true), 100)
   }, [])
 
+  const handleSelect = (id: string) => {
+    setSelectedId(id)
+  }
+
   return (
-    <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24">
-      <BackButton href="/photography" label="Photography" />
-
-      {/* Page Header with fade-in animation */}
-      <header 
-        className="mb-16"
+    <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24 relative">
+      {/* Black overlay that fades in when a project is selected */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
         style={{
-          opacity: headerVisible ? 1 : 0,
-          transform: headerVisible ? "translateY(0)" : "translateY(-30px)",
-          transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
+          backgroundColor: "#000000",
+          opacity: selectedId ? 1 : 0,
+          transition: "opacity 0.5s ease-out",
         }}
-      >
-        <h1
-          className="mb-4"
-          style={{
-            fontFamily: "var(--font-chillax), sans-serif",
-            fontWeight: 500,
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
-            letterSpacing: "0.12em",
-            color: "rgba(180, 175, 165, 0.82)",
-            textTransform: "uppercase",
-          }}
-        >
-          {category.label}
-        </h1>
-        <p
-          style={{
-            fontFamily: "var(--font-figtree), sans-serif",
-            fontWeight: 400,
-            fontSize: "14px",
-            color: "rgba(180, 175, 165, 0.6)",
-            maxWidth: "500px",
-            lineHeight: 1.7,
-            opacity: headerVisible ? 1 : 0,
-            transition: "opacity 0.8s ease-out 0.3s",
-          }}
-        >
-          {category.description}
-        </p>
-      </header>
+      />
 
-      {/* Clickable Thumbnails Grid - 3 columns on desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {category.subsections.map((subsection, index) => (
-          <CarGalleryCard
-            key={subsection.id}
-            subsection={subsection}
-            categorySlug={category.slug}
-            index={index}
-          />
-        ))}
+      <div className="relative z-10">
+        <BackButton href="/photography" label="Photography" />
+
+        {/* Page Header with fade-in animation */}
+        <header 
+          className="mb-16"
+          style={{
+            opacity: selectedId ? 0 : headerVisible ? 1 : 0,
+            transform: selectedId ? "translateY(-20px)" : headerVisible ? "translateY(0)" : "translateY(-30px)",
+            transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+          }}
+        >
+          <h1
+            className="mb-4"
+            style={{
+              fontFamily: "var(--font-chillax), sans-serif",
+              fontWeight: 500,
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              letterSpacing: "0.12em",
+              color: "rgba(180, 175, 165, 0.82)",
+              textTransform: "uppercase",
+            }}
+          >
+            {category.label}
+          </h1>
+          <p
+            style={{
+              fontFamily: "var(--font-figtree), sans-serif",
+              fontWeight: 400,
+              fontSize: "14px",
+              color: "rgba(180, 175, 165, 0.6)",
+              maxWidth: "500px",
+              lineHeight: 1.7,
+              opacity: headerVisible ? 1 : 0,
+              transition: "opacity 0.8s ease-out 0.3s",
+            }}
+          >
+            {category.description}
+          </p>
+        </header>
+
+        {/* Clickable Thumbnails Grid - 3 columns on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {category.subsections.map((subsection, index) => (
+            <CarGalleryCard
+              key={subsection.id}
+              subsection={subsection}
+              categorySlug={category.slug}
+              index={index}
+              onSelect={handleSelect}
+              isSelected={selectedId === subsection.id}
+              isOtherSelected={selectedId !== null && selectedId !== subsection.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
