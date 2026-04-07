@@ -24,8 +24,8 @@ export const projectColorThemes: Record<string, { primary: string; secondary: st
     secondary: 'rgba(155, 180, 160, 0.8)',   // muted olive
     accent: 'rgba(140, 165, 145, 0.7)',      // moss
   },
-  // Community Hub - warm welcoming amber
-  'community-hub': {
+  // Sky Bridge - warm welcoming amber
+  'sky-bridge': {
     primary: 'rgba(215, 190, 155, 0.95)',    // warm amber
     secondary: 'rgba(195, 175, 145, 0.8)',   // golden beige
     accent: 'rgba(180, 160, 130, 0.7)',      // caramel
@@ -201,11 +201,11 @@ export const portfolioData = {
         ],
       },
       {
-        id: "community-hub",
-        category: "PUBLIC",
-        title: "COMMUNITY",
-        titleAccent: "HUB",
-        description: "Project Description\n\nA civic building designed to serve as a gathering point for the local community. The architecture emphasizes transparency, accessibility, and flexibility to accommodate diverse activities and events.\n\nThought Process\n\nFostering social connections and community engagement through open, adaptable spaces.",
+        id: "sky-bridge",
+        category: "URBAN CONNECTOR STUDY",
+        title: "SKY",
+        titleAccent: "BRIDGE",
+        description: "Project Description\n\nAn architectural intervention designed to connect two buildings through an elevated bridge structure. The project explores how circulation, structure, and enclosure can be integrated to create a functional yet expressive space within a dense urban environment.\n\nThought Process\n\nThe design focused on transforming a simple bridge into an engaging spatial experience. By introducing layered surfaces and vertical elements, the structure enhances movement while creating moments of light, shadow, and visual connection. The goal was to balance functionality with atmosphere, turning circulation into an architectural feature rather than just a passage.",
         thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
