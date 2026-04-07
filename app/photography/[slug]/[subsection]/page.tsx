@@ -5,6 +5,7 @@ import SubsectionGallery from "@/components/subsection-gallery"
 import FerrariShowcase from "@/components/ferrari-showcase"
 import ShelbyShowcase from "@/components/shelby-showcase"
 import ToyotaShowcase from "@/components/toyota-showcase"
+import BrabusShowcase from "@/components/brabus-showcase"
 import { getAllPhotographySlugs, getPhotographyCategory, getSubsection, hasSubsections } from "@/lib/photography-data"
 
 export async function generateStaticParams() {
@@ -48,10 +49,11 @@ export default async function SubsectionPage({ params }: { params: Promise<{ slu
     notFound()
   }
 
-  // Use dedicated showcase components for Ferrari, Shelby, and Toyota
+  // Use dedicated showcase components for Ferrari, Shelby, Toyota, and Brabus
   const isFerrari = subsectionId === "ferrari"
   const isShelby = subsectionId === "shelby"
   const isToyota = subsectionId === "toyota"
+  const isBrabus = subsectionId === "brabus"
 
   return (
     <>
@@ -71,6 +73,12 @@ export default async function SubsectionPage({ params }: { params: Promise<{ slu
           />
         ) : isToyota ? (
           <ToyotaShowcase
+            categoryLabel={category.label}
+            categorySlug={slug}
+            images={subsection.images}
+          />
+        ) : isBrabus ? (
+          <BrabusShowcase
             categoryLabel={category.label}
             categorySlug={slug}
             images={subsection.images}
