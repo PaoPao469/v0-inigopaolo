@@ -249,11 +249,49 @@ export const portfolioData = {
         title: "ELEMENTAL",
         titleAccent: "PAVILIONS",
         description: "Project Description\n\nA series of pavilions designed within a natural landscape, responding to site conditions, circulation patterns, and user interaction. The project integrates programmatic elements such as a ranger station and restroom facilities with spaces for observation and nature engagement.\n\nThought Process\n\nThe design was driven by the intention to blend architecture with the surrounding environment. Forms were developed to feel organic and continuous with the landscape, guiding movement while minimizing visual disruption. Program placement was informed by accessibility and privacy, creating a balance between public use and quiet interaction with nature.",
-        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-        images: [
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rhino%20Project.png-jNU56elsezwSUzWM9gwcP2H6ku3bZq.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%201.png-Cq2oOdEFNtCXLlhI3NYz9d1WyfsQ4d.jpeg",
-          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/project%202.png-Nrnh2KD5R14zxwftxOj318BRF4PtN0.jpeg",
+        thumbnail: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render.png-hHGSjQ6PYE6xFlpuPz9hqF8IG981sf.jpeg",
+        images: [],
+        imageSections: [
+          {
+            label: "Render",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render.png-hHGSjQ6PYE6xFlpuPz9hqF8IG981sf.jpeg",
+            ],
+          },
+          {
+            label: "Model Photos",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-LiQ8kHnajB53bYhmaOhHhzEyajV4TF.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-WyqD6E8DOa7CUXOJe9vdQ8GSDn6qUi.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-PRAM9xD22oPtl1nyGG0VF3ZYzh8nSq.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-tpAEc5te1eZVLYEIAmH8JsqJ6UyGPk.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-qGh2JsidmGVknHoDIfziQUbeixcZrf.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-x3pmIElhydILIHdArlUqbG0z5NoKZS.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-IaBGPqAP4AKmg6ATAWOtLrJ6VDz2jj.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-gZKhHoF04TcUmDQNqlCKrMlpM66VrQ.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9-8LG6ivoxXgOPGsPFTJCbIa6uj8hE5z.jpg",
+            ],
+          },
+          {
+            label: "Rhino Model",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%201-eTdhedtQPzSA6ufc9zlHC25eMwR2kL.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%202-kHDeR6WAomNzdKWM7n0z1SArWxlgqM.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%203-hCLyWdVLdbIiHxvkRg6BKKu2UR8eJv.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%204-sK4OGGRjtT5zAAyUURFKyWWbwdzRAK.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rhino%205-FvkD1uTFnOrPKqjbskyWkU2dsow6qk.png",
+            ],
+          },
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201.png-acWcs0rRz699lV8vkGtomiqMFEGMAU.jpeg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202.png-YeIYmc5LS0OcZfX6Mf39R1JA7D1EQY.jpeg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203.png-tMHjU0cBUB00ZdEgR2hxVygXpDifCj.jpeg",
+            ],
+          },
         ],
       },
     ],
