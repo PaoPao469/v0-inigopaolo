@@ -253,7 +253,6 @@ export default function ClothingBrandDetail({ brand }: ClothingBrandDetailProps)
           }}
         >
           <h1
-            className="mb-4"
             style={{
               fontFamily: "var(--font-chillax), sans-serif",
               fontWeight: 500,
@@ -265,18 +264,6 @@ export default function ClothingBrandDetail({ brand }: ClothingBrandDetailProps)
           >
             {brand.label}
           </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-figtree), sans-serif",
-              fontWeight: 400,
-              fontSize: "14px",
-              color: "rgba(200, 205, 215, 0.6)",
-              maxWidth: "500px",
-              lineHeight: 1.7,
-            }}
-          >
-            {brand.description}
-          </p>
         </header>
 
         {/* Section Thumbnails Grid */}

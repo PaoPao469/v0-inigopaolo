@@ -310,7 +310,6 @@ export default function ClothingPortfolio() {
           }}
         >
           <h1
-            className="mb-4"
             style={{
               fontFamily: "var(--font-chillax), sans-serif",
               fontWeight: 500,
@@ -322,20 +321,6 @@ export default function ClothingPortfolio() {
           >
             Clothing
           </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-figtree), sans-serif",
-              fontWeight: 400,
-              fontSize: "14px",
-              color: "rgba(180, 175, 165, 0.6)",
-              maxWidth: "500px",
-              lineHeight: 1.7,
-              opacity: headerVisible ? 1 : 0,
-              transition: "opacity 0.8s ease-out 0.3s",
-            }}
-          >
-            Original clothing brand concepts featuring unique designs, branding, and fashion pieces.
-          </p>
         </header>
 
         {/* Single Brand Thumbnail - Centered */}
