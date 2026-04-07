@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { getYearForProject, getProjectColorTheme } from "@/lib/architecture-data"
+import { getProjectColorTheme } from "@/lib/architecture-data"
 import ImageLightbox from "./image-lightbox"
 
 interface ImageSection {
@@ -31,9 +31,8 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
-  const yearInfo = getYearForProject(project.id)
-  const backHref = yearInfo ? `/architecture/${yearInfo.slug}` : "/architecture"
-  const backLabel = yearInfo ? `BACK TO ${yearInfo.label}` : "BACK TO COLLECTIONS"
+  const backHref = "/architecture"
+  const backLabel = "BACK TO PROJECTS"
 
   // Get project-specific color theme
   const colorTheme = getProjectColorTheme(project.id)

@@ -2,62 +2,62 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { portfolioData } from "@/lib/architecture-data"
+import { getAllProjects } from "@/lib/architecture-data"
 
-// Year thumbnail card for main architecture page
-interface YearCardProps {
-  slug: string
-  label: string
+interface Project {
+  id: string
+  category: string
+  title: string
+  titleAccent: string
+  description: string
   thumbnail: string
-  projectCount: number
+  images: string[]
 }
 
-function YearCard({ slug, label, thumbnail, projectCount }: YearCardProps) {
+function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
-      href={`/architecture/${slug}`}
-      className="group block relative overflow-hidden"
+      href={`/architecture/${project.id}`}
+      className="group block"
     >
-      <div className="relative aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden mb-4">
         <Image
-          src={thumbnail}
-          alt={label}
+          src={project.thumbnail}
+          alt={`${project.title} ${project.titleAccent}`}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
-        
-        {/* Content overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-          <h2
-            className="text-2xl md:text-3xl lg:text-4xl mb-3 transition-transform duration-300 group-hover:scale-105"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              color: "rgba(255, 255, 255, 0.95)",
-            }}
-          >
-            {label}
-          </h2>
-          <p
-            className="text-xs tracking-[0.2em]"
-            style={{
-              fontFamily: "var(--font-chillax), sans-serif",
-              color: "rgba(200, 205, 215, 0.9)",
-            }}
-          >
-            {projectCount} {projectCount === 1 ? "PROJECT" : "PROJECTS"}
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
       </div>
+      
+      <span
+        className="text-[10px] tracking-[0.2em] block mb-2"
+        style={{
+          fontFamily: "var(--font-chillax), sans-serif",
+          color: "rgba(200, 205, 215, 0.8)",
+        }}
+      >
+        {project.category}
+      </span>
+      
+      <h3
+        className="text-lg md:text-xl transition-colors group-hover:text-white"
+        style={{
+          fontFamily: "var(--font-chillax), sans-serif",
+          fontWeight: 500,
+          color: "rgba(255, 255, 255, 0.85)",
+          letterSpacing: "0.03em",
+        }}
+      >
+        {project.title}{" "}
+        <span style={{ fontWeight: 400, opacity: 0.6 }}>{project.titleAccent}</span>
+      </h3>
     </Link>
   )
 }
 
 export default function ArchitecturePortfolio() {
-  const years = Object.values(portfolioData)
+  const allProjects = getAllProjects()
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -81,20 +81,14 @@ export default function ArchitecturePortfolio() {
             color: "rgba(200, 205, 215, 0.45)",
           }}
         >
-          SELECT A COLLECTION
+          {allProjects.length} PROJECTS
         </p>
       </div>
 
-      {/* Year Thumbnails Grid - Only 3 cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        {years.map((year) => (
-          <YearCard
-            key={year.slug}
-            slug={year.slug}
-            label={year.label}
-            thumbnail={year.thumbnail}
-            projectCount={year.projects.length}
-          />
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        {allProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </div>
