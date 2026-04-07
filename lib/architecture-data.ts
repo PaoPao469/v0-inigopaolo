@@ -145,7 +145,7 @@ export const portfolioData = {
         images: [],
         imageSections: [
           {
-            label: "Drawings",
+            label: "Track Layout",
             isHeroFirst: true,
             preserveHeroAspect: true,
             images: [
@@ -155,9 +155,9 @@ export const portfolioData = {
           {
             label: "Model Photos",
             images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-sQjujWokboPzpRJ6MP6YG7lkOkzkUR.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-B3L5RVjxDvIvQM70hn6rm397NBP9NB.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-vdKWzsveVYaN7sr8tyQCFRQhrtCUEo.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-B3L5RVjxDvIvQM70hn6rm397NBP9NB.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-sQjujWokboPzpRJ6MP6YG7lkOkzkUR.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-JO342LFkpL7dhNyzk6nUzJr7Diere5.jpg",
             ],
           },
@@ -169,7 +169,7 @@ export const portfolioData = {
             ],
           },
           {
-            label: "Sections and Diagrams",
+            label: "Drawings and Diagrams",
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sections-L9j55XiID9qOUr2CeBKbV8brTZg23Q.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
