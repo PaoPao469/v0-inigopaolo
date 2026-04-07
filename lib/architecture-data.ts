@@ -197,15 +197,31 @@ export const portfolioData = {
         images: [],
         imageSections: [
           {
-            label: "Rhino Model Views",
-            isMosaic: true,
+            label: "Main View",
+            isHeroFirst: true,
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-x3zl3qxfsy01IgWxRM3nSAoB9zWbin.png",
+            ],
+          },
+          {
+            label: "Exterior Views",
+            images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-uFtlONEaqUB6tD90HmIbWB2IUfDz3m.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.2-Tq9JsrSTgsi4XWlZJarkexyvIThLWd.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-jaVshepvw8mrfk0Ubz8CKY3r8Y4byC.png",
+            ],
+          },
+          {
+            label: "Plan Views",
+            images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-gEvn5oaMnEutHFydAXD5o2oK6GTfkS.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-wHYAM7HWO5QlDSzsw1lSa5UmqfCkHj.png",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-jaVshepvw8mrfk0Ubz8CKY3r8Y4byC.png",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.2-Tq9JsrSTgsi4XWlZJarkexyvIThLWd.png",
+            ],
+          },
+          {
+            label: "Interior Views",
+            images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-Kcu9fBTQhIc5PPpkJ8QMZcp7tH5kiy.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-EJUDOGHNOUXm3yOCJa8PuKKmzVZDgR.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-pb0pkicmDN2JgSW9vCkI7lpfD3pipm.png",
