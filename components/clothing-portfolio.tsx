@@ -252,21 +252,6 @@ function BrandCard({
           }}
         />
       </div>
-
-      {/* Description */}
-      <p
-        className="mt-2 text-center"
-        style={{
-          fontFamily: "var(--font-figtree), sans-serif",
-          fontWeight: 400,
-          fontSize: "13px",
-          color: isHovered ? "rgba(180, 175, 165, 0.7)" : "rgba(180, 175, 165, 0.5)",
-          lineHeight: 1.6,
-          transition: "color 0.3s ease-out",
-        }}
-      >
-        {brand.description}
-      </p>
     </button>
   )
 }

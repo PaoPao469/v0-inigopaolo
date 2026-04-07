@@ -230,16 +230,6 @@ export default function ClothingBrandDetail({ brand }: ClothingBrandDetailProps)
 
   return (
     <div className="min-h-screen px-6 py-24 md:px-12 lg:px-24 relative">
-      {/* Black overlay that fades in when a section is selected */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          backgroundColor: "#000000",
-          opacity: selectedId ? 1 : 0,
-          transition: "opacity 0.5s ease-out",
-        }}
-      />
-
       <div className="relative z-10">
         <BackButton href="/clothing" label="Clothing" />
 
