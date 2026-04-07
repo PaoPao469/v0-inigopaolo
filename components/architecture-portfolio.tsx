@@ -45,7 +45,7 @@ function YearCard({ slug, label, thumbnail, projectCount }: YearCardProps) {
             className="text-xs tracking-[0.2em]"
             style={{
               fontFamily: "var(--font-chillax), sans-serif",
-              color: "rgba(180, 160, 120, 0.9)",
+              color: "rgba(200, 205, 215, 0.9)",
             }}
           >
             {projectCount} {projectCount === 1 ? "PROJECT" : "PROJECTS"}
@@ -78,7 +78,7 @@ export default function ArchitecturePortfolio() {
           className="text-xs tracking-[0.25em]"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 175, 165, 0.45)",
+            color: "rgba(200, 205, 215, 0.45)",
           }}
         >
           SELECT A COLLECTION

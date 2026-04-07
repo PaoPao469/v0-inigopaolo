@@ -30,7 +30,7 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
             fontWeight: 400,
             fontSize: "12px",
             letterSpacing: "0.15em",
-            color: "rgba(180, 160, 120, 0.7)",
+            color: "rgba(200, 205, 215, 0.7)",
             textTransform: "uppercase",
           }}
         >
@@ -42,7 +42,7 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
             fontWeight: 500,
             fontSize: "clamp(2rem, 5vw, 3.5rem)",
             letterSpacing: "0.12em",
-            color: "rgba(180, 175, 165, 0.82)",
+            color: "rgba(255, 255, 255, 0.9)",
             textTransform: "uppercase",
           }}
         >
@@ -86,7 +86,7 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
           className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.8)",
+            color: "rgba(200, 205, 215, 0.8)",
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -100,7 +100,7 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
           className="text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 175, 165, 0.6)",
+            color: "rgba(200, 205, 215, 0.6)",
           }}
         >
           ALL PHOTOGRAPHY

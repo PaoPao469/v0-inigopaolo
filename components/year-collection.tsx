@@ -44,7 +44,7 @@ function ProjectCard({ project }: { project: Project }) {
         className="text-[10px] tracking-[0.2em] block mb-2"
         style={{
           fontFamily: "var(--font-chillax), sans-serif",
-          color: "rgba(180, 160, 120, 0.8)",
+          color: "rgba(200, 205, 215, 0.8)",
         }}
       >
         {project.category}
@@ -76,7 +76,7 @@ export default function YearCollection({ yearData }: YearCollectionProps) {
           className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.8)",
+            color: "rgba(200, 205, 215, 0.8)",
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -103,7 +103,7 @@ export default function YearCollection({ yearData }: YearCollectionProps) {
           className="text-xs tracking-[0.25em]"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 175, 165, 0.45)",
+            color: "rgba(200, 205, 215, 0.45)",
           }}
         >
           {yearData.projects.length} {yearData.projects.length === 1 ? "PROJECT" : "PROJECTS"}
@@ -124,7 +124,7 @@ export default function YearCollection({ yearData }: YearCollectionProps) {
           className="inline-flex items-center gap-2 text-xs tracking-[0.15em] transition-opacity hover:opacity-70"
           style={{
             fontFamily: "var(--font-chillax), sans-serif",
-            color: "rgba(180, 160, 120, 0.8)",
+            color: "rgba(200, 205, 215, 0.8)",
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

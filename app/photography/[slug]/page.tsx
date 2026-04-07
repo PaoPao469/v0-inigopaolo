@@ -36,7 +36,7 @@ export default async function PhotographyCategoryPage({ params }: { params: Prom
   return (
     <>
       <SlimeCursor />
-      <SectionLayout>
+      <SectionLayout plainBackground>
         {isCarPhotography ? (
           <CarPhotographySection category={category as typeof category & { subsections: Array<{ id: string; title: string; images: string[] }> }} />
         ) : (

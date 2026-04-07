@@ -56,7 +56,7 @@ export default async function SubsectionPage({ params }: { params: Promise<{ slu
   return (
     <>
       <SlimeCursor />
-      <SectionLayout>
+      <SectionLayout plainBackground>
         {isFerrari ? (
           <FerrariShowcase
             categoryLabel={category.label}

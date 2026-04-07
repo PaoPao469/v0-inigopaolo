@@ -1,3 +1,55 @@
+// Project color themes derived from each project's photo palette
+export const projectColorThemes: Record<string, { primary: string; secondary: string; accent: string }> = {
+  // Seaside House - warm sandy beige tones from the coastal setting
+  'seaside-house': {
+    primary: 'rgba(210, 195, 170, 0.95)',    // warm sand
+    secondary: 'rgba(190, 175, 155, 0.8)',   // muted beige
+    accent: 'rgba(180, 165, 140, 0.7)',      // soft tan
+  },
+  // The Exhibit - cool gray tones from the minimalist cube renders
+  'the-exhibit': {
+    primary: 'rgba(180, 190, 200, 0.95)',    // cool steel gray
+    secondary: 'rgba(160, 170, 185, 0.8)',   // slate blue-gray
+    accent: 'rgba(145, 155, 170, 0.7)',      // muted blue
+  },
+  // Marina Vista Raceway - vibrant warm tones from the dancer image
+  'marina-vista-raceway': {
+    primary: 'rgba(220, 180, 160, 0.95)',    // warm coral
+    secondary: 'rgba(200, 165, 145, 0.8)',   // dusty rose
+    accent: 'rgba(185, 150, 130, 0.7)',      // terracotta
+  },
+  // Vertical Landscapes - organic green tones
+  'vertical-landscapes': {
+    primary: 'rgba(170, 195, 175, 0.95)',    // sage green
+    secondary: 'rgba(155, 180, 160, 0.8)',   // muted olive
+    accent: 'rgba(140, 165, 145, 0.7)',      // moss
+  },
+  // Community Hub - warm welcoming amber
+  'community-hub': {
+    primary: 'rgba(215, 190, 155, 0.95)',    // warm amber
+    secondary: 'rgba(195, 175, 145, 0.8)',   // golden beige
+    accent: 'rgba(180, 160, 130, 0.7)',      // caramel
+  },
+  // Parametric Forms - futuristic purple-blue
+  'parametric-forms': {
+    primary: 'rgba(190, 180, 210, 0.95)',    // soft lavender
+    secondary: 'rgba(170, 165, 195, 0.8)',   // muted violet
+    accent: 'rgba(155, 150, 180, 0.7)',      // dusty purple
+  },
+}
+
+// Default color theme for projects without a specific theme
+export const defaultColorTheme = {
+  primary: 'rgba(200, 205, 215, 0.95)',
+  secondary: 'rgba(200, 205, 215, 0.8)',
+  accent: 'rgba(200, 205, 215, 0.7)',
+}
+
+// Helper to get color theme for a project
+export function getProjectColorTheme(projectId: string) {
+  return projectColorThemes[projectId] || defaultColorTheme
+}
+
 // Project data organized by year - shared between server and client
 export const portfolioData = {
   "year-1": {
@@ -15,9 +67,10 @@ export const portfolioData = {
         images: [],
         imageSections: [
           {
-            label: "Clay Model",
+            label: "Minecraft Render",
+            preserveHeroAspect: true,
             images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/clay%20model-ACVwfGgoKX9EJcp9Wp2lfHVI85Qi64.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/house-RDLsUrBoz9hYmlANOYqgFsdNYDLyV4.png",
             ],
           },
           {
@@ -32,9 +85,10 @@ export const portfolioData = {
             ],
           },
           {
-            label: "Minecraft Render",
+            label: "Clay Model",
+            preserveHeroAspect: true,
             images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/house-RDLsUrBoz9hYmlANOYqgFsdNYDLyV4.png",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/clay%20model-ACVwfGgoKX9EJcp9Wp2lfHVI85Qi64.jpg",
             ],
           },
         ],
@@ -49,16 +103,9 @@ export const portfolioData = {
         images: [],
         imageSections: [
           {
-            label: "Drawings",
-            images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-4S6XMQBDG5O3BXqHXWq11z2V9UQ2F4.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-H5bKdyATbyc9kX27kB9t6IchCI6Lme.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-FEwIiPRnFTnn2cDVdrYL4uZo7OTYo9.jpg",
-            ],
-          },
-          {
             label: "Rhino Renders",
             isHeroFirst: true,
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%201-NdiGixNSfVbgBI23WtoYCOUSFgOax6.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/render%202-KvTPQqQ0XS3730frk1RBCik1gzimT6.jpg",
@@ -67,9 +114,7 @@ export const portfolioData = {
           },
           {
             label: "Model Photos",
-            gridLayout: "hero-3x3",
             images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-Q0dKkVufsh0wjSQWOFui0FCqWMOInz.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-LzElRHotngL5SnyDF62TUzxZBNZG9p.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-OnKwG81sVp7hbkFLzoVMJSfGDNFm5r.jpg",
@@ -77,6 +122,15 @@ export const portfolioData = {
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-GKU9VGFQ85nS9X9ZDmEZFPUC3OV34v.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-VjNiVy9cu8T2dv9C7e1agmXTVfAPI2.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-rqXRrLfwbQeWjnqHNYEGqpLy3OrAfI.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-MMkZtx78DUn065S1MJV0nyFjCcwwza.jpg",
+            ],
+          },
+          {
+            label: "Drawings",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-FEwIiPRnFTnn2cDVdrYL4uZo7OTYo9.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-H5bKdyATbyc9kX27kB9t6IchCI6Lme.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-4S6XMQBDG5O3BXqHXWq11z2V9UQ2F4.jpg",
             ],
           },
         ],
@@ -91,26 +145,14 @@ export const portfolioData = {
         images: [],
         imageSections: [
           {
-            label: "Chosen Image",
-            images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
-            ],
-          },
-          {
             label: "Drawings",
             isHeroFirst: true,
+            preserveHeroAspect: true,
             images: [
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/main%20image-trdRozYQam0xLD6avW6jR6Y0LwkDAm.png",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%201-ogCSxBvSmQux0ttPT3ZW7KtJEpNzAQ.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%202-RvRKsEmFx6wDCTFQCyjEkh50RJ94xq.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/drawing%203-f0aNHOArAcqnCfFXHdEZzoDrqyNFzD.jpg",
-            ],
-          },
-          {
-            label: "Sections and Diagrams",
-            images: [
-              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sections-L9j55XiID9qOUr2CeBKbV8brTZg23Q.jpg",
             ],
           },
           {
@@ -120,6 +162,20 @@ export const portfolioData = {
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-B3L5RVjxDvIvQM70hn6rm397NBP9NB.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-vdKWzsveVYaN7sr8tyQCFRQhrtCUEo.jpg",
               "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-JO342LFkpL7dhNyzk6nUzJr7Diere5.jpg",
+            ],
+          },
+          {
+            label: "Chosen Image",
+            preserveHeroAspect: true,
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Chosen%20image-NMR2AeKoZ0BJTRUS7vfkr6SRhG701k.jpg",
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chosen%20image%202-VANOlWoxGZgpTVhCrVWLLAgNnVufqA.jpg",
+            ],
+          },
+          {
+            label: "Sections and Diagrams",
+            images: [
+              "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sections-L9j55XiID9qOUr2CeBKbV8brTZg23Q.jpg",
             ],
           },
         ],
