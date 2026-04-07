@@ -42,6 +42,7 @@ export const photographyData = {
         images: [
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4384-AXVJzOrPeCANoDpEEo0WupPaR6ML8j.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4352-2-EkCljfdEphyXNBZNkhZfjR5faA1gBk.jpg",
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4340-5-NPBueR6q902qnDIzmFlahy6a6HSrQZ.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4367-4-8S7mDGVQAILYY8532Pbsktzzeo7E0p.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4235-4-Xbh5GcluMT05iFyxn61XOYXnyBOJ6Z.jpg",
           "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC_4321-ucBD6Vo6b7tAefIPHEZVKSxc6qxs2X.jpg",
