@@ -68,45 +68,6 @@ export default function SectionLayout({ children, plainBackground = false }: Sec
                 background: "radial-gradient(ellipse at 30% 70%, rgba(10,14,18,0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(10,14,18,0.3) 0%, transparent 50%)",
               }}
             />
-
-            {/* Heavy fractal noise grain — matches main menu */}
-            <div
-              aria-hidden="true"
-              className="grain-overlay fixed inset-0 w-full h-full pointer-events-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "512px 512px",
-                opacity: 0.7,
-                mixBlendMode: "overlay",
-              }}
-            />
-
-            {/* Secondary grain layer — finer texture */}
-            <div
-              aria-hidden="true"
-              className="grain-overlay-secondary fixed inset-0 w-full h-full pointer-events-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='1'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "256px 256px",
-                opacity: 0.5,
-                mixBlendMode: "soft-light",
-              }}
-            />
-
-            {/* Speckle grain — particle highlights */}
-            <div
-              aria-hidden="true"
-              className="grain-speckle fixed inset-0 w-full h-full pointer-events-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='ns'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.0' numOctaves='4' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='discrete' tableValues='0 1'/%3E%3CfeFuncG type='discrete' tableValues='0 1'/%3E%3CfeFuncB type='discrete' tableValues='0 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ns)' opacity='0.6'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "200px 200px",
-                opacity: 0.22,
-                mixBlendMode: "color-dodge",
-              }}
-            />
           </>
         )}
 
