@@ -70,12 +70,9 @@ export default function SlimeCursor() {
           marginLeft: "-7px",
           marginTop: "-7px",
           borderRadius: "50%",
-          background: "radial-gradient(circle at 35% 35%, rgba(220, 215, 205, 0.95) 0%, rgba(180, 175, 165, 0.8) 50%, rgba(140, 135, 125, 0.7) 100%)",
-          boxShadow: "0 0 8px rgba(180, 175, 165, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2)",
+          backgroundColor: "rgba(200, 195, 185, 0.9)",
           opacity: isVisible ? 1 : 0,
-          transition: "opacity 0.15s ease",
           willChange: "transform",
-          contain: "layout style paint",
         }}
       />
     </>
