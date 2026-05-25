@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import { getAllProjects } from "@/lib/architecture-data"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState, memo } from "react"
 import { useRouter } from "next/navigation"
+import { useOptimizedCard } from "@/hooks/use-optimized-card"
 
 interface Project {
   id: string
@@ -15,7 +16,7 @@ interface Project {
   images: string[]
 }
 
-function ProjectCard({ 
+const ProjectCard = memo(function ProjectCard({ 
   project, 
   index,
   onSelect,
@@ -29,46 +30,15 @@ function ProjectCard({
   isOtherSelected: boolean
 }) {
   const router = useRouter()
-  const cardRef = useRef<HTMLButtonElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovered, setIsHovered] = useState(false)
-
-  // Intersection Observer for scroll-triggered animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Staggered delay based on index for cascade effect
-          setTimeout(() => {
-            setIsVisible(true)
-          }, index * 100)
-        }
-      },
-      { threshold: 0.1, rootMargin: "50px" }
-    )
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [index])
-
-  // Parallax tilt effect on mouse move
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    setMousePosition({ x, y })
-  }
-
-  const handleMouseEnter = () => setIsHovered(true)
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-    setMousePosition({ x: 0, y: 0 })
-  }
+  const {
+    cardRef,
+    isVisible,
+    isHovered,
+    mousePosition,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useOptimizedCard({ index, staggerDelay: 100 })
 
   // Handle card selection with animation before navigation
   const handleClick = () => {
@@ -276,7 +246,7 @@ function ProjectCard({
       </h3>
     </button>
   )
-}
+})
 
 export default function ArchitecturePortfolio() {
   const allProjects = getAllProjects()

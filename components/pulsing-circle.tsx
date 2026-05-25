@@ -1,7 +1,6 @@
 "use client"
 
 import { PulsingBorder } from "@paper-design/shaders-react"
-import { motion } from "framer-motion"
 
 export default function PulsingCircle() {
   return (
@@ -29,17 +28,14 @@ export default function PulsingCircle() {
           }}
         />
 
-        {/* Rotating Text Around the Pulsing Border */}
-        <motion.svg
-          className="absolute inset-0 w-full h-full"
+        {/* Rotating Text Around the Pulsing Border - using CSS animation for GPU performance */}
+        <svg
+          className="absolute inset-0 w-full h-full animate-spin-slow"
           viewBox="0 0 100 100"
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+          style={{ 
+            transform: "scale(1.6)",
+            willChange: "transform",
           }}
-          style={{ transform: "scale(1.6)" }}
         >
           <defs>
             <path id="circle" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
@@ -49,7 +45,7 @@ export default function PulsingCircle() {
               v0 is amazing • v0 is amazing • v0 is amazing • v0 is amazing •
             </textPath>
           </text>
-        </motion.svg>
+        </svg>
       </div>
     </div>
   )

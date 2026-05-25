@@ -156,51 +156,68 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-chillax);
 }
 
-/* Primary grain animation — fast, jittery shifts */
+/* Primary grain animation — using transform for GPU acceleration */
 @keyframes grain-shift {
-  0%   { background-position: 0% 0%; }
-  10%  { background-position: -5% -10%; }
-  20%  { background-position: -15% 5%; }
-  30%  { background-position: 7% -20%; }
-  40%  { background-position: -5% 25%; }
-  50%  { background-position: -15% 10%; }
-  60%  { background-position: 15% 0%; }
-  70%  { background-position: 0% 10%; }
-  80%  { background-position: 3% 35%; }
-  90%  { background-position: -10% 10%; }
-  100% { background-position: 0% 0%; }
+  0%   { transform: translate3d(0%, 0%, 0); }
+  10%  { transform: translate3d(-5%, -10%, 0); }
+  20%  { transform: translate3d(-15%, 5%, 0); }
+  30%  { transform: translate3d(7%, -20%, 0); }
+  40%  { transform: translate3d(-5%, 25%, 0); }
+  50%  { transform: translate3d(-15%, 10%, 0); }
+  60%  { transform: translate3d(15%, 0%, 0); }
+  70%  { transform: translate3d(0%, 10%, 0); }
+  80%  { transform: translate3d(3%, 35%, 0); }
+  90%  { transform: translate3d(-10%, 10%, 0); }
+  100% { transform: translate3d(0%, 0%, 0); }
 }
 
 /* Secondary grain animation — slower, offset pattern for depth */
 @keyframes grain-shift-alt {
-  0%   { background-position: 10% 5%; }
-  15%  { background-position: -8% 12%; }
-  30%  { background-position: 5% -15%; }
-  45%  { background-position: -12% 8%; }
-  60%  { background-position: 8% 18%; }
-  75%  { background-position: -5% -8%; }
-  90%  { background-position: 12% 3%; }
-  100% { background-position: 10% 5%; }
+  0%   { transform: translate3d(10%, 5%, 0); }
+  15%  { transform: translate3d(-8%, 12%, 0); }
+  30%  { transform: translate3d(5%, -15%, 0); }
+  45%  { transform: translate3d(-12%, 8%, 0); }
+  60%  { transform: translate3d(8%, 18%, 0); }
+  75%  { transform: translate3d(-5%, -8%, 0); }
+  90%  { transform: translate3d(12%, 3%, 0); }
+  100% { transform: translate3d(10%, 5%, 0); }
 }
 
 /* Speckle grain animation — micro-jitter for fine particles */
 @keyframes grain-speckle-shift {
-  0%   { background-position: 0% 0%; }
-  20%  { background-position: -3% 5%; }
-  40%  { background-position: 4% -3%; }
-  60%  { background-position: -2% -4%; }
-  80%  { background-position: 3% 2%; }
-  100% { background-position: 0% 0%; }
+  0%   { transform: translate3d(0%, 0%, 0); }
+  20%  { transform: translate3d(-3%, 5%, 0); }
+  40%  { transform: translate3d(4%, -3%, 0); }
+  60%  { transform: translate3d(-2%, -4%, 0); }
+  80%  { transform: translate3d(3%, 2%, 0); }
+  100% { transform: translate3d(0%, 0%, 0); }
 }
 
 .grain-overlay {
-  animation: grain-shift 0.35s steps(1) infinite;
+  animation: grain-shift 0.8s steps(4) infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .grain-overlay-secondary {
-  animation: grain-shift-alt 0.5s steps(1) infinite;
+  animation: grain-shift-alt 1.2s steps(4) infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .grain-speckle {
-  animation: grain-speckle-shift 0.25s steps(1) infinite;
+  animation: grain-speckle-shift 0.6s steps(3) infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Slow spin animation for pulsing circle text - GPU accelerated */
+@keyframes spin-slow {
+  from { transform: scale(1.6) rotate(0deg); }
+  to { transform: scale(1.6) rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+  will-change: transform;
 }

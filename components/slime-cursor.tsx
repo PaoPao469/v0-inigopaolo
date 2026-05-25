@@ -5,11 +5,25 @@ import { useEffect, useRef, useState } from "react"
 export default function SlimeCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const rafRef = useRef<number | null>(null)
+  const positionRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    // Use RAF for smooth cursor updates without layout thrashing
+    const updateCursor = () => {
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+        cursorRef.current.style.transform = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`
+      }
+      rafRef.current = null
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      positionRef.current.x = e.clientX
+      positionRef.current.y = e.clientY
+      
+      // Only schedule RAF if one isn't already pending
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(updateCursor)
       }
       if (!isVisible) setIsVisible(true)
     }
@@ -22,7 +36,7 @@ export default function SlimeCursor() {
       setIsVisible(true)
     }
 
-    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mousemove", handleMouseMove, { passive: true })
     document.addEventListener("mouseleave", handleMouseLeave)
     document.addEventListener("mouseenter", handleMouseEnter)
 
@@ -30,6 +44,9 @@ export default function SlimeCursor() {
       document.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mouseleave", handleMouseLeave)
       document.removeEventListener("mouseenter", handleMouseEnter)
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+      }
     }
   }, [isVisible])
 
@@ -57,6 +74,8 @@ export default function SlimeCursor() {
           boxShadow: "0 0 8px rgba(180, 175, 165, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.2)",
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.15s ease",
+          willChange: "transform",
+          contain: "layout style paint",
         }}
       />
     </>

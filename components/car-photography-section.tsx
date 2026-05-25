@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import BackButton from "@/components/back-button"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState, memo, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { useOptimizedCard } from "@/hooks/use-optimized-card"
 
 interface Subsection {
   id: string
@@ -23,7 +24,7 @@ interface CarPhotographySectionProps {
   category: CarPhotographyCategory
 }
 
-function CarGalleryCard({ 
+const CarGalleryCard = memo(function CarGalleryCard({ 
   subsection, 
   categorySlug, 
   index,
@@ -39,49 +40,18 @@ function CarGalleryCard({
   isOtherSelected: boolean
 }) {
   const router = useRouter()
-  const cardRef = useRef<HTMLAnchorElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovered, setIsHovered] = useState(false)
-
-  // Intersection Observer for scroll-triggered animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Staggered delay based on index for cascade effect
-          setTimeout(() => {
-            setIsVisible(true)
-          }, index * 120)
-        }
-      },
-      { threshold: 0.1, rootMargin: "50px" }
-    )
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [index])
-
-  // Parallax tilt effect on mouse move
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    setMousePosition({ x, y })
-  }
-
-  const handleMouseEnter = () => setIsHovered(true)
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-    setMousePosition({ x: 0, y: 0 })
-  }
+  const {
+    cardRef,
+    isVisible,
+    isHovered,
+    mousePosition,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useOptimizedCard({ index, staggerDelay: 120 })
 
   // Handle card selection with animation before navigation
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
     onSelect(subsection.id)
     
@@ -89,7 +59,7 @@ function CarGalleryCard({
     setTimeout(() => {
       router.push(`/photography/${categorySlug}/${subsection.id}`)
     }, 600)
-  }
+  }, [onSelect, subsection.id, router, categorySlug])
 
   // Calculate transform based on mouse position and selection state
   const getTransform = () => {
@@ -115,10 +85,10 @@ function CarGalleryCard({
 
   return (
     <button
-      ref={cardRef as React.RefObject<HTMLButtonElement>}
+      ref={cardRef}
       onClick={handleClick}
       className="group block text-left w-full"
-      onMouseMove={handleMouseMove as unknown as React.MouseEventHandler<HTMLButtonElement>}
+      onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -300,7 +270,7 @@ function CarGalleryCard({
       </p>
     </button>
   )
-}
+})
 
 export default function CarPhotographySection({ category }: CarPhotographySectionProps) {
   const [headerVisible, setHeaderVisible] = useState(false)

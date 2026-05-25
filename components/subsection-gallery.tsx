@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
+import { memo, useMemo } from "react"
 
 interface Subsection {
   id: string
@@ -15,6 +16,36 @@ interface SubsectionGalleryProps {
   categorySlug: string
   subsection: Subsection
 }
+
+// Memoized gallery image for better performance
+const GalleryImage = memo(function GalleryImage({
+  image,
+  title,
+  index,
+  aspectClass,
+}: {
+  image: string
+  title: string
+  index: number
+  aspectClass: string
+}) {
+  return (
+    <div
+      className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
+    >
+      <Image
+        src={image}
+        alt={`${title} - Image ${index + 1}`}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        priority={index === 0}
+        loading={index < 6 ? "eager" : "lazy"}
+      />
+      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
+    </div>
+  )
+})
 
 export default function SubsectionGallery({ categoryLabel, categorySlug, subsection }: SubsectionGalleryProps) {
   return (
@@ -61,20 +92,13 @@ export default function SubsectionGallery({ categoryLabel, categorySlug, subsect
               : "aspect-square"
           
           return (
-            <div
+            <GalleryImage
               key={index}
-              className={`relative ${aspectClass} overflow-hidden rounded-lg mb-4 break-inside-avoid group`}
-            >
-              <Image
-                src={image}
-                alt={`${subsection.title} - Image ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                priority={index === 0}
-              />
-              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
-            </div>
+              image={image}
+              title={subsection.title}
+              index={index}
+              aspectClass={aspectClass}
+            />
           )
         })}
       </div>

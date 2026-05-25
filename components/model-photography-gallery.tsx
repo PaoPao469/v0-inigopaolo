@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
+import { memo } from "react"
 
 interface ModelPhotographyCategory {
   label: string
@@ -15,6 +16,33 @@ interface ModelPhotographyCategory {
 interface ModelPhotographyGalleryProps {
   category: ModelPhotographyCategory
 }
+
+// Memoize image items to prevent unnecessary re-renders
+const GalleryImage = memo(function GalleryImage({ 
+  image, 
+  label, 
+  index 
+}: { 
+  image: string
+  label: string
+  index: number 
+}) {
+  return (
+    <div className="relative w-full overflow-hidden mb-6 break-inside-avoid group">
+      <Image
+        src={image}
+        alt={`${label} - Image ${index + 1}`}
+        width={1200}
+        height={1600}
+        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        loading={index < 4 ? "eager" : "lazy"}
+        placeholder="empty"
+      />
+      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300 pointer-events-none" />
+    </div>
+  )
+})
 
 export default function ModelPhotographyGallery({ category }: ModelPhotographyGalleryProps) {
   return (
@@ -39,24 +67,14 @@ export default function ModelPhotographyGallery({ category }: ModelPhotographyGa
 
       {/* Large Image Gallery Grid */}
       <div className="columns-1 lg:columns-2 gap-6">
-        {category.images.map((image, index) => {
-          return (
-            <div
-              key={index}
-              className="relative w-full overflow-hidden mb-6 break-inside-avoid group"
-            >
-              <Image
-                src={image}
-                alt={`${category.label} - Image ${index + 1}`}
-                width={1200}
-                height={1600}
-                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300 pointer-events-none" />
-            </div>
-          )
-        })}
+        {category.images.map((image, index) => (
+          <GalleryImage
+            key={index}
+            image={image}
+            label={category.label}
+            index={index}
+          />
+        ))}
       </div>
 
       {/* Bottom Navigation */}
