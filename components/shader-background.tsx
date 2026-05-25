@@ -16,6 +16,7 @@ const ShaderLayers = memo(function ShaderLayers() {
       className="absolute inset-0 w-full h-full pointer-events-none" 
       style={{ 
         backgroundColor: "#000000",
+        contain: "strict",
       }}
     >
       {/* Single optimized silk ribbon layer — reduced speed and pixel ratio for better performance */}
