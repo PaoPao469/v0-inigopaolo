@@ -16,8 +16,6 @@ const ShaderLayers = memo(function ShaderLayers() {
       className="absolute inset-0 w-full h-full" 
       style={{ 
         filter: "contrast(1.4) brightness(1.05)",
-        willChange: "transform",
-        contain: "strict",
       }}
     >
       {/* Primary silk ribbon layer — stark white highlights against deep black */}
@@ -56,7 +54,6 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         className="absolute inset-0 w-full h-full pointer-events-none"
         style={{
           background: "radial-gradient(ellipse at 30% 70%, rgba(10,14,18,0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(10,14,18,0.3) 0%, transparent 50%)",
-          contain: "strict",
         }}
       />
 
@@ -70,7 +67,6 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
           backgroundSize: "512px 512px",
           opacity: 0.7,
           mixBlendMode: "overlay",
-          contain: "strict",
         }}
       />
 
@@ -84,7 +80,6 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
           backgroundSize: "256px 256px",
           opacity: 0.5,
           mixBlendMode: "soft-light",
-          contain: "strict",
         }}
       />
 
@@ -98,7 +93,6 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
           backgroundSize: "200px 200px",
           opacity: 0.22,
           mixBlendMode: "color-dodge",
-          contain: "strict",
         }}
       />
 
