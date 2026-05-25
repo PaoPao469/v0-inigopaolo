@@ -1,32 +1,19 @@
 "use client"
 
-import { PulsingBorder } from "@paper-design/shaders-react"
-
 export default function PulsingCircle() {
   return (
     <div className="absolute bottom-8 right-8 z-30">
       <div className="relative w-20 h-20 flex items-center justify-center">
-        {/* Pulsing Border Circle */}
-        <PulsingBorder
-          colors={["#BEECFF", "#E77EDC", "#FF4C3E", "#00FF88", "#FFD700", "#FF6B35", "#8A2BE2"]}
-          colorBack="#00000000"
-          speed={1.5}
-          roundness={1}
-          thickness={0.1}
-          softness={0.2}
-          intensity={5}
-          pulse={0.1}
-          smoke={0.5}
-          smokeSize={4}
-          scale={0.65}
-          rotation={0}
-          frame={9161408.251009725}
+        {/* Simple CSS pulsing border circle - replaces heavy WebGL shader */}
+        <div 
+          className="absolute w-[60px] h-[60px] rounded-full animate-pulse-border"
           style={{
-            width: "60px",
-            height: "60px",
-            borderRadius: "50%",
+            background: "conic-gradient(from 0deg, #BEECFF, #E77EDC, #FF4C3E, #00FF88, #FFD700, #FF6B35, #8A2BE2, #BEECFF)",
+            padding: "3px",
           }}
-        />
+        >
+          <div className="w-full h-full rounded-full bg-black" />
+        </div>
 
         {/* Rotating Text Around the Pulsing Border - using CSS animation for GPU performance */}
         <svg
@@ -34,7 +21,6 @@ export default function PulsingCircle() {
           viewBox="0 0 100 100"
           style={{ 
             transform: "scale(1.6)",
-            willChange: "transform",
           }}
         >
           <defs>

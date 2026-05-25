@@ -15,15 +15,14 @@ const ShaderLayers = memo(function ShaderLayers() {
     <div 
       className="absolute inset-0 w-full h-full pointer-events-none" 
       style={{ 
-        filter: "contrast(1.4) brightness(1.05)",
         backgroundColor: "#000000",
       }}
     >
-      {/* Single optimized silk ribbon layer — stark white highlights against deep black */}
+      {/* Single optimized silk ribbon layer — reduced speed for better performance */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
         colors={["#000000", "#FFFFFF", "#000000", "#FAFAFA", "#050608"]}
-        speed={0.12}
+        speed={0.02}
       />
     </div>
   )

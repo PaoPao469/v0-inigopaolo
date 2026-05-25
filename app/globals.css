@@ -164,5 +164,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
-  will-change: transform;
+}
+
+/* Simple pulse animation for the border circle */
+@keyframes pulse-border {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 3s ease-in-out infinite;
 }
