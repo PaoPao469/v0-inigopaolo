@@ -13,7 +13,7 @@ interface ShaderBackgroundProps {
 const ShaderLayers = memo(function ShaderLayers() {
   return (
     <div 
-      className="absolute inset-0 w-full h-full" 
+      className="absolute inset-0 w-full h-full pointer-events-none" 
       style={{ 
         filter: "contrast(1.4) brightness(1.05)",
         backgroundColor: "#000000",

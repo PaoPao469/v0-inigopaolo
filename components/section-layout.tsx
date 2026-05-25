@@ -19,7 +19,7 @@ export default function SectionLayout({ children, plainBackground = false }: Sec
           <>
             {/* Static gradient background - matches main menu without animation */}
             <div 
-              className="fixed inset-0 w-full h-full" 
+              className="fixed inset-0 w-full h-full pointer-events-none" 
               style={{ filter: "contrast(1.4) brightness(1.05)" }}
             >
               {/* Primary silk ribbon layer — stark white highlights matching main menu */}
