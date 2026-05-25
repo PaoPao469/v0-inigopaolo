@@ -175,13 +175,3 @@ h1, h2, h3, h4, h5, h6 {
 .animate-pulse-border {
   animation: pulse-border 3s ease-in-out infinite;
 }
-
-/* Slow gradient shift animation for background - replaces WebGL shader */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.animate-gradient-shift {
-  animation: gradient-shift 30s ease-in-out infinite;
-}
