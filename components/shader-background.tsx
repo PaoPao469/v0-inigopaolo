@@ -18,11 +18,12 @@ const ShaderLayers = memo(function ShaderLayers() {
         backgroundColor: "#000000",
       }}
     >
-      {/* Single optimized silk ribbon layer — reduced speed for better performance */}
+      {/* Single optimized silk ribbon layer — reduced speed and pixel ratio for better performance */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
         colors={["#000000", "#FFFFFF", "#000000", "#FAFAFA", "#050608"]}
         speed={0.02}
+        pixelDensity={0.5}
       />
     </div>
   )
