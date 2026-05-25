@@ -57,19 +57,6 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         }}
       />
 
-      {/* Optimized single grain layer using pre-rendered texture for GPU efficiency */}
-      <div
-        aria-hidden="true"
-        className="grain-overlay absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `url("/grain-texture.jpg")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "256px 256px",
-          opacity: 0.45,
-          mixBlendMode: "overlay",
-        }}
-      />
-
       {children}
     </div>
   )

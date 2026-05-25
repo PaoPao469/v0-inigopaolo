@@ -156,21 +156,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-chillax);
 }
 
-/* Optimized grain animation — slower timing reduces repaints while maintaining film-like jitter */
-@keyframes grain-shift {
-  0%, 100% { background-position: 0% 0%; }
-  25%  { background-position: -10% 15%; }
-  50%  { background-position: 15% -10%; }
-  75%  { background-position: -5% 20%; }
-}
-
-.grain-overlay {
-  animation: grain-shift 2s steps(4) infinite;
-  will-change: background-position;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
 /* Slow spin animation for pulsing circle text - GPU accelerated */
 @keyframes spin-slow {
   from { transform: scale(1.6) rotate(0deg); }
